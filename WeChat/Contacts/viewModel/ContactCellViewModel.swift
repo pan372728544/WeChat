@@ -45,18 +45,18 @@ class ContactCellViewModel: NSObject,MeProtocol {
 extension ContactCellViewModel {
     
     func setupView()  {
-        self.cell?.searchBar.isHidden = true
+        self.cell?.search.searchBar.isHidden = true
         self.cell?.backgroundColor = UIColor.white
         self.cell?.nameLabel.text = dbFriend?.name
         let url = URL(string: (dbFriend?.picture)!)
         if self.cell?.indexPath.section == 0 {
             self.cell?.imageIcon.image = UIImage(named: (dbFriend?.picture)!)
             if self.cell?.indexPath.row == 0 {
-                self.cell?.searchBar.isHidden = false
+                self.cell?.search.searchBar.isHidden = false
                 self.cell?.backgroundColor = UIColor.Gray237Color()
                 
             } else {
-                self.cell?.searchBar.isHidden = true
+                self.cell?.search.searchBar.isHidden = true
             }
         } else {
             

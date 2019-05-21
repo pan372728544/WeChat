@@ -18,4 +18,6 @@ protocol MeProtocol {
 
 extension MeProtocol {
     func bingData(data: Any){}
+    
+    func bingViewController(vc: UIViewController){}
 }

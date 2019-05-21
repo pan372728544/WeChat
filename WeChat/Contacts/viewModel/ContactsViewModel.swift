@@ -47,9 +47,10 @@ class ContactsViewModel: NSObject,MeProtocol {
     var cell : ContactsTableViewCell?
     fileprivate var cellVM = ContactCellViewModel()
     fileprivate var view : UIView = UIView()
-    
+    fileprivate var vc : UIViewController = UIViewController()
     fileprivate var keysAry : [String] = [String]()
     var dicAll = [String : Array<Any>]()
+    
     
     fileprivate var contactArray : [Any] = [Any]()
     fileprivate var arraySectionH : [CGFloat] = [CGFloat]()
@@ -58,6 +59,12 @@ class ContactsViewModel: NSObject,MeProtocol {
         
         self.view = view
         self.setupMainView()
+    }
+    
+    func bingViewController(vc: UIViewController) {
+        self.vc = vc
+        self.vc.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.vc.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func loadData()  {
@@ -230,6 +237,13 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         label.text = title
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = UIColor.black
+//        let viewLine1 = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 1/UIScreen.main.scale))
+//        viewLine1.backgroundColor = UIColor.Gray213Color()
+//        view.addSubview(viewLine1)
+        let viewLine2 = UIView(frame: CGRect(x: 0, y: 30, width: Screen_W, height: 1/UIScreen.main.scale))
+        viewLine2.backgroundColor = UIColor.Gray213Color()
+        view.addSubview(viewLine2)
+        
         return view
 
     }
@@ -247,6 +261,8 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         self.view.endEditing(true)
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H
+        changeNavigation(scrollsetOffY)
+        
         
         for index in 1..<keysAry.count {
             
@@ -317,11 +333,20 @@ extension ContactsViewModel {
         let colorDeltaLabel = (labelNormalColor.0 - labelSelectColor.0, labelNormalColor.1 - labelSelectColor.1, labelNormalColor.2 - labelSelectColor.2)
         label?.textColor = UIColor(r: labelNormalColor.0 - colorDeltaLabel.0 * progress, g: labelNormalColor.1 - colorDeltaLabel.1 * progress, b: labelNormalColor.2 - colorDeltaLabel.2 * progress)
         if progress > 0 {
-            label?.font = UIFont.boldSystemFont(ofSize: 14)
+//            label?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.init(1*progress))
+            label?.font = UIFont.boldSystemFont(ofSize: (15+0.5*progress))
         } else {
             label?.font = UIFont.systemFont(ofSize: 15)
         }
         
 
+    }
+    
+    func changeNavigation(_ offset : CGFloat)  {
+
+        self.vc.navigationController?.navigationBar.setBackgroundImage(offset > 0 ? nil : UIImage(), for: UIBarMetrics.default)
+        self.vc.navigationController?.navigationBar.shadowImage = offset > 0 ? nil : UIImage()
+        let color237 = UIColor.init(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
+        self.vc.navigationController?.navigationBar.barTintColor = color237
     }
 }

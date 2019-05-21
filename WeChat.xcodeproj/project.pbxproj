@@ -35,6 +35,7 @@
 		38278D87228BA9AF00884EB0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D86228BA9AF00884EB0 /* Toast.swift */; };
 		38278D89228BB4D200884EB0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D88228BB4D200884EB0 /* LoginViewController.swift */; };
 		38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D8A228BE51900884EB0 /* PhoneTextField.swift */; };
+		38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */; };
 		38EDD75D228C0C7300E9935A /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD75C228C0C7300E9935A /* Immessage.proto.swift */; };
 		38EDD768228C0DBD00E9935A /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD767228C0DBD00E9935A /* SocketManager.swift */; };
 		38EDD76A228C0DD900E9935A /* IMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD769228C0DD900E9935A /* IMDataManager.swift */; };
@@ -93,6 +94,7 @@
 		38278D86228BA9AF00884EB0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		38278D88228BB4D200884EB0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		38278D8A228BE51900884EB0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
+		38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearchViewController.swift; sourceTree = "<group>"; };
 		38EDD75C228C0C7300E9935A /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
 		38EDD767228C0DBD00E9935A /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		38EDD769228C0DD900E9935A /* IMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDataManager.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				38278C9E2285887100884EB0 /* ContactsViewController.swift */,
+				38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */,
 			);
 			path = vcs;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				38EDD7D5228E74A300E9935A /* Socket.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
 				38278D80228B9A4E00884EB0 /* WelComeViewController.swift in Sources */,
+				38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

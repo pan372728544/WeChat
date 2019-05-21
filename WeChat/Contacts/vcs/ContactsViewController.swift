@@ -23,6 +23,7 @@ class ContactsViewController: UIViewController {
 //        self.navigationController?.navigationBar.barTintColor = UIColor.Gray237Color()
         contactVM.loadData()
         contactVM.bindView(view: self.view)
+        contactVM.bingViewController(vc: self)
         
     }
     
