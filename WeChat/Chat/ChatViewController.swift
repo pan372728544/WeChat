@@ -39,6 +39,15 @@ class ChatViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.white
         view.addSubview(self.tableView)
+        
+        // 搜索控制器
+        let resultVC = UINavigationController(rootViewController: ContactSearchViewController())
+        let searchController = UISearchController(searchResultsController: resultVC)
+        //        self.searchController = searchController
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = true
+        //        tableView.tableHeaderView = searchController.searchBar
+        tableView.addSubview(searchController.searchBar)
     }
 
 }

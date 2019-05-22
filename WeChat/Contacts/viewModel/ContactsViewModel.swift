@@ -33,6 +33,12 @@ class ContactsViewModel: NSObject,MeProtocol {
         return indexView
     }()
     
+    fileprivate var searchController : SearchViewController = {
+        
+        let searchController = SearchViewController(searchResultsController: ContactSearchViewController())
+        return searchController
+    }()
+    
     fileprivate var cellArray : [ContactCellViewModel] = [ContactCellViewModel]()
     
     fileprivate lazy var labelSelectColor : (r : CGFloat, g : CGFloat, b : CGFloat) = self.getRGBWithColor(UIColor.ThemeGreenColor())
@@ -63,8 +69,10 @@ class ContactsViewModel: NSObject,MeProtocol {
     
     func bingViewController(vc: UIViewController) {
         self.vc = vc
-        self.vc.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.vc.navigationController?.navigationBar.shadowImage = UIImage()
+    
+        self.vc.extendedLayoutIncludesOpaqueBars = true
+        self.vc.automaticallyAdjustsScrollViewInsets = true
+
     }
     
     func loadData()  {
@@ -116,11 +124,7 @@ class ContactsViewModel: NSObject,MeProtocol {
         for item  in keysAry {
         
             let array = dicAll[item]
-            
             contactArray.append(array as Any)
-            
-           
-        
         }
         
         
@@ -169,12 +173,14 @@ extension ContactsViewModel {
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         self.tableView.showsVerticalScrollIndicator = false
-//        self.tableView.contentInsetAdjustmentBehavior = .never
+        self.tableView.contentInsetAdjustmentBehavior = .always
 //        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
         
         self.view.addSubview(self.indexView)
         self.indexView.setSelectionIndex(index: 1)
         self.indexView.vibrationOn = true
+        self.tableView.tableHeaderView = searchController.searchBar
+
 
     }
     
@@ -237,9 +243,6 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         label.text = title
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = UIColor.black
-//        let viewLine1 = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 1/UIScreen.main.scale))
-//        viewLine1.backgroundColor = UIColor.Gray213Color()
-//        view.addSubview(viewLine1)
         let viewLine2 = UIView(frame: CGRect(x: 0, y: 30, width: Screen_W, height: 1/UIScreen.main.scale))
         viewLine2.backgroundColor = UIColor.Gray213Color()
         view.addSubview(viewLine2)
@@ -344,9 +347,11 @@ extension ContactsViewModel {
     
     func changeNavigation(_ offset : CGFloat)  {
 
+     
         self.vc.navigationController?.navigationBar.setBackgroundImage(offset > 0 ? nil : UIImage(), for: UIBarMetrics.default)
         self.vc.navigationController?.navigationBar.shadowImage = offset > 0 ? nil : UIImage()
-        let color237 = UIColor.init(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
-        self.vc.navigationController?.navigationBar.barTintColor = color237
+
+        self.vc.navigationController?.view.backgroundColor = UIColor.Gray237Color()
+
     }
 }

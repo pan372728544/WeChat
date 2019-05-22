@@ -16,21 +16,6 @@ class ContactsTableViewCell: UITableViewCell {
     
     var viewLine = UIView()
     
-    lazy  var search : UISearchController = {
-        
-        let searchController = UISearchController(searchResultsController: ContactSearchViewController())
-        searchController.view.backgroundColor = UIColor.Gray237Color()
-        searchController.dimsBackgroundDuringPresentation = true
-        searchController.hidesNavigationBarDuringPresentation = true
-//        searchController.navigationController?.navigationBar.barStyle = .default
-//        searchController.navigationController?.navigationBar.shadowImage = UIImage()
-//        searchController.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        return searchController
-        
-    }()
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -70,20 +55,6 @@ class ContactsTableViewCell: UITableViewCell {
         viewLine.backgroundColor = UIColor.Gray213Color()
         contentView.addSubview(viewLine)
         
-        search.searchBar.isHidden = true
-
-        // 搜索框
-        let bar = search.searchBar
-        // 样式
-//        bar.barStyle = .black
-        bar.barTintColor = UIColor.Gray237Color()
-        bar.tintColor = UIColor.ThemeGreenColor()
-        search.searchResultsController?.navigationController?.navigationBar.shadowImage = UIImage()
-//       search.searchResultsController?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarStyle.default)
-        search.searchBar.setValue("取消", forKey:"_cancelButtonText")
-        // 去除背景及上下两条横线
-        bar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-         contentView.addSubview(search.searchBar)
     }
 
 }

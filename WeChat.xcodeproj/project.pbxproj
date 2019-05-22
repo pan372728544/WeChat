@@ -36,6 +36,7 @@
 		38278D89228BB4D200884EB0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D88228BB4D200884EB0 /* LoginViewController.swift */; };
 		38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D8A228BE51900884EB0 /* PhoneTextField.swift */; };
 		38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */; };
+		38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */; };
 		38EDD75D228C0C7300E9935A /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD75C228C0C7300E9935A /* Immessage.proto.swift */; };
 		38EDD768228C0DBD00E9935A /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD767228C0DBD00E9935A /* SocketManager.swift */; };
 		38EDD76A228C0DD900E9935A /* IMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD769228C0DD900E9935A /* IMDataManager.swift */; };
@@ -95,6 +96,7 @@
 		38278D88228BB4D200884EB0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		38278D8A228BE51900884EB0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearchViewController.swift; sourceTree = "<group>"; };
+		38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		38EDD75C228C0C7300E9935A /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
 		38EDD767228C0DBD00E9935A /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		38EDD769228C0DD900E9935A /* IMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDataManager.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 			children = (
 				38EDD79C228E462600E9935A /* IndexView.swift */,
 				38EDD79E228E469300E9935A /* IndicatorView.swift */,
+				38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */,
 			);
 			path = commonView;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				38278D6722897C6000884EB0 /* ChatRoomViewController.swift in Sources */,
 				38EDD77D228C2D4E00E9935A /* MeProtocol.swift in Sources */,
 				38278D72228A50FB00884EB0 /* Theme.swift in Sources */,
+				38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */,
 				38278D74228A9FA000884EB0 /* ThemeSelectViewController.swift in Sources */,
 				38278D6A2289850600884EB0 /* Const.swift in Sources */,
 				38278D83228B9AE300884EB0 /* RealmTool.swift in Sources */,

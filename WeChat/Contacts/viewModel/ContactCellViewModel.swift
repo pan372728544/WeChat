@@ -33,7 +33,7 @@ class ContactCellViewModel: NSObject,MeProtocol {
         } else {
             
             if self.cell?.indexPath.section == 0 && self.cell?.indexPath.row == 0 {
-                self.cell?.viewLine.isHidden = true
+//                self.cell?.viewLine.isHidden = true
             } else {
                 self.cell?.viewLine.isHidden = false
             }
@@ -45,19 +45,11 @@ class ContactCellViewModel: NSObject,MeProtocol {
 extension ContactCellViewModel {
     
     func setupView()  {
-        self.cell?.search.searchBar.isHidden = true
-        self.cell?.backgroundColor = UIColor.white
         self.cell?.nameLabel.text = dbFriend?.name
         let url = URL(string: (dbFriend?.picture)!)
         if self.cell?.indexPath.section == 0 {
             self.cell?.imageIcon.image = UIImage(named: (dbFriend?.picture)!)
-            if self.cell?.indexPath.row == 0 {
-                self.cell?.search.searchBar.isHidden = false
-                self.cell?.backgroundColor = UIColor.Gray237Color()
-                
-            } else {
-                self.cell?.search.searchBar.isHidden = true
-            }
+
         } else {
             
             self.cell?.imageIcon.kf.setImage(with: url)
