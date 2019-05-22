@@ -263,10 +263,11 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
         
-        let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H
+        let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - (tableView.tableHeaderView?.height)!
         changeNavigation(scrollsetOffY)
         
         
+        print(scrollsetOffY)
         for index in 1..<keysAry.count {
             
             // 设置seciton
