@@ -15,13 +15,14 @@ class SearchViewController: UISearchController {
 
     }
     
-
+    fileprivate var searResult : ContactSearchViewController?
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     override init(searchResultsController: UIViewController?) {
         super.init(searchResultsController: searchResultsController)
+        self.searResult = searchResultsController as! ContactSearchViewController
         setup()
         self.delegate = self
     }
@@ -35,11 +36,12 @@ class SearchViewController: UISearchController {
   //        let image = UIImage(named: "fav_searchbar_textfield2")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 6, bottom: 12, right: 6), resizingMode: UIImage.ResizingMode.stretch)
         // 样式
 //        searchBar.barTintColor = UIColor.Gray237Color()
+        
         searchBar.tintColor = UIColor.ThemeGreenColor()
         searchBar.placeholder = "搜索"
         searchBar.setValue("取消", forKey:"_cancelButtonText")
         searchBar.setPositionAdjustment(UIOffset(horizontal: (Screen_W-20-90)*0.5, vertical: 0), for: UISearchBar.Icon.search)
-
+        self.searchResultsUpdater = searResult
 
         let viewSearch = UIView(frame: CGRect(x: 0, y: NavaBar_H, width: Screen_W, height: Screen_H-NavaBar_H))
         viewSearch.backgroundColor = UIColor.Gray237Color()

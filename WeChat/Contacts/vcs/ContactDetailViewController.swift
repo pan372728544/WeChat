@@ -1,26 +1,33 @@
 //
-//  ContactSearchViewController.swift
+//  ContactDetailViewController.swift
 //  WeChat
 //
-//  Created by panzhijun on 2019/5/20.
+//  Created by panzhijun on 2019/5/22.
 //  Copyright © 2019 panzhijun. All rights reserved.
 //
 
 import UIKit
 
-class ContactSearchViewController: UIViewController,UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
-    
+class ContactDetailViewController: UIViewController {
+
+    fileprivate var userId : String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
     
+    init(userId: String) {
+        
+       super.init(nibName: nil, bundle: nil)
+        self.userId = userId
+    }
+    
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     /*
     // MARK: - Navigation
 

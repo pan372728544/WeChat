@@ -18,7 +18,6 @@ class ContactsViewModel: NSObject,MeProtocol {
                                                    width: Screen_W,
                                                    height: Screen_H),
                                      style: UITableView.Style.plain)
-        tableView.backgroundColor = UIColor.orange
         return tableView
     }()
     
@@ -169,7 +168,8 @@ extension ContactsViewModel {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.tableViewBackGroundColor()
+        self.tableView.backgroundColor = UIColor.Gray237Color()
+        
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         self.tableView.showsVerticalScrollIndicator = false
@@ -179,6 +179,7 @@ extension ContactsViewModel {
         self.view.addSubview(self.indexView)
         self.indexView.setSelectionIndex(index: 1)
         self.indexView.vibrationOn = true
+
         self.tableView.tableHeaderView = searchController.searchBar
 
 
@@ -251,6 +252,15 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let array = contactArray[indexPath.section] as! [ContactCellViewModel]
+        let vm = array[indexPath.row]
+        let vc = ContactDetailViewController(userId: (vm.dbFriend?.friendId)!)
+        self.vc.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 //        print("\(section)--willDisplayHeaderView")
         
@@ -266,8 +276,6 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - (tableView.tableHeaderView?.height)!
         changeNavigation(scrollsetOffY)
         
-        
-        print(scrollsetOffY)
         for index in 1..<keysAry.count {
             
             // 设置seciton
@@ -348,11 +356,12 @@ extension ContactsViewModel {
     
     func changeNavigation(_ offset : CGFloat)  {
 
-     
-        self.vc.navigationController?.navigationBar.setBackgroundImage(offset > 0 ? nil : UIImage(), for: UIBarMetrics.default)
-        self.vc.navigationController?.navigationBar.shadowImage = offset > 0 ? nil : UIImage()
+        let new = offset + (self.tableView.tableHeaderView?.height)!
+        
+        self.vc.navigationController?.navigationBar.setBackgroundImage(new > 0 ? nil : UIImage(), for: UIBarMetrics.default)
+        self.vc.navigationController?.navigationBar.shadowImage = new > 0 ? nil : UIImage()
 
-        self.vc.navigationController?.view.backgroundColor = UIColor.Gray237Color()
+//        self.vc.navigationController?.view.backgroundColor = UIColor.Gray237Color()
 
     }
 }
