@@ -41,6 +41,8 @@ class ContactDetailTableViewCell: ContactBaseTableViewCell {
         
         
         imagePhoto.frame = CGRect(x: 15, y: 15, width: 70, height: 70)
+        imagePhoto.layer.masksToBounds = true
+        imagePhoto.layer.cornerRadius = 10
         contentView.addSubview(imagePhoto)
         
         lbelNike.frame = CGRect(x:  imagePhoto.right + 10, y: 15, width: 200, height: 30)
@@ -48,14 +50,14 @@ class ContactDetailTableViewCell: ContactBaseTableViewCell {
         lbelNike.font = UIFont.boldSystemFont(ofSize: 23)
         contentView.addSubview(lbelNike)
         
-        lbelId.frame = CGRect(x:  imagePhoto.right + 10, y: lbelNike.bottom + 10, width: 200, height: 20)
+        lbelId.frame = CGRect(x:  imagePhoto.right + 10, y: lbelNike.bottom + 8, width: 200, height: 20)
         lbelId.textColor = UIColor.textNameColor()
-        lbelId.font = UIFont.systemFont(ofSize: 17)
+        lbelId.font = UIFont.systemFont(ofSize: 15)
         contentView.addSubview(lbelId)
         
-        lbelCity.frame = CGRect(x:  imagePhoto.right + 10, y: lbelId.bottom + 10, width: 200, height: 20)
+        lbelCity.frame = CGRect(x:  imagePhoto.right + 10, y: lbelId.bottom + 5, width: 200, height: 20)
         lbelCity.textColor = UIColor.textNameColor()
-        lbelCity.font = UIFont.systemFont(ofSize: 17)
+        lbelCity.font = UIFont.systemFont(ofSize: 15)
         contentView.addSubview(lbelCity)
         
      
