@@ -16,6 +16,7 @@ protocol ZJSocketDelegate : class {
     func socket(_ socket : ZJSocket, leaveRoom user : ProtoUser)
     func socket(_ socket : ZJSocket, login user : ProtoUser)
     func socket(_ socket : ZJSocket, friend user : ProtoFriend)
+    func socket(_ socket : ZJSocket, friendDetail user : ProtoUser)
     
 //    func socket(_ socket : ZJSocket, chatMsg : TextMessage)
 //    func socket(_ socket : ZJSocket, groupMsg : GroupMessage)
@@ -134,6 +135,9 @@ extension ZJSocket {
         case 201 :
             let protoFriend = try! ProtoFriend.parseFrom(data: data)
             delegate?.socket(self, friend: protoFriend)
+        case 202 :
+            let protoUser = try! ProtoUser.parseFrom(data: data)
+            delegate?.socket(self, friendDetail: protoUser)
 
         default:
 
@@ -165,6 +169,15 @@ extension ZJSocket {
         
         // 发送
         sendMsg(data: msgData, type: 201)
+    }
+    // 获取好友信息
+    func sendFridenDetail(phone : String)  {
+        
+        print(phone)
+        
+        let msgData = phone.data(using: .utf8)
+        
+        sendMsg(data: msgData!, type: 202)
     }
     
 //    func sendJoinRoom() {

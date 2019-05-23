@@ -70,7 +70,7 @@ class ContactsViewModel: NSObject,MeProtocol {
         self.vc = vc
     
         self.vc.extendedLayoutIncludesOpaqueBars = true
-        self.vc.automaticallyAdjustsScrollViewInsets = true
+//        self.vc.automaticallyAdjustsScrollViewInsets = true
 
     }
     

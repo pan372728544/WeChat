@@ -1,5 +1,5 @@
 //
-//  ContactDetailModel.swift
+//  ContactModel.swift
 //  WeChat
 //
 //  Created by panzhijun on 2019/5/22.
@@ -8,6 +8,8 @@
 
 import UIKit
 
-class ContactDetailModel: NSObject {
+class ContactModel: NSObject {
 
+    var name : String = ""
+    
 }

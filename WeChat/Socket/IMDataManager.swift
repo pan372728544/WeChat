@@ -305,6 +305,15 @@ extension IMDataManager : ZJSocketDelegate {
         IMDataManager.share.insertProtoFriend(cupid: build)
         print(user)
     }
+    
+    func socket(_ socket : ZJSocket, friendDetail user : ProtoUser) {
+        
+        print(user)
+        let build = try! user.toBuilder()
+        
+        IMDataManager.share.insertProtoUser(cupid: build)
+        notificationToFriendDetail()
+    }
 //    func socket(_ socket: ZJSocket, chatMsg: TextMessage) {
 //        print("接收到会话消息： \(chatMsg.text ?? "")")
 //
@@ -338,6 +347,11 @@ extension IMDataManager {
     func notificationToLogin()  {
 
         NotificationCenter.default.post(name: NSNotification.Name("loginSuccess"), object: self, userInfo:nil)
+    }
+    
+    func notificationToFriendDetail()  {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("FriendDetailSuccess"), object: self, userInfo:nil)
     }
 }
 

@@ -126,6 +126,16 @@ extension RealmTool {
         return realm.objects(DBFriend.self)
     }
     
+    
+    /// 获取 指定条件查询
+    public class func getDBUserById(_ predicate: String) -> Results<DBUser> {
+        let realm = self.defaultRealm()
+        
+        let pre = NSPredicate(format: predicate)
+        let results = realm.objects(DBUser.self)
+        return  results.filter(pre)
+    }
+    
 //
 //    public class func getUserInfo() -> Results<UserInfoRealm> {
 //        let realm = self.defaultRealm()

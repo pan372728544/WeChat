@@ -127,10 +127,10 @@ extension LoginViewController {
         let window = UIApplication.shared.keyWindow
         window?.rootViewController = BaseTabBarController()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                    Toast.showCenterWithText(text: "登录成功")
+            Toast.showCenterWithText(text: "登录成功")
         }
-
         
+        socketClient.sendLoadFriends()
     }
     
     @objc func btnClick() {

@@ -11,10 +11,27 @@ import UIKit
 class ContactDetailViewController: UIViewController {
 
     fileprivate var userId : String?
+    // tableView
+    fileprivate lazy var tableView : UITableView = {
+        let tableView =  UITableView(frame: CGRect(x: 0,
+                                                   y: 0,
+                                                   width: Screen_W,
+                                                   height: Screen_H),
+                                     style: UITableView.Style.grouped)
+        
+        return tableView
+    }()
+    
+    fileprivate var detailVM : ContactDetailViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        let image = UIImage.from(color: UIColor.white)
+        
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+   
         view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
+        setup()
     }
     
     init(userId: String) {
@@ -28,14 +45,20 @@ class ContactDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+
+}
+
+extension ContactDetailViewController {
+    
+    func setup()  {
+        
+        self.view.addSubview(self.tableView)
+        detailVM = ContactDetailViewModel()
+        detailVM?.bingData(data: self.userId!)
+        detailVM?.loadDataRequest()
+        detailVM!.bindView(view: self.tableView)
+
     }
-    */
-
+    
 }
