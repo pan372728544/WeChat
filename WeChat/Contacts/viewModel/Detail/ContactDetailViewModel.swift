@@ -44,8 +44,14 @@ class ContactDetailViewModel: NSObject,MeProtocol {
     
     func loadDataRequest() {
         
-        socketClient.sendFridenDetail(phone: self.userId!)
-        
+
+        let que = "objectId = \'\(self.userId!)\'"
+        dbUsers =  RealmTool.getDBUserById(que)
+        if dbUsers?.first != nil {
+            self.loadData()
+        } else {
+            socketClient.sendFridenDetail(phone: self.userId!)
+        }
     }
     
     func loadData()  {

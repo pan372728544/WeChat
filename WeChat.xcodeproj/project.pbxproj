@@ -319,6 +319,28 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		38D5A16022963A42002BBBA7 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				38D5A14F22954EC9002BBBA7 /* ContactDetailTableViewCell.swift */,
+				38D5A15122955ACE002BBBA7 /* ContactDetailOtherTableViewCell.swift */,
+				38D5A15322955ADE002BBBA7 /* ContactDetailVideoTableViewCell.swift */,
+				38D5A15E2295651A002BBBA7 /* ContactBaseTableViewCell.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		38D5A16122963A56002BBBA7 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				38D5A14D22954E81002BBBA7 /* ContactDetailViewModel.swift */,
+				38D5A15522955B9A002BBBA7 /* ContactDetailOtherViewModel.swift */,
+				38D5A15722955BAD002BBBA7 /* ContactDetailVideoViewModel.swift */,
+				38D5A15C22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		38EDD762228C0CE800E9935A /* Socket */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,12 +408,9 @@
 		38EDD797228D5A3E00E9935A /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				38D5A16122963A56002BBBA7 /* Detail */,
 				38EDD78C228D3EC600E9935A /* ContactCellViewModel.swift */,
 				38EDD788228D3D4800E9935A /* ContactsViewModel.swift */,
-				38D5A14D22954E81002BBBA7 /* ContactDetailViewModel.swift */,
-				38D5A15522955B9A002BBBA7 /* ContactDetailOtherViewModel.swift */,
-				38D5A15722955BAD002BBBA7 /* ContactDetailVideoViewModel.swift */,
-				38D5A15C22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -399,11 +418,8 @@
 		38EDD798228D5A4900E9935A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38D5A16022963A42002BBBA7 /* Detail */,
 				38EDD78A228D3D5F00E9935A /* ContactsTableViewCell.swift */,
-				38D5A14F22954EC9002BBBA7 /* ContactDetailTableViewCell.swift */,
-				38D5A15122955ACE002BBBA7 /* ContactDetailOtherTableViewCell.swift */,
-				38D5A15322955ADE002BBBA7 /* ContactDetailVideoTableViewCell.swift */,
-				38D5A15E2295651A002BBBA7 /* ContactBaseTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
