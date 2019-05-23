@@ -305,6 +305,13 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - (tableView.tableHeaderView?.height)!
         changeNavigation(scrollsetOffY)
+
+        // 设置底部颜色
+        if scrollsetOffY >= 0 {
+            self.tableView.backgroundView?.backgroundColor = UIColor.white
+        } else {
+            self.tableView.backgroundView?.backgroundColor = UIColor.Gray237Color()
+        }
         
         for index in 1..<keysAry.count {
             
