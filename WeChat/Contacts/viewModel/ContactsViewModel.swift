@@ -78,7 +78,7 @@ class ContactsViewModel: NSObject,MeProtocol {
         
         dicAll = [String : Array<Any>]()
         
-        countAll = dbFriends.count
+        countAll = dbFriends.count-4
         for item in dbFriends {
             
             let cellVM = ContactCellViewModel()
