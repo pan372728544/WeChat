@@ -19,7 +19,7 @@ class ContactsViewController: UIViewController {
 //    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.Gray237Color()
+        view.backgroundColor = UIColor.white
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

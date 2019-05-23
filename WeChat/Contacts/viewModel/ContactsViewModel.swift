@@ -56,7 +56,7 @@ class ContactsViewModel: NSObject,MeProtocol {
     fileprivate var keysAry : [String] = [String]()
     var dicAll = [String : Array<Any>]()
     
-    
+    fileprivate var countAll : Int?
     fileprivate var contactArray : [Any] = [Any]()
     fileprivate var arraySectionH : [CGFloat] = [CGFloat]()
     fileprivate var arraySectionNewH : [CGFloat] = [CGFloat]()
@@ -70,8 +70,6 @@ class ContactsViewModel: NSObject,MeProtocol {
         self.vc = vc
 
         self.vc.extendedLayoutIncludesOpaqueBars = false
-//        self.vc.edgesForExtendedLayout = .top
-//        self.vc.automaticallyAdjustsScrollViewInsets = true
 
     }
     
@@ -80,6 +78,7 @@ class ContactsViewModel: NSObject,MeProtocol {
         
         dicAll = [String : Array<Any>]()
         
+        countAll = dbFriends.count
         for item in dbFriends {
             
             let cellVM = ContactCellViewModel()
@@ -149,6 +148,26 @@ class ContactsViewModel: NSObject,MeProtocol {
 
             
         }
+        
+        
+        let viewBottom = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 44))
+        viewBottom.backgroundColor  = UIColor.white
+        let labCount = UILabel(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 44))
+        labCount.text = "\(countAll!)位联系人"
+        labCount.textAlignment = .center
+        labCount.textColor = UIColor.textNameColor()
+        labCount.font = UIFont.systemFont(ofSize: 18)
+        labCount.backgroundColor = UIColor.white
+        viewBottom.addSubview(labCount)
+        
+        let viewH = 1/UIScreen.main.scale
+        
+        let viewLine1 = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: viewH))
+        viewLine1.backgroundColor = UIColor.Gray213Color()
+        viewBottom.addSubview(viewLine1)
+        
+        
+        self.tableView.tableFooterView = viewBottom
 
         
     }
