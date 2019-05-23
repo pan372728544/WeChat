@@ -27,7 +27,7 @@ class ContactsViewController: UIViewController {
         contactVM.loadData()
         contactVM.bindView(view: self.view)
         contactVM.bingViewController(vc: self)
-
+//    self.automaticallyAdjustsScrollViewInsets = true;
 //        self.navigationItem.searchController = searchController
         
         

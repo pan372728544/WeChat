@@ -22,7 +22,7 @@ class SearchViewController: UISearchController {
     
     override init(searchResultsController: UIViewController?) {
         super.init(searchResultsController: searchResultsController)
-        self.searResult = searchResultsController as! ContactSearchViewController
+        self.searResult = searchResultsController as? ContactSearchViewController
         setup()
         self.delegate = self
     }

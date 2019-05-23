@@ -33,8 +33,8 @@ class ContactsViewModel: NSObject,MeProtocol {
     }()
     
     fileprivate var searchController : SearchViewController = {
-        
-        let searchController = SearchViewController(searchResultsController: ContactSearchViewController())
+
+        let searchController = SearchViewController.init(searchResultsController: ContactSearchViewController())
         return searchController
     }()
     
@@ -68,8 +68,9 @@ class ContactsViewModel: NSObject,MeProtocol {
     
     func bingViewController(vc: UIViewController) {
         self.vc = vc
-    
-        self.vc.extendedLayoutIncludesOpaqueBars = true
+
+        self.vc.extendedLayoutIncludesOpaqueBars = false
+//        self.vc.edgesForExtendedLayout = .top
 //        self.vc.automaticallyAdjustsScrollViewInsets = true
 
     }
@@ -168,12 +169,12 @@ extension ContactsViewModel {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.Gray237Color()
+        self.tableView.backgroundColor = UIColor.clear
         
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         self.tableView.showsVerticalScrollIndicator = false
-        self.tableView.contentInsetAdjustmentBehavior = .always
+//        self.tableView.contentInsetAdjustmentBehavior = .always
 //        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
         
         self.view.addSubview(self.indexView)
@@ -182,6 +183,11 @@ extension ContactsViewModel {
 
         self.tableView.tableHeaderView = searchController.searchBar
 
+        // 解决下拉有其他view 背景颜色问题
+        let viewNew = UIView(frame: self.tableView.bounds)
+        viewNew.backgroundColor = UIColor.Gray237Color()
+        self.tableView.backgroundView = viewNew
+        
 
     }
     
