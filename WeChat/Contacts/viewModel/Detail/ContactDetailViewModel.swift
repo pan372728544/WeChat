@@ -187,7 +187,7 @@ extension ContactDetailViewModel : UITableViewDelegate,UITableViewDataSource {
         let tempAry : [String] = sectionAry[indexPath.section] as! [String]
 
         if tempAry[0] == "设置备注和标签" {
-            return 130+NavaBar_H
+            return 90+NavaBar_H
         } else if tempAry[indexPath.row] == "朋友圈"{
     
             return 99

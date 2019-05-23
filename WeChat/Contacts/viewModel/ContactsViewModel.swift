@@ -254,10 +254,15 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let array = contactArray[indexPath.section] as! [ContactCellViewModel]
-        let vm = array[indexPath.row]
-        let vc = ContactDetailViewController(userId: (vm.dbFriend?.friendId)!)
-        self.vc.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.section == 0 {
+            
+            Toast.showCenterWithText(text: "没有可跳转的页面")
+        } else {
+            let array = contactArray[indexPath.section] as! [ContactCellViewModel]
+            let vm = array[indexPath.row]
+            let vc = ContactDetailViewController(userId: (vm.dbFriend?.friendId)!)
+            self.vc.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

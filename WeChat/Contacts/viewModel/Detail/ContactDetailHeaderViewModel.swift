@@ -26,9 +26,9 @@ extension ContactDetailHeaderViewModel {
     func setupView()  {
         
         self.cell?.nameLabel.text = model?.name
-        self.cell?.viewLine.frame.origin.y = 130+NavaBar_H - MeCellH
-        self.cell?.imageArrow.frame.origin.y = 130+NavaBar_H - MeCellH + (MeCellH-16)/2
-        self.cell?.nameLabel.frame.origin.y = 130+NavaBar_H - MeCellH
+        self.cell?.viewLine.frame.origin.y = 90+NavaBar_H - MeCellH
+        self.cell?.imageArrow.frame.origin.y = 90+NavaBar_H - MeCellH + (MeCellH-16)/2
+        self.cell?.nameLabel.frame.origin.y = 90+NavaBar_H - MeCellH
         
         
         cell?.lbelNike.text = dbUser?.name
