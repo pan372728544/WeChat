@@ -27,9 +27,9 @@ class ContactDetailViewController: UIViewController {
         super.viewDidLoad()
         let image = UIImage.from(color: UIColor.white)
         
-        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-   
+//        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+   self.navigationController?.navigationBar.isOpaque = true
         view.backgroundColor = UIColor.white
         setup()
     }
@@ -49,7 +49,7 @@ class ContactDetailViewController: UIViewController {
 
 }
 
-extension ContactDetailViewController {
+extension ContactDetailViewController : UIScrollViewDelegate {
     
     func setup()  {
         
@@ -58,7 +58,17 @@ extension ContactDetailViewController {
         detailVM?.bingData(data: self.userId!)
         detailVM?.loadDataRequest()
         detailVM!.bindView(view: self.tableView)
+        detailVM!.bindVC(vc: self)
 
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+//        super.willMove(toParent: parent)
+            let image = UIImage.from(color: UIColor.red)
+//                self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        
+        print(parent)
+    }
+    
+  
 }

@@ -13,11 +13,11 @@ class ContactDetailViewModel: NSObject,MeProtocol {
 
     
     fileprivate var tableView : UITableView?
-    
+    fileprivate var viewHead : UIView?
     fileprivate var sectionAry : [Any] = [Any]()
         fileprivate var dbUsers : Results<DBUser>?
     fileprivate var userId : String?
-    
+        fileprivate var vc : UIViewController?
     fileprivate var cellOhterVM =  ContactDetailOtherViewModel()
     
     fileprivate var cellVideoVM =  ContactDetailVideoViewModel()
@@ -42,6 +42,10 @@ class ContactDetailViewModel: NSObject,MeProtocol {
         self.userId = data as? String
     }
     
+    func bindVC(vc: UIViewController)  {
+        self.vc = vc
+        self.vc?.view.addSubview(viewHead!)
+    }
     func loadDataRequest() {
         
 
@@ -127,6 +131,8 @@ extension ContactDetailViewModel {
         self.tableView!.sectionFooterHeight = 0.1
         self.tableView!.separatorStyle = .none
 
+        viewHead = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H))
+        viewHead?.backgroundColor = UIColor.white
         
         
     }
@@ -210,10 +216,15 @@ extension ContactDetailViewModel : UITableViewDelegate,UITableViewDataSource {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor.tableViewBackGroundColor()
-        return view
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print(scrollView.contentOffset.y)
+        
+        let offsetY = scrollView.contentOffset.y+NavaBar_H
+        if offsetY < 0 {
+            viewHead?.frame.size.height = NavaBar_H-offsetY
+       
+        }
         
     }
     

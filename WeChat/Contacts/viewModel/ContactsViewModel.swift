@@ -69,7 +69,7 @@ class ContactsViewModel: NSObject,MeProtocol {
     func bingViewController(vc: UIViewController) {
         self.vc = vc
 
-        self.vc.extendedLayoutIncludesOpaqueBars = false
+        self.vc.extendedLayoutIncludesOpaqueBars = true
 
     }
     
@@ -193,8 +193,7 @@ extension ContactsViewModel {
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         self.tableView.showsVerticalScrollIndicator = false
-//        self.tableView.contentInsetAdjustmentBehavior = .always
-//        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInsetAdjustmentBehavior = .automatic
         
         self.view.addSubview(self.indexView)
         self.indexView.setSelectionIndex(index: 1)
@@ -303,9 +302,12 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
         
-        let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - (tableView.tableHeaderView?.height)!
+        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
+        
+        let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
 
+        print(scrollsetOffY)
         // 设置底部颜色
         if scrollsetOffY >= 0 {
             self.tableView.backgroundView?.backgroundColor = UIColor.white
@@ -393,7 +395,8 @@ extension ContactsViewModel {
     
     func changeNavigation(_ offset : CGFloat)  {
 
-        let new = offset + (self.tableView.tableHeaderView?.height)!
+        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
+        let new = offset + tableHeadH
         
         self.vc.navigationController?.navigationBar.setBackgroundImage(new > 0 ? nil : UIImage(), for: UIBarMetrics.default)
         self.vc.navigationController?.navigationBar.shadowImage = new > 0 ? nil : UIImage()
