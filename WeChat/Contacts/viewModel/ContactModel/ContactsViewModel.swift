@@ -193,7 +193,8 @@ extension ContactsViewModel {
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         self.tableView.showsVerticalScrollIndicator = false
-        self.tableView.contentInsetAdjustmentBehavior = .automatic
+        self.tableView.contentInsetAdjustmentBehavior = .never
+        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
         
         self.view.addSubview(self.indexView)
         self.indexView.setSelectionIndex(index: 1)
