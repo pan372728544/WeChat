@@ -17,7 +17,16 @@ class MineViewController: UIViewController {
         view.backgroundColor = .white
     
         self.navigationItem.title = ""
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "WAWeb_Menu_Video_Dark_Normal", target: self, action: #selector(btnSetingTheme))
+        let rightButton = UIButton(type: .custom)
+        rightButton.setImage(UIImage(named: "ChatRomm_ToolPanel_Icon_Video_Normal"), for: .normal)
+        rightButton.imageView?.contentMode = .scaleAspectFill
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -10)
+        rightButton.backgroundColor = UIColor.clear
+        rightButton.addTarget(self, action: #selector(btnSetingTheme), for: .touchUpInside)
+        let right = UIBarButtonItem(customView: rightButton)
+        
+        navigationItem.rightBarButtonItem = right
         
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
