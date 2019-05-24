@@ -26,10 +26,18 @@ extension ContactDetailVideoViewModel {
         
         self.cell?.nameLabel.text = model?.name
         
-        
-        self.cell?.nameLabel.frame.origin.x = (Screen_W-200)/2
-        self.cell?.nameLabel.textAlignment = .center
-        self.cell?.nameLabel.textColor = UIColor.init(r: 65, g: 105, b: 225)
+        self.cell?.nameLabel.sizeToFit()
+        self.cell?.nameLabel.frame.origin.x = (Screen_W-(cell?.nameLabel.width)!)/2
+        self.cell?.nameLabel.frame.origin.y = (MeCellH-(cell?.nameLabel.height)!)/2
+        self.cell?.nameLabel.textColor = UIColor.init(r: 112, g: 129, b: 165)
+        cell?.nameLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        self.cell?.imagePhoto.left = (self.cell?.nameLabel.left)! - 25 - 5
+        if cell?.indexPath?.row == 0 {
+            self.cell?.imagePhoto.image = UIImage.init(named: "AlbumCommentSingleAHL")
+        } else {
+            self.cell?.imagePhoto.image = UIImage.init(named: "AlbumInformationLikeHL")
+        }
+
         self.cell?.imageArrow.isHidden = true
         self.cell?.viewLine.frame = CGRect(x: 0, y: MeCellH, width: Screen_W, height: 1/UIScreen.main.scale)
     }

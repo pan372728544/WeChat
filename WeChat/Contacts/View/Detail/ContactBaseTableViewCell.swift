@@ -44,7 +44,7 @@ class ContactBaseTableViewCell: UITableViewCell {
 //        imageIcon.frame = CGRect(x: 15, y: (MeCellH-25)/2, width: 25, height: 25)
 //        contentView.addSubview(imageIcon)
         
-        nameLabel.frame = CGRect(x:  20, y: 0, width: 200, height: 55)
+        nameLabel.frame = CGRect(x:  20, y: 0, width: 200, height: MeCellH)
         nameLabel.textColor = UIColor.black
         nameLabel.font = UIFont.systemFont(ofSize: 17)
         contentView.addSubview(nameLabel)
