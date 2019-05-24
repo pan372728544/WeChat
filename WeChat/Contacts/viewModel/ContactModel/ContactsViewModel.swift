@@ -60,6 +60,7 @@ class ContactsViewModel: NSObject,MeProtocol {
     fileprivate var contactArray : [Any] = [Any]()
     fileprivate var arraySectionH : [CGFloat] = [CGFloat]()
     fileprivate var arraySectionNewH : [CGFloat] = [CGFloat]()
+     fileprivate var viewLine1: UIView = UIView()
     func bindView(view: UIView) {
         
         self.view = view
@@ -219,7 +220,12 @@ extension ContactsViewModel {
         effectView?.alpha = 0
         self.view.addSubview(effectView!)
         
-
+        let viewH = 1/UIScreen.main.scale
+        
+        viewLine1 = UIView(frame: CGRect(x: 0, y: NavaBar_H-viewH, width: Screen_W, height: viewH))
+        viewLine1.backgroundColor = UIColor.Gray213Color()
+        viewLine1.isHidden = true
+        self.view.addSubview(viewLine1)
     }
     
 }
@@ -405,6 +411,9 @@ extension ContactsViewModel {
         let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
 
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
+        print("\(offset)   iiiiii")
+      
+        viewLine1.isHidden = offset <= -tableHeadH
 
 
     }
