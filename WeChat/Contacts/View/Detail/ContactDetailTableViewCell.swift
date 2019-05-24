@@ -13,6 +13,7 @@ class ContactDetailTableViewCell: ContactBaseTableViewCell {
 
     var imagePhoto = UIImageView()
     
+    var imageGender = UIImageView()
     var lbelNike = UILabel()
     var lbelId = UILabel()
     var lbelCity = UILabel()
@@ -44,11 +45,17 @@ class ContactDetailTableViewCell: ContactBaseTableViewCell {
         imagePhoto.layer.masksToBounds = true
         imagePhoto.layer.cornerRadius = 10
         contentView.addSubview(imagePhoto)
+
         
         lbelNike.frame = CGRect(x:  imagePhoto.right + 10, y: 15, width: 200, height: 30)
         lbelNike.textColor = UIColor.black
         lbelNike.font = UIFont.boldSystemFont(ofSize: 23)
         contentView.addSubview(lbelNike)
+        
+        
+        imageGender.frame = CGRect(x: lbelNike.right + 10, y: lbelNike.top+4, width: 20, height: 20)
+
+        contentView.addSubview(imageGender)
         
         lbelId.frame = CGRect(x:  imagePhoto.right + 10, y: lbelNike.bottom + 8, width: 200, height: 20)
         lbelId.textColor = UIColor.textNameColor()

@@ -29,19 +29,27 @@ extension ContactDetailHeaderViewModel {
         self.cell?.viewLine.frame.origin.y = 90+NavaBar_H - MeCellH
         self.cell?.imageArrow.frame.origin.y = 90+NavaBar_H - MeCellH + (MeCellH-16)/2
         self.cell?.nameLabel.frame.origin.y = 90+NavaBar_H - MeCellH
-        
+
+
         
         cell?.lbelNike.text = dbUser?.name
         cell?.lbelNike.sizeToFit()
-
         cell?.lbelId.text = "微信号:  \(String(describing: dbUser!.objectId))"
         cell?.lbelId.sizeToFit()
         
         cell?.lbelCity.text = "地区:  \(String(describing: dbUser!.country))"
         cell?.lbelCity.sizeToFit()
+    
         
         let url = URL(string: (dbUser?.picture)!)
         
         cell?.imagePhoto.kf.setImage(with: url)
+        
+        var nameG = "Contact_Female"
+        if dbUser?.gender == "man" {
+            nameG = "Contact_Male"
+        }
+        cell?.imageGender.image = UIImage.init(named: nameG)
+        cell?.imageGender.left = (cell?.lbelNike.right)! + 10
     }
 }

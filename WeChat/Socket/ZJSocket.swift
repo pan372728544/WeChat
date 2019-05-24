@@ -375,6 +375,7 @@ extension ZJSocket {
         protoUser.lastTerminate = dbUser.lastTerminate
         protoUser.createdAt = dbUser.createdAt
         protoUser.updatedAt = dbUser.updatedAt
+        protoUser.gender = dbUser.gender
         return protoUser
     }
 }

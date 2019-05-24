@@ -377,7 +377,7 @@ extension IMDataManager {
             dbUser.lastTerminate = protoUser.lastTerminate
             dbUser.createdAt =  protoUser.createdAt
             dbUser.updatedAt = protoUser.updatedAt
-            
+            dbUser.gender = protoUser.gender
             RealmTool.insertDBUser(by: dbUser)
     
         }

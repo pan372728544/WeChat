@@ -50,7 +50,7 @@ extension RealmTool  {
         //        Realm.Configuration.defaultConfiguration = config
         
         // 配置二 数据库迁移 （数据库发生变化版本号也要变化）
-        let currentVersion = 2
+        let currentVersion = 10
         print(getRealmPath())
         let config = Realm.Configuration(fileURL: URL.init(string: getRealmPath()), inMemoryIdentifier: nil, syncConfiguration: nil, encryptionKey: nil, readOnly: false, schemaVersion: UInt64(currentVersion), migrationBlock: { (migration, oldVersion) in
             

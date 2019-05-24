@@ -39,6 +39,7 @@ final public class ProtoUser : GeneratedMessage {
         fieldCheck = fieldCheck && (lhs.hasLastTerminate == rhs.hasLastTerminate) && (!lhs.hasLastTerminate || lhs.lastTerminate == rhs.lastTerminate)
         fieldCheck = fieldCheck && (lhs.hasCreatedAt == rhs.hasCreatedAt) && (!lhs.hasCreatedAt || lhs.createdAt == rhs.createdAt)
         fieldCheck = fieldCheck && (lhs.hasUpdatedAt == rhs.hasUpdatedAt) && (!lhs.hasUpdatedAt || lhs.updatedAt == rhs.updatedAt)
+        fieldCheck = fieldCheck && (lhs.hasGender == rhs.hasGender) && (!lhs.hasGender || lhs.gender == rhs.gender)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -80,6 +81,9 @@ final public class ProtoUser : GeneratedMessage {
     public fileprivate(set) var updatedAt:Int64! = nil
     public fileprivate(set) var hasUpdatedAt:Bool = false
 
+    public fileprivate(set) var gender:String! = nil
+    public fileprivate(set) var hasGender:Bool = false
+
     required public init() {
         super.init()
     }
@@ -120,6 +124,9 @@ final public class ProtoUser : GeneratedMessage {
         if !hasUpdatedAt {
             throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoUser.self): field \"updatedAt\" mark required")
         }
+        if !hasGender {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoUser.self): field \"gender\" mark required")
+        }
     }
     override public func writeTo(codedOutputStream: CodedOutputStream) throws {
         if hasObjectId {
@@ -157,6 +164,9 @@ final public class ProtoUser : GeneratedMessage {
         }
         if hasUpdatedAt {
             try codedOutputStream.writeInt64(fieldNumber: 12, value:updatedAt)
+        }
+        if hasGender {
+            try codedOutputStream.writeString(fieldNumber: 13, value:gender)
         }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
@@ -202,6 +212,9 @@ final public class ProtoUser : GeneratedMessage {
         }
         if hasUpdatedAt {
             serialize_size += updatedAt.computeInt64Size(fieldNumber: 12)
+        }
+        if hasGender {
+            serialize_size += gender.computeStringSize(fieldNumber: 13)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -264,6 +277,9 @@ final public class ProtoUser : GeneratedMessage {
         if hasUpdatedAt {
             jsonMap["updatedAt"] = "\(updatedAt!)"
         }
+        if hasGender {
+            jsonMap["gender"] = gender
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> ProtoUser {
@@ -310,6 +326,9 @@ final public class ProtoUser : GeneratedMessage {
         if hasUpdatedAt {
             output += "\(indent) updatedAt: \(String(describing: updatedAt)) \n"
         }
+        if hasGender {
+            output += "\(indent) gender: \(String(describing: gender)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -351,6 +370,9 @@ final public class ProtoUser : GeneratedMessage {
             }
             if hasUpdatedAt {
                 hashCode = (hashCode &* 31) &+ updatedAt.hashValue
+            }
+            if hasGender {
+                hashCode = (hashCode &* 31) &+ gender.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -678,6 +700,31 @@ final public class ProtoUser : GeneratedMessage {
             builderResult.updatedAt = nil
             return self
         }
+        public var gender:String {
+            get {
+                return builderResult.gender
+            }
+            set (value) {
+                builderResult.hasGender = true
+                builderResult.gender = value
+            }
+        }
+        public var hasGender:Bool {
+            get {
+                return builderResult.hasGender
+            }
+        }
+        @discardableResult
+        public func setGender(_ value:String) -> ProtoUser.Builder {
+            self.gender = value
+            return self
+        }
+        @discardableResult
+        public func clearGender() -> ProtoUser.Builder{
+            builderResult.hasGender = false
+            builderResult.gender = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -740,6 +787,9 @@ final public class ProtoUser : GeneratedMessage {
             if other.hasUpdatedAt {
                 updatedAt = other.updatedAt
             }
+            if other.hasGender {
+                gender = other.gender
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -792,6 +842,9 @@ final public class ProtoUser : GeneratedMessage {
 
                 case 96:
                     updatedAt = try codedInputStream.readInt64()
+
+                case 106:
+                    gender = try codedInputStream.readString()
 
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
@@ -846,6 +899,9 @@ final public class ProtoUser : GeneratedMessage {
                 resultDecodedBuilder.updatedAt = Int64(jsonValueUpdatedAt)!
             } else if let jsonValueUpdatedAt = jsonMap["updatedAt"] as? Int {
                 resultDecodedBuilder.updatedAt = Int64(jsonValueUpdatedAt)
+            }
+            if let jsonValueGender = jsonMap["gender"] as? String {
+                resultDecodedBuilder.gender = jsonValueGender
             }
             return resultDecodedBuilder
         }
@@ -1516,6 +1572,7 @@ extension ProtoUser: GeneratedMessageProtocol {
         case "lastTerminate": return self.lastTerminate
         case "createdAt": return self.createdAt
         case "updatedAt": return self.updatedAt
+        case "gender": return self.gender
         default: return nil
         }
     }
@@ -1537,6 +1594,7 @@ extension ProtoUser.Builder: GeneratedMessageBuilderProtocol {
             case "lastTerminate": return self.lastTerminate
             case "createdAt": return self.createdAt
             case "updatedAt": return self.updatedAt
+            case "gender": return self.gender
             default: return nil
             }
         }
@@ -1602,6 +1660,11 @@ extension ProtoUser.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.updatedAt = newSubscriptValue
+            case "gender":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.gender = newSubscriptValue
             default: return
             }
         }

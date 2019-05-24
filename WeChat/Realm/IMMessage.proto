@@ -17,6 +17,7 @@ message ProtoUser {
     required int64 lastTerminate = 10;
     required int64 createdAt = 11;
     required int64 updatedAt = 12;
+    required string gender = 13;
 }
 
 message ProtoFriend {
