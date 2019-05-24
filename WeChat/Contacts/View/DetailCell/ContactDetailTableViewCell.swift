@@ -41,7 +41,7 @@ class ContactDetailTableViewCell: ContactBaseTableViewCell {
     func setupMainView()  {
         
         
-        imagePhoto.frame = CGRect(x: 15, y: 15, width: 70, height: 70)
+        imagePhoto.frame = CGRect(x: 20, y: 15, width: 70, height: 70)
         imagePhoto.layer.masksToBounds = true
         imagePhoto.layer.cornerRadius = 10
         contentView.addSubview(imagePhoto)

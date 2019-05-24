@@ -17,11 +17,27 @@ class ContactsViewController: UIViewController {
  
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-
+        
+        
+        let img = UIImage(named: "AlbumGroupIcon")
+        let itemRight = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(more))
+        self.navigationItem.rightBarButtonItems = [itemRight]
+        
         contactVM.loadData()
         contactVM.bindView(view: self.view)
         contactVM.bingViewController(vc: self)
         
     }
+    
+}
+
+extension ContactsViewController  {
+    
+
+    @objc func more() {
+        
+    }
+    
+   
     
 }

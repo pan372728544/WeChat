@@ -411,7 +411,6 @@ extension ContactsViewModel {
         let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
 
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
-        print("\(offset)   iiiiii")
       
         viewLine1.isHidden = offset <= -tableHeadH
 
