@@ -25,11 +25,8 @@ class ContactDetailViewController: UIViewController {
     fileprivate var detailVM : ContactDetailViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let image = UIImage.from(color: UIColor.white)
-        
-//        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-   self.navigationController?.navigationBar.isOpaque = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         view.backgroundColor = UIColor.white
         setup()
     }
@@ -62,13 +59,11 @@ extension ContactDetailViewController : UIScrollViewDelegate {
 
     }
     
-    override func willMove(toParent parent: UIViewController?) {
-//        super.willMove(toParent: parent)
-            let image = UIImage.from(color: UIColor.red)
-//                self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-        
-        print("willMove---\(parent)")
-    }
+//    override func willMove(toParent parent: UIViewController?) {
+
+//    }
+//    override func didMove(toParent parent: UIViewController?) {
+//    }
     
   
 }

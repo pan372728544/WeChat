@@ -55,7 +55,7 @@ class ContactsViewModel: NSObject,MeProtocol {
     fileprivate var vc : UIViewController = UIViewController()
     fileprivate var keysAry : [String] = [String]()
     var dicAll = [String : Array<Any>]()
-    
+    fileprivate   var  effectView : UIVisualEffectView?
     fileprivate var countAll : Int?
     fileprivate var contactArray : [Any] = [Any]()
     fileprivate var arraySectionH : [CGFloat] = [CGFloat]()
@@ -166,9 +166,11 @@ class ContactsViewModel: NSObject,MeProtocol {
         viewLine1.backgroundColor = UIColor.Gray213Color()
         viewBottom.addSubview(viewLine1)
         
-        
         self.tableView.tableFooterView = viewBottom
-
+        
+        let viewFoot = UIView(frame: CGRect(x: 0, y: 44, width: Screen_W, height: Screen_H))
+        viewFoot.backgroundColor = UIColor.white
+        viewBottom.addSubview(viewFoot)
         
     }
     
@@ -206,6 +208,16 @@ extension ContactsViewModel {
         let viewNew = UIView(frame: self.tableView.bounds)
         viewNew.backgroundColor = UIColor.Gray237Color()
         self.tableView.backgroundView = viewNew
+        
+
+        // 添加毛玻璃效果
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
+        
+        effectView = UIVisualEffectView(effect: blur)
+        effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
+        effectView?.backgroundColor = UIColor.Gray237Color()
+        effectView?.alpha = 0
+        self.view.addSubview(effectView!)
         
 
     }
@@ -283,6 +295,7 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
             
             Toast.showCenterWithText(text: "没有可跳转的页面")
         } else {
+
             let array = contactArray[indexPath.section] as! [ContactCellViewModel]
             let vm = array[indexPath.row]
             let vc = ContactDetailViewController(userId: (vm.dbFriend?.friendId)!)
@@ -308,14 +321,6 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
 
-        print("scrollViewDidScroll=== \(scrollsetOffY)")
-        // 设置底部颜色
-        if scrollsetOffY >= 0 {
-            self.tableView.backgroundView?.backgroundColor = UIColor.white
-        } else {
-            self.tableView.backgroundView?.backgroundColor = UIColor.Gray237Color()
-        }
-        
         for index in 1..<keysAry.count {
             
             // 设置seciton
@@ -325,7 +330,7 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
                 
             }
             
-            // 设置颜色
+            // 设置headview颜色
             if scrollsetOffY  >= arraySectionH[index-1]-30 && scrollsetOffY  <= arraySectionH[index]+30 {
                 let scrolla = arraySectionH[index-1]-30
                 let  progress : CGFloat = (scrollsetOffY-scrolla) / 30
@@ -397,12 +402,10 @@ extension ContactsViewModel {
     func changeNavigation(_ offset : CGFloat)  {
 
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        let new = offset + tableHeadH
-        
-        self.vc.navigationController?.navigationBar.setBackgroundImage(new > 0 ? nil : UIImage(), for: UIBarMetrics.default)
-        self.vc.navigationController?.navigationBar.shadowImage = new > 0 ? nil : UIImage()
+        let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
 
-//        self.vc.navigationController?.view.backgroundColor = UIColor.Gray237Color()
+        effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
+
 
     }
 }

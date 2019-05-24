@@ -14,17 +14,14 @@ class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
+ 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
         contactVM.loadData()
         contactVM.bindView(view: self.view)
         contactVM.bingViewController(vc: self)
+        
     }
     
-
-    
-    
-
 }
