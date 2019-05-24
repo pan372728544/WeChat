@@ -67,7 +67,7 @@ extension ContactDetailViewController : UIScrollViewDelegate {
             let image = UIImage.from(color: UIColor.red)
 //                self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
         
-        print(parent)
+        print("willMove---\(parent)")
     }
     
   

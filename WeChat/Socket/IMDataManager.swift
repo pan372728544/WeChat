@@ -303,12 +303,12 @@ extension IMDataManager : ZJSocketDelegate {
         let build = try! user.toBuilder()
         // 更新插入数据
         IMDataManager.share.insertProtoFriend(cupid: build)
-        print(user)
+//        print(user)
     }
     
     func socket(_ socket : ZJSocket, friendDetail user : ProtoUser) {
         
-        print(user)
+//        print(user)
         let build = try! user.toBuilder()
         
         IMDataManager.share.insertProtoUser(cupid: build)

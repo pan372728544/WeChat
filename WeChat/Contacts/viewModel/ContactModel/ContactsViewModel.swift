@@ -300,14 +300,14 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     }
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+
         
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
 
-        print(scrollsetOffY)
+        print("scrollViewDidScroll=== \(scrollsetOffY)")
         // 设置底部颜色
         if scrollsetOffY >= 0 {
             self.tableView.backgroundView?.backgroundColor = UIColor.white

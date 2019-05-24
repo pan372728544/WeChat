@@ -111,7 +111,6 @@ class ContactDetailViewModel: NSObject,MeProtocol {
         
         self.tableView?.reloadData()
         
-        print(sectionAry)
     }
 }
 
@@ -218,7 +217,6 @@ extension ContactDetailViewModel : UITableViewDelegate,UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        print(scrollView.contentOffset.y)
         
         let offsetY = scrollView.contentOffset.y+NavaBar_H
         if offsetY < 0 {

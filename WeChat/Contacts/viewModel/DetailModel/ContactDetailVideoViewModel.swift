@@ -27,7 +27,7 @@ extension ContactDetailVideoViewModel {
         self.cell?.nameLabel.text = model?.name
         
         self.cell?.nameLabel.sizeToFit()
-        self.cell?.nameLabel.frame.origin.x = (Screen_W-(cell?.nameLabel.width)!)/2
+        self.cell?.nameLabel.frame.origin.x = (Screen_W-(cell?.nameLabel.width)!)/2 + 10
         self.cell?.nameLabel.frame.origin.y = (MeCellH-(cell?.nameLabel.height)!)/2
         self.cell?.nameLabel.textColor = UIColor.init(r: 112, g: 129, b: 165)
         cell?.nameLabel.font = UIFont.boldSystemFont(ofSize: 17)

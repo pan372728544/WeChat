@@ -34,7 +34,7 @@ extension RealmTool {
         
         let dbPath = docPath.appending("/\(name).realm")
         
-        print(dbPath)
+//        print(dbPath)
         return dbPath
     }
 }

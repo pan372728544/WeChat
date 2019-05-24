@@ -311,6 +311,47 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		38AA01AA2297867500755C8D /* ContactCell */ = {
+			isa = PBXGroup;
+			children = (
+				38EDD78A228D3D5F00E9935A /* ContactsTableViewCell.swift */,
+			);
+			path = ContactCell;
+			sourceTree = "<group>";
+		};
+		38AA01AB2297868A00755C8D /* ContactModel */ = {
+			isa = PBXGroup;
+			children = (
+				38EDD78C228D3EC600E9935A /* ContactCellViewModel.swift */,
+				38EDD788228D3D4800E9935A /* ContactsViewModel.swift */,
+			);
+			path = ContactModel;
+			sourceTree = "<group>";
+		};
+		38AA01AC229786A300755C8D /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				38278C9E2285887100884EB0 /* ContactsViewController.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		38AA01AD229786B300755C8D /* ContactSearch */ = {
+			isa = PBXGroup;
+			children = (
+				38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */,
+			);
+			path = ContactSearch;
+			sourceTree = "<group>";
+		};
+		38AA01AE229786C000755C8D /* ContactDetail */ = {
+			isa = PBXGroup;
+			children = (
+				38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */,
+			);
+			path = ContactDetail;
+			sourceTree = "<group>";
+		};
 		38D5A15922955DFC002BBBA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,7 +360,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		38D5A16022963A42002BBBA7 /* Detail */ = {
+		38D5A16022963A42002BBBA7 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
 				38D5A14F22954EC9002BBBA7 /* ContactDetailTableViewCell.swift */,
@@ -327,10 +368,10 @@
 				38D5A15322955ADE002BBBA7 /* ContactDetailVideoTableViewCell.swift */,
 				38D5A15E2295651A002BBBA7 /* ContactBaseTableViewCell.swift */,
 			);
-			path = Detail;
+			path = DetailCell;
 			sourceTree = "<group>";
 		};
-		38D5A16122963A56002BBBA7 /* Detail */ = {
+		38D5A16122963A56002BBBA7 /* DetailModel */ = {
 			isa = PBXGroup;
 			children = (
 				38D5A14D22954E81002BBBA7 /* ContactDetailViewModel.swift */,
@@ -338,7 +379,7 @@
 				38D5A15722955BAD002BBBA7 /* ContactDetailVideoViewModel.swift */,
 				38D5A15C22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift */,
 			);
-			path = Detail;
+			path = DetailModel;
 			sourceTree = "<group>";
 		};
 		38EDD762228C0CE800E9935A /* Socket */ = {
@@ -398,9 +439,9 @@
 		38EDD796228D5A3200E9935A /* vcs */ = {
 			isa = PBXGroup;
 			children = (
-				38278C9E2285887100884EB0 /* ContactsViewController.swift */,
-				38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */,
-				38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */,
+				38AA01AE229786C000755C8D /* ContactDetail */,
+				38AA01AD229786B300755C8D /* ContactSearch */,
+				38AA01AC229786A300755C8D /* Contact */,
 			);
 			path = vcs;
 			sourceTree = "<group>";
@@ -408,9 +449,8 @@
 		38EDD797228D5A3E00E9935A /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
-				38D5A16122963A56002BBBA7 /* Detail */,
-				38EDD78C228D3EC600E9935A /* ContactCellViewModel.swift */,
-				38EDD788228D3D4800E9935A /* ContactsViewModel.swift */,
+				38AA01AB2297868A00755C8D /* ContactModel */,
+				38D5A16122963A56002BBBA7 /* DetailModel */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -418,8 +458,8 @@
 		38EDD798228D5A4900E9935A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				38D5A16022963A42002BBBA7 /* Detail */,
-				38EDD78A228D3D5F00E9935A /* ContactsTableViewCell.swift */,
+				38AA01AA2297867500755C8D /* ContactCell */,
+				38D5A16022963A42002BBBA7 /* DetailCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
