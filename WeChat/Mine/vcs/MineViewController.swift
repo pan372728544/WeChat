@@ -46,6 +46,7 @@ extension MineViewController {
         
         headerVM.loadData()
         headerVM.bindView(view: self.view)
+        headerVM.bindViewController(vc: self)
     }
     
 }

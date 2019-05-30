@@ -42,8 +42,14 @@ class MeHeaderTableViewCell: UITableViewCell {
     
     func setupView()  {
         
+        contentView.backgroundColor = UIColor.clear
+        let viewWhite = UIView(frame: CGRect(x: 0, y: NavaBar_H+60, width: Screen_W, height: 70))
+        viewWhite.backgroundColor = .white
+        contentView.addSubview(viewWhite)
         
         imageHead.frame = CGRect(x: 30, y: 20+NavaBar_H, width: 60, height: 60)
+        imageHead.layer.cornerRadius = 5
+        imageHead.layer.masksToBounds = true
         contentView.addSubview(imageHead)
         
         nameLabel.frame = CGRect(x: imageHead.right + 20, y: imageHead.top+10, width: 200, height: 24)
@@ -63,6 +69,8 @@ class MeHeaderTableViewCell: UITableViewCell {
         imgCode.frame = CGRect(x: imageArrow.left - 10 - 20, y: idLabel.top+3, width: 16, height: 16)
         imgCode.image = UIImage(named: "setting_myQR_Normal")
         contentView.addSubview(imgCode)
+        
+
         
   
     }

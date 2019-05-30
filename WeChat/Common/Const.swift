@@ -27,7 +27,7 @@ let NavaBar_H : CGFloat = StatusBar_H + 44
 
 
 var isConnected = false
-let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.34", port: 9999)
+let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.32", port: 9999)
 
 
 let MeCellH : CGFloat = 56

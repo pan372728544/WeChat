@@ -23,7 +23,7 @@ class MeViewModel: NSObject, MeProtocol{
     }()
     
     fileprivate var view : UIView = UIView()
-    
+    fileprivate var vc : UIViewController = UIViewController()
     fileprivate var sectionAry : [Any] = [Any]()
     
     fileprivate var dataAry : [MeModel] = [MeModel]()
@@ -33,22 +33,24 @@ class MeViewModel: NSObject, MeProtocol{
     fileprivate var cellOhterVM =  MeOtherViewModel()
     
     fileprivate var dbUsers : Results<DBUser>?
-    
+    fileprivate var isCan : Bool!
     fileprivate var model = MeModel()
-    
+    fileprivate var imgv : UIImageView?
     fileprivate var headArray : [MeHeaderCellViewModel] = [MeHeaderCellViewModel]()
-    
+        fileprivate var viewHead : UIView?
     fileprivate var otherArray : [Any] = [Any]()
     
     func bindView(view: UIView) {
-        
+        isCan = false
         self.view = view
         self.setupMainView()
         
+    }
+    func bindViewController(vc: UIViewController) {
         
+        self.vc = vc
         
     }
-    
     override init() {
 
         super.init()
@@ -106,24 +108,38 @@ extension MeViewModel {
     
     func setupMainView()   {
         
+        
+        let viewH = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: Screen_H))
+        viewH.backgroundColor = UIColor.tableViewBackGroundColor()
+        let img = UIImage(named: "story_teach_bg")
+        imgv =  UIImageView(frame: CGRect(x: 0, y:-200, width: 144, height: 344))
+        imgv!.contentMode = .scaleAspectFill
+        imgv!.image = img
+        viewH.addSubview(imgv!)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(pan:)))
+
+        viewH.addGestureRecognizer(panGesture)
+        self.view.addSubview(viewH)
+        
+        
+        viewHead = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H+60))
+        viewHead?.backgroundColor = UIColor.white
+        self.view.addSubview(viewHead!)
+        
         self.tableView.register(MeHeaderTableViewCell.self, forCellReuseIdentifier: "MeHeaderTableViewCell")
         self.tableView.register(MeOtherTableViewCell.self, forCellReuseIdentifier: "MeOtherTableViewCell")
         
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.tableViewBackGroundColor()
+        self.tableView.backgroundColor = UIColor.clear
         self.tableView.sectionHeaderHeight = 0.1
         self.tableView.sectionFooterHeight = 0.1
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         
         self.tableView.contentInset = UIEdgeInsets(top: -NavaBar_H, left: 0, bottom: 0, right: 0)
-
-       
-        let whiteView = UIView(frame: CGRect(x: 0, y: -Screen_H, width: Screen_W, height: Screen_H))
-        whiteView.backgroundColor = .white
-        self.tableView.addSubview(whiteView)
         
     }
     
@@ -148,6 +164,7 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MeHeaderTableViewCell") as! MeHeaderTableViewCell
             cell.selectionStyle = .none
             let cellVM = headArray[indexPath.section]
+            cell.backgroundColor = UIColor.clear
             cellVM.bindView(view: cell)
             return cell
 
@@ -187,5 +204,109 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 8))
+        view.backgroundColor = UIColor.tableViewBackGroundColor()
+        return view
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("\(scrollView.contentOffset.y)=====")
+        
+        let offsetY = scrollView.contentOffset.y
+        // 设置head尺寸
+        if offsetY < 0 {
+            viewHead?.frame.size.height = NavaBar_H+60-offsetY
+        }
+        
+        if offsetY < -80 {
+            
+            imgv?.frame.origin.y = -200 - offsetY*1.3
+            viewHead?.alpha = 1 - CGFloat(-(offsetY+80)/200)
+        } else {
+            viewHead?.alpha = 1
+        }
+
+    }
+
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
+
+        let offseY = scrollView.contentOffset.y
+        
+        if offseY < -120 {
+            
+            self.tableView.delegate = nil
+            self.vc.tabBarController?.tabBar.isHidden = true
+            
+            self.viewHead?.isHidden = true
+            self.tableView.transform = CGAffineTransform(translationX: 0, y: -offseY+NavaBar_H)
+
+            UIView.animate(withDuration: 0.3, animations: {
+
+                self.tableView.transform = CGAffineTransform(translationX: 0, y: Screen_H)
+                self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: 144, height: 344)
+            }) { (isFinish) in
+                self.viewHead?.frame.size.height = Screen_H
+                self.tableView.delegate = self
+                
+            }
+            
+        }
+    }
+}
+
+
+extension MeViewModel {
+    
+    @objc func handlePanGesture(pan: UIPanGestureRecognizer)  {
+        //得到拖的过程中的xy坐标
+        let translation : CGPoint = pan.translation(in: self.view)
+        print(translation.y)
+        
+        switch pan.state {
+            
+        case .changed:
+            self.tableView.frame.origin.y = Screen_H + translation.y*0.5
+            
+            self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344 + translation.y*0.2, width: 144, height: 344)
+            
+        case .ended:
+            if translation.y < -200 {
+                
+                self.viewHead?.alpha = 0
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.viewHead?.alpha = 1
+                    self.tableView.transform = CGAffineTransform.identity
+                    self.tableView.frame.origin.y = 0
+                    self.viewHead?.isHidden = false
+                    self.viewHead?.frame.size.height = NavaBar_H+60
+                    self.imgv?.frame = CGRect(x: 0, y:  -200, width: 144, height: 344)
+                }) { (finish) in
+                  
+                }
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.tableView.frame.origin.y = Screen_H
+                    
+                    self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: 144, height: 344)
+                    
+                }) { (finish) in
+                    self.viewHead?.isHidden = true
+                }
+            }
+        default:
+            print("")
+        }
+        
+        
+      
+        
+        }
     
 }
