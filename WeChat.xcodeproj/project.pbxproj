@@ -35,6 +35,8 @@
 		38278D87228BA9AF00884EB0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D86228BA9AF00884EB0 /* Toast.swift */; };
 		38278D89228BB4D200884EB0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D88228BB4D200884EB0 /* LoginViewController.swift */; };
 		38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D8A228BE51900884EB0 /* PhoneTextField.swift */; };
+		38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA025E229FB58900755C8D /* BaseViewController.swift */; };
+		38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */; };
 		38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */; };
 		38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */; };
 		38D5A14C22954E63002BBBA7 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */; };
@@ -105,6 +107,8 @@
 		38278D86228BA9AF00884EB0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		38278D88228BB4D200884EB0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		38278D8A228BE51900884EB0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
+		38AA025E229FB58900755C8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearchViewController.swift; sourceTree = "<group>"; };
 		38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		38278C9B2285884100884EB0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				38AA0260229FBED400755C8D /* viewModel */,
 				38278C9C2285885C00884EB0 /* ChatViewController.swift */,
 				38278D6622897C6000884EB0 /* ChatRoomViewController.swift */,
 			);
@@ -255,6 +260,7 @@
 			children = (
 				38278CA52285892000884EB0 /* BaseTabBarController.swift */,
 				38278D6422897C0600884EB0 /* BaseNavigationController.swift */,
+				38AA025E229FB58900755C8D /* BaseViewController.swift */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -350,6 +356,14 @@
 				38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */,
 			);
 			path = ContactDetail;
+			sourceTree = "<group>";
+		};
+		38AA0260229FBED400755C8D /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */,
+			);
+			path = viewModel;
 			sourceTree = "<group>";
 		};
 		38D5A15922955DFC002BBBA7 /* Model */ = {
@@ -667,6 +681,7 @@
 				38278C9F2285887100884EB0 /* ContactsViewController.swift in Sources */,
 				38D5A15822955BAD002BBBA7 /* ContactDetailVideoViewModel.swift in Sources */,
 				38EDD78D228D3EC600E9935A /* ContactCellViewModel.swift in Sources */,
+				38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */,
 				38EDD776228C2C8B00E9935A /* MeOtherViewModel.swift in Sources */,
 				38278C9D2285885C00884EB0 /* ChatViewController.swift in Sources */,
 				38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */,
@@ -675,6 +690,7 @@
 				38EDD7D0228E74A300E9935A /* yudpsocket.c in Sources */,
 				38278CA12285888700884EB0 /* DiscoverViewController.swift in Sources */,
 				38EDD75D228C0C7300E9935A /* Immessage.proto.swift in Sources */,
+				38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */,
 				38D5A15022954EC9002BBBA7 /* ContactDetailTableViewCell.swift in Sources */,
 				38278CA32285889C00884EB0 /* MineViewController.swift in Sources */,
 				38EDD76A228C0DD900E9935A /* IMDataManager.swift in Sources */,

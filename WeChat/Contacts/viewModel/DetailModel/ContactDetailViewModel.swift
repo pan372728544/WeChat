@@ -15,9 +15,9 @@ class ContactDetailViewModel: NSObject,MeProtocol {
     fileprivate var tableView : UITableView?
     fileprivate var viewHead : UIView?
     fileprivate var sectionAry : [Any] = [Any]()
-        fileprivate var dbUsers : Results<DBUser>?
+    fileprivate var dbUsers : Results<DBUser>?
     fileprivate var userId : String?
-        fileprivate var vc : UIViewController?
+    fileprivate var vc : UIViewController?
     fileprivate var cellOhterVM =  ContactDetailOtherViewModel()
     
     fileprivate var cellVideoVM =  ContactDetailVideoViewModel()
@@ -215,6 +215,14 @@ extension ContactDetailViewModel : UITableViewDelegate,UITableViewDataSource {
         return 0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          let tempAry : [String] = sectionAry[indexPath.section] as! [String]
+        if tempAry[indexPath.row] == "发消息" {
+            let chat = ChatRoomViewController(dbUsers: dbUsers!)
+            self.vc?.navigationController?.pushViewController(chat, animated: true)
+
+        }
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         

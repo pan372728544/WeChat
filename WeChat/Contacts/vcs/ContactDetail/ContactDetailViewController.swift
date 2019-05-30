@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactDetailViewController: UIViewController {
+class ContactDetailViewController: BaseViewController {
 
     fileprivate var userId : String?
     // tableView
@@ -25,31 +25,15 @@ class ContactDetailViewController: UIViewController {
     fileprivate var detailVM : ContactDetailViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Do any additional setup after loading the view.
+
         view.backgroundColor = UIColor.white
-        
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self as UIGestureRecognizerDelegate
-        // 返回按钮
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage(named: "kinda_actionbar_icon_dark_back"), for: .normal)
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -18, bottom: 0, right: 0)
-        backButton.backgroundColor = UIColor.clear
-        // 设置frame
-        backButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-        let backView = UIBarButtonItem(customView: backButton)
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        backButton.width = -15 // iOS 11 失效
-        navigationItem.leftBarButtonItems = [barButtonItem, backView]
-        
         
         let img = UIImage(named: "barbuttonicon_more_black_Normal")
         let itemRight = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(more))
         self.navigationItem.rightBarButtonItems = [itemRight]
-        
-            
-        
+
         setup()
     }
     
@@ -80,10 +64,10 @@ extension ContactDetailViewController : UIScrollViewDelegate,UIGestureRecognizer
         detailVM!.bindVC(vc: self)
 
     }
-    @objc func back() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+//    @objc func back() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+//    
     @objc func more() {
 
     }
