@@ -18,14 +18,14 @@ class ChatRoomViewController: BaseViewController {
                                                    y: 0,
                                                    width: Screen_W,
                                                    height: Screen_H),
-                                     style: UITableView.Style.grouped)
+                                     style: UITableView.Style.plain)
         
         return tableView
     }()
 
     open var dbUsers : Results<DBUser>?
     
-    fileprivate var chatRoomVM : ChatRoomViewModel?
+    fileprivate var chatRoomVM : ChatRoomViewModel = ChatRoomViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +51,16 @@ class ChatRoomViewController: BaseViewController {
     }
     
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.chatRoomVM.registerNotification()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.chatRoomVM.removeNotification()
+        
+    }
 
 }
 
@@ -59,14 +69,19 @@ extension ChatRoomViewController {
     func setup()  {
         
         self.view.insertSubview(self.tableView, belowSubview: self.effectView!)
-        chatRoomVM = ChatRoomViewModel()
-        chatRoomVM?.bingData(data: (self.dbUsers?.first)!)
-        chatRoomVM?.loadDataRequest()
-        chatRoomVM!.bindVC(vc: self)
-        chatRoomVM?.bindTablView(tableView: self.tableView)
+        chatRoomVM.bingData(data: (self.dbUsers?.first)!)
+        chatRoomVM.loadDataRequest()
+        chatRoomVM.bindVC(vc: self)
+        chatRoomVM.bindTablView(tableView: self.tableView)
         
         
     }
+   
+    
+}
+
+// MARK:- 键盘通知
+extension ChatRoomViewController {
    
     
 }
