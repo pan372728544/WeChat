@@ -325,6 +325,7 @@ extension MeViewModel {
                 self.viewHead?.alpha = 0
                 UIView.animate(withDuration: 0.3, animations: {
                     self.viewHead?.alpha = 1
+                    self.photoButton?.removeFromSuperview()
                     self.tableView.transform = CGAffineTransform.identity
                     self.tableView.frame.origin.y = 0
                     self.viewHead?.isHidden = false
@@ -336,7 +337,7 @@ extension MeViewModel {
                         self.generator = UIImpactFeedbackGenerator(style: .light)
                     }
                 }) { (finish) in
-                    self.photoButton?.removeFromSuperview()
+        
                 }
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
