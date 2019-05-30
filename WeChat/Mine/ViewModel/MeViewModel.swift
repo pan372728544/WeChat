@@ -21,7 +21,7 @@ class MeViewModel: NSObject, MeProtocol{
         tableView.backgroundColor = UIColor.orange
         return tableView
     }()
-    
+        fileprivate var generator : UIImpactFeedbackGenerator?
     fileprivate var view : UIView = UIView()
     fileprivate var vc : UIViewController = UIViewController()
     fileprivate var sectionAry : [Any] = [Any]()
@@ -36,6 +36,8 @@ class MeViewModel: NSObject, MeProtocol{
     fileprivate var isCan : Bool!
     fileprivate var model = MeModel()
     fileprivate var imgv : UIImageView?
+    
+    fileprivate var photoButton : UIButton?
     fileprivate var headArray : [MeHeaderCellViewModel] = [MeHeaderCellViewModel]()
         fileprivate var viewHead : UIView?
     fileprivate var otherArray : [Any] = [Any]()
@@ -112,8 +114,8 @@ extension MeViewModel {
         let viewH = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: Screen_H))
         viewH.backgroundColor = UIColor.tableViewBackGroundColor()
         let img = UIImage(named: "story_teach_bg")
-        imgv =  UIImageView(frame: CGRect(x: 0, y:-200, width: 144, height: 344))
-        imgv!.contentMode = .scaleAspectFill
+        imgv =  UIImageView(frame: CGRect(x: 0, y:-200, width: Screen_W, height: 344))
+        imgv!.contentMode = .left
         imgv!.image = img
         viewH.addSubview(imgv!)
         
@@ -140,7 +142,7 @@ extension MeViewModel {
         view.addSubview(self.tableView)
         
         self.tableView.contentInset = UIEdgeInsets(top: -NavaBar_H, left: 0, bottom: 0, right: 0)
-        
+        generator = UIImpactFeedbackGenerator(style: .light)
     }
     
 }
@@ -228,6 +230,11 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
         } else {
             viewHead?.alpha = 1
         }
+        
+        if offsetY <= -120 {
+            generator?.impactOccurred()
+            generator = nil
+        }
 
     }
 
@@ -241,19 +248,42 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
         if offseY < -120 {
             
             self.tableView.delegate = nil
-            self.vc.tabBarController?.tabBar.isHidden = true
-            
             self.viewHead?.isHidden = true
             self.tableView.transform = CGAffineTransform(translationX: 0, y: -offseY+NavaBar_H)
 
             UIView.animate(withDuration: 0.3, animations: {
-
+                self.vc.tabBarController?.tabBar.isHidden = true
+                self.vc.navigationController?.navigationBar.isHidden = true
                 self.tableView.transform = CGAffineTransform(translationX: 0, y: Screen_H)
-                self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: 144, height: 344)
+                self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: Screen_W, height: 344)
+                self.imgv?.isUserInteractionEnabled = true
+                
+                
+            
+        
             }) { (isFinish) in
                 self.viewHead?.frame.size.height = Screen_H
                 self.tableView.delegate = self
-                
+                self.photoButton?.removeFromSuperview()
+                self.photoButton = UIButton(frame: CGRect(x: (Screen_W-190)/2, y: 200, width: 190, height: 45))
+                self.photoButton?.setTitle("拍一个视频动态", for: UIControl.State.normal)
+                self.photoButton?.setTitleColor(UIColor.init(r: 14, g: 156, b: 230), for: .normal)
+                var img = UIImage.init(named: "ChatRomm_ToolPanel_Icon_Video_Normal")
+                img = img?.withRenderingMode(.alwaysTemplate)
+                self.photoButton?.tintColor = UIColor.init(r: 14, g: 156, b: 230)
+                self.photoButton?.setImage(img, for: .normal)
+                self.photoButton?.setImage(img, for: .highlighted)
+                self.photoButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+                self.photoButton?.layer.masksToBounds = true
+                self.photoButton?.layer.cornerRadius = 5
+                self.photoButton?.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+                self.photoButton?.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+                self.photoButton?.addTarget(self, action: #selector(self.btnClick22(btn:)), for: UIControl.Event.touchUpInside)
+                self.photoButton?.addTarget(self, action: #selector(self.btnClick11(btn:)), for: UIControl.Event.touchDown)
+                self.imgv?.addSubview(self.photoButton!)
+                if self.generator == nil {
+                    self.generator = UIImpactFeedbackGenerator(style: .light)
+                }
             }
             
         }
@@ -262,6 +292,14 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
 
 
 extension MeViewModel {
+    
+    @objc func btnClick22(btn: UIButton) {
+        btn.backgroundColor = UIColor.clear
+    }
+    
+    @objc func btnClick11(btn: UIButton) {
+        btn.backgroundColor = UIColor.Gray213Color()
+    }
     
     @objc func handlePanGesture(pan: UIPanGestureRecognizer)  {
         //得到拖的过程中的xy坐标
@@ -273,11 +311,17 @@ extension MeViewModel {
         case .changed:
             self.tableView.frame.origin.y = Screen_H + translation.y*0.5
             
-            self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344 + translation.y*0.2, width: 144, height: 344)
+            self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344 + translation.y*0.2, width: Screen_W, height: 344)
             
+            self.photoButton?.backgroundColor = UIColor.clear
+            if translation.y < -200 {
+            
+                generator?.impactOccurred()
+                generator = nil;
+            }
         case .ended:
             if translation.y < -200 {
-                
+              
                 self.viewHead?.alpha = 0
                 UIView.animate(withDuration: 0.3, animations: {
                     self.viewHead?.alpha = 1
@@ -286,15 +330,20 @@ extension MeViewModel {
                     self.viewHead?.isHidden = false
                     self.viewHead?.frame.size.height = NavaBar_H+60
                     self.imgv?.frame = CGRect(x: 0, y:  -200, width: 144, height: 344)
+                    self.vc.tabBarController?.tabBar.isHidden = false
+                    self.vc.navigationController?.navigationBar.isHidden = false
+                    if self.generator == nil {
+                        self.generator = UIImpactFeedbackGenerator(style: .light)
+                    }
                 }) { (finish) in
-                  
+                    self.photoButton?.removeFromSuperview()
                 }
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
                     
                     self.tableView.frame.origin.y = Screen_H
                     
-                    self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: 144, height: 344)
+                    self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344, width: Screen_W, height: 344)
                     
                 }) { (finish) in
                     self.viewHead?.isHidden = true
@@ -308,5 +357,6 @@ extension MeViewModel {
       
         
         }
+    
     
 }
