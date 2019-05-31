@@ -70,10 +70,9 @@ extension ChatRoomViewController {
         
         self.view.insertSubview(self.tableView, belowSubview: self.effectView!)
         chatRoomVM.bingData(data: (self.dbUsers?.first)!)
-        chatRoomVM.loadDataRequest()
         chatRoomVM.bindVC(vc: self)
         chatRoomVM.bindTablView(tableView: self.tableView)
-        
+        chatRoomVM.loadDataRequest()
         
     }
    

@@ -12,13 +12,20 @@ import RealmSwift
 
 // 代理
 protocol ZJSocketDelegate : class {
+    // 进入会话
     func socket(_ socket : ZJSocket, joinRoom user : ProtoUser)
+    // 离开会话
     func socket(_ socket : ZJSocket, leaveRoom user : ProtoUser)
+    // 登录
     func socket(_ socket : ZJSocket, login user : ProtoUser)
+    // 获取好友列表
     func socket(_ socket : ZJSocket, friend user : ProtoFriend)
+    
+    // 获取好友详情
     func socket(_ socket : ZJSocket, friendDetail user : ProtoUser)
     
-//    func socket(_ socket : ZJSocket, chatMsg : TextMessage)
+    // 收到消息
+    func socket(_ socket : ZJSocket, chatMsg : ProtoMessage)
 //    func socket(_ socket : ZJSocket, groupMsg : GroupMessage)
 }
 
@@ -29,32 +36,9 @@ class ZJSocket : NSObject{
     
     fileprivate var tcpClient : TCPClient
 
-//    fileprivate var userInfo : UserInfo.Builder = {
-//
-//
-//        LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
-//        var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
-//        let userInfo = UserInfo.Builder()
-//        // 用户ID
-//        let userId : String = String(LogInName!.suffix(1))
-//        userInfo.userId = userId
-//
-//        // 用户名
-//        let count = LogInName!.count
-//        userInfo.name = String(LogInName!.prefix(count-4) )
-//
-//        // 用户等级
-//        userInfo.level = Int64(userId)!
-//
-//        // 用户头像
-//        let n : Int = Int(userId)!
-//        let str = imgs[n-1]
-//        userInfo.iconUrl = str
-//        return userInfo
-//    }()
     
     // 记录之前的时间c
-    fileprivate var timeOld : String = ""
+    fileprivate var timeOld : Int64 = 0
     init(addr: String, port : Int32) {
         // 创建TCP
         tcpClient = TCPClient(address: addr, port: port )
@@ -118,13 +102,12 @@ extension ZJSocket {
     fileprivate func handleMsg(type : Int, data : Data) {
         switch type {
         case 0, 1:
-            print("T##items: Any...##Any")
-//            let user = try! UserInfo.parseFrom(data: data)
-//            type == 0 ? delegate?.socket(self, joinRoom: user) : delegate?.socket(self, leaveRoom: user)
+            let user = try! ProtoUser.parseFrom(data: data)
+            type == 0 ? delegate?.socket(self, joinRoom: user) : delegate?.socket(self, leaveRoom: user)
         case 2:
-//            let chatMsg = try! TextMessage.parseFrom(data: data)
-//            delegate?.socket(self, chatMsg: chatMsg)
-   print("T##items: Any...##Any")
+            // 收到消息
+            let chatMsg = try! ProtoMessage.parseFrom(data: data)
+            delegate?.socket(self, chatMsg: chatMsg)
         case 10:
                print("T##items: Any...##Any")
 //            let group = try! GroupMessage.parseFrom(data: data)
@@ -170,7 +153,7 @@ extension ZJSocket {
         // 发送
         sendMsg(data: msgData, type: 201)
     }
-    // 获取好友信息
+    // 获取好友详细信息
     func sendFridenDetail(phone : String)  {
         
         print(phone)
@@ -180,23 +163,115 @@ extension ZJSocket {
         sendMsg(data: msgData!, type: 202)
     }
     
-//    func sendJoinRoom() {
-//        // 用户信息
-//
-//        let userInfoNew = getUserInfo()
-//        let msgData = (try! userInfoNew.build()).data()
-//
-//        // 发送
-//        sendMsg(data: msgData, type: 0)
-//    }
-//
-//    func sendLeaveRoom() {
-//        // 用户信息
-//        let userInfoNew = getUserInfo()
-//        let msgData = (try! userInfoNew.build()).data()
-//        // 发送
-//        sendMsg(data: msgData, type: 1)
-//    }
+    // 发送消息
+    func sendMessage(recipient: DBUser, text: String?, picture: UIImage?, video: URL?, audio: String?,file: String?)  -> (re: Result,da: Data,ch: ProtoMessage.Builder){
+        // 获取当前用户
+        let userInfo = getUserInfo()
+        
+        let message = ProtoMessage.Builder()
+        
+        
+        let members = [ userInfo.objectId, recipient.objectId]
+        let sorted = members.sorted{$0.localizedCaseInsensitiveCompare($1) == .orderedAscending}
+        let chatIdStr =  Checksum.md5HashOf(string: sorted.joined(separator: ""))
+        
+        message.objectId = NextPushId.getUUIDString()
+        message.chatId = chatIdStr
+
+        message.members = "\( userInfo.objectId),\(recipient.objectId)"
+        
+        message.senderId =  userInfo.objectId
+        message.senderName = userInfo.name
+        message.senderPicture = userInfo.picture
+        
+        message.recipientId = recipient.objectId
+        message.recipientName = recipient.name
+        message.recipientPicture = recipient.picture
+        
+        message.groupId = ""
+        message.groupName = ""
+        message.groupPicture = ""
+        
+        var typeNew = ""
+        var textNew = ""
+        
+        if (text != nil){
+            typeNew = "text"
+            textNew = text!
+        } else if (picture != nil) {
+            typeNew = "picture"
+            textNew = "[图片]"
+            message.picture = (picture?.pngData())!
+        } else if (video != nil) {
+            typeNew = "video"
+            textNew = "[视频]"
+            message.video = Data()
+        } else if (audio != nil)  {
+            typeNew = "aduio"
+            textNew = "[语音]"
+            
+            message.audio = Data()
+        }else if (file != nil)  {
+            typeNew = "file"
+            textNew = "[文件]"
+            
+            message.file = Data()
+        } else {
+            typeNew = "unknown"
+            textNew = "[未知]"
+        }
+        
+        message.type = typeNew
+        message.text = textNew
+        
+        message.videoDuration = 0
+        
+
+        message.audioDuration = 0
+        
+
+        
+        message.status = "success"
+        message.isDeleted = false
+        
+        
+        // 发送时间
+        let timeInterval = Date().timeIntervalSince1970
+       
+        if timeOld != Int64(timeInterval) {
+            message.updatedAt = Int64(timeInterval)
+            timeOld = message.updatedAt
+        } else {
+            message.updatedAt = 0
+        }
+        message.createdAt = 0
+        
+        // 获取对应的data
+        let chatData = (try! message.build()).data()
+        
+        // 发送消息到服务器
+        let result = sendMsg(data: chatData, type: 2)
+        
+        return (result,chatData,message)
+    }
+    
+    func sendJoinRoom() {
+        // 用户信息
+
+        let userInfoNew = getUserInfo()
+        let msgData = (try! userInfoNew.build()).data()
+
+        // 发送
+        sendMsg(data: msgData, type: 0)
+    }
+
+    func sendLeaveRoom() {
+        // 用户信息
+        let userInfoNew = getUserInfo()
+        let msgData = (try! userInfoNew.build()).data()
+        // 发送
+        sendMsg(data: msgData, type: 1)
+    }
 //    @discardableResult
 //    func sendTextMsg(message : String, group : GroupMessage) -> (re: Result,da: Data,ch: TextMessage.Builder) {
 //
@@ -283,16 +358,16 @@ extension ZJSocket {
 //        }
     
 //    }
-//    
-//    
-//    func sendHeartBeat() {
-//        // 1.获取心跳包中的数据
-//        let heartString = "I am a heart beat;"
-//        let heartData = heartString.data(using: .utf8)!
-//        
-//        // 2.发送数据
-//        sendMsg(data: heartData, type: 100)
-//    }
+    
+    
+    func sendHeartBeat() {
+        // 1.获取心跳包中的数据
+        let heartString = "I am a heart beat;"
+        let heartData = heartString.data(using: .utf8)!
+        
+        // 2.发送数据
+        sendMsg(data: heartData, type: 100)
+    }
     @discardableResult
     func sendMsg(data : Data, type : Int) -> Result{
         // 1.将消息长度, 写入到data

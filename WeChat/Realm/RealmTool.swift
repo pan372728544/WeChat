@@ -94,13 +94,13 @@ extension RealmTool {
 
     }
 
-//    /// 保存数据ChatMessage
-//    public class func insertMessages(by messages : [ChatMessage])  {
-//        let realm = self.defaultRealm()
-//        try! realm.write {
-//            realm.add(messages)
-//        }
-//    }
+    /// 保存数据Message
+    public class func insertMessages(by messages : DBMessage)  {
+        let realm = self.defaultRealm()
+        try! realm.write {
+               realm.add(messages,update: true)
+        }
+    }
 //
 //    /// 保存群组列表
 //    public class func insertMessage(by message : GroupListMessage) {
@@ -155,14 +155,21 @@ extension RealmTool {
 //        return realm.object(ofType: ChatMessage.self, forPrimaryKey: id)
 //    }
 //
-//    /// 获取 指定条件查询
-//    public class func getMessageByPredicate(_ predicate: String) -> Results<ChatMessage> {
-//        let realm = self.defaultRealm()
-//
-//        let pre = NSPredicate(format: predicate)
-//        let results = realm.objects(ChatMessage.self)
-//        return  results.filter(pre)
-//    }
+    /// 获取 指定条件查询
+    public class func getMessageByPredicate(_ predicate: String) -> Results<DBMessage> {
+        let realm = self.defaultRealm()
+        
+        let pre = NSPredicate(format: predicate)
+        let results = realm.objects(DBMessage.self)
+        return  results.filter(pre)
+    }
+    
+    /// 获取 Messages
+    public class func getMessages() -> Results<DBMessage> {
+        let realm = self.defaultRealm()
+        return realm.objects(DBMessage.self)
+    }
+    
 //
 //    /// 获取 按id排序
 //    public class func getMessageByIdSorted(_ isAscending: Bool) -> Results<ChatMessage> {

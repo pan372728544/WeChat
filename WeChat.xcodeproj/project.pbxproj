@@ -39,6 +39,9 @@
 		38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */; };
 		38AA0265229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */; };
 		38AA0267229FCCEC00755C8D /* ChatRoomOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0266229FCCEC00755C8D /* ChatRoomOtherTableViewCell.swift */; };
+		38AA0269229FE8E700755C8D /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0268229FE8E600755C8D /* Checksum.swift */; };
+		38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA027A229FFA3600755C8D /* Immessage.proto.swift */; };
+		38AA028122A0E0FE00755C8D /* NextPushId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA028022A0E0FD00755C8D /* NextPushId.swift */; };
 		38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */; };
 		38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */; };
 		38D5A14C22954E63002BBBA7 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */; };
@@ -51,7 +54,6 @@
 		38D5A15B22955E19002BBBA7 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A15A22955E19002BBBA7 /* ContactModel.swift */; };
 		38D5A15D22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A15C22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift */; };
 		38D5A15F2295651A002BBBA7 /* ContactBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A15E2295651A002BBBA7 /* ContactBaseTableViewCell.swift */; };
-		38EDD75D228C0C7300E9935A /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD75C228C0C7300E9935A /* Immessage.proto.swift */; };
 		38EDD768228C0DBD00E9935A /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD767228C0DBD00E9935A /* SocketManager.swift */; };
 		38EDD76A228C0DD900E9935A /* IMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD769228C0DD900E9935A /* IMDataManager.swift */; };
 		38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD76B228C0E0D00E9935A /* ZJSocket.swift */; };
@@ -113,6 +115,9 @@
 		38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMeTableViewCell.swift; sourceTree = "<group>"; };
 		38AA0266229FCCEC00755C8D /* ChatRoomOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomOtherTableViewCell.swift; sourceTree = "<group>"; };
+		38AA0268229FE8E600755C8D /* Checksum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
+		38AA027A229FFA3600755C8D /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
+		38AA028022A0E0FD00755C8D /* NextPushId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPushId.swift; sourceTree = "<group>"; };
 		38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearchViewController.swift; sourceTree = "<group>"; };
 		38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +130,6 @@
 		38D5A15A22955E19002BBBA7 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		38D5A15C22955E9C002BBBA7 /* ContactDetailHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailHeaderViewModel.swift; sourceTree = "<group>"; };
 		38D5A15E2295651A002BBBA7 /* ContactBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactBaseTableViewCell.swift; sourceTree = "<group>"; };
-		38EDD75C228C0C7300E9935A /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
 		38EDD767228C0DBD00E9935A /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		38EDD769228C0DD900E9935A /* IMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDataManager.swift; sourceTree = "<group>"; };
 		38EDD76B228C0E0D00E9935A /* ZJSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJSocket.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				38278D692289850600884EB0 /* Const.swift */,
 				38278D6D228A496200884EB0 /* Extension.swift */,
 				38278D86228BA9AF00884EB0 /* Toast.swift */,
+				38AA0268229FE8E600755C8D /* Checksum.swift */,
+				38AA028022A0E0FD00755C8D /* NextPushId.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -314,7 +320,7 @@
 		38278D81228B9A8600884EB0 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				38EDD75C228C0C7300E9935A /* Immessage.proto.swift */,
+				38AA027A229FFA3600755C8D /* Immessage.proto.swift */,
 				38EDD78E228D439800E9935A /* IMMessage.proto */,
 				38278D82228B9AE300884EB0 /* RealmTool.swift */,
 				38278D84228B9AF900884EB0 /* ChatMessage.swift */,
@@ -686,6 +692,7 @@
 				38EDD78B228D3D5F00E9935A /* ContactsTableViewCell.swift in Sources */,
 				38EDD79D228E462700E9935A /* IndexView.swift in Sources */,
 				38EDD7D3228E74A300E9935A /* Result.swift in Sources */,
+				38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */,
 				38D5A15B22955E19002BBBA7 /* ContactModel.swift in Sources */,
 				38EDD7D2228E74A300E9935A /* TCPClient.swift in Sources */,
 				38EDD7D4228E74A300E9935A /* UDPClient.swift in Sources */,
@@ -702,10 +709,10 @@
 				38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */,
 				38278C802285542F00884EB0 /* AppDelegate.swift in Sources */,
 				38EDD778228C2CAD00E9935A /* MeHeaderTableViewCell.swift in Sources */,
+				38AA028122A0E0FE00755C8D /* NextPushId.swift in Sources */,
 				38AA0267229FCCEC00755C8D /* ChatRoomOtherTableViewCell.swift in Sources */,
 				38EDD7D0228E74A300E9935A /* yudpsocket.c in Sources */,
 				38278CA12285888700884EB0 /* DiscoverViewController.swift in Sources */,
-				38EDD75D228C0C7300E9935A /* Immessage.proto.swift in Sources */,
 				38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */,
 				38D5A15022954EC9002BBBA7 /* ContactDetailTableViewCell.swift in Sources */,
 				38278CA32285889C00884EB0 /* MineViewController.swift in Sources */,
@@ -723,6 +730,7 @@
 				38278D6E228A496200884EB0 /* Extension.swift in Sources */,
 				38EDD789228D3D4800E9935A /* ContactsViewModel.swift in Sources */,
 				38EDD7D5228E74A300E9935A /* Socket.swift in Sources */,
+				38AA0269229FE8E700755C8D /* Checksum.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
 				38278D80228B9A4E00884EB0 /* WelComeViewController.swift in Sources */,
 				38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */,

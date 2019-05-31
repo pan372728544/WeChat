@@ -33,4 +33,44 @@ message ProtoFriend {
 
 }
 
+message ProtoMessage {
+    // protoc IMMessage.proto --swift_out="./"
+    required string objectId = 1;
+    required string chatId = 2;
+    required string members = 3;
+    
+    required string senderId = 4;
+    required string senderName = 5;
+    required string senderPicture = 6;
+    
+    required string recipientId = 7;
+    required string recipientName = 8;
+    required string recipientPicture = 9;
+    
+    required string groupId = 10;
+    required string groupName = 11;
+    required string groupPicture = 12;
+    
+    required string type = 13;
+    required string text = 14;
+    
+    optional bytes picture = 15;
+    
+    optional bytes video = 16;
+    required int64 video_duration = 17;
+    
+    optional bytes audio = 18;
+    
+    required int64 audio_duration = 19;
+    
+    optional bytes file = 20;
+    required string status = 21;
+    
+    required bool isDeleted = 22;
+    
+    required int64 createdAt = 23;
+    required int64 updatedAt = 24;
+    
+}
+
 

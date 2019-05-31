@@ -1529,6 +1529,1507 @@ final public class ProtoFriend : GeneratedMessage {
 
 }
 
+final public class ProtoMessage : GeneratedMessage {
+    public typealias BuilderType = ProtoMessage.Builder
+
+    public static func == (lhs: ProtoMessage, rhs: ProtoMessage) -> Bool {
+        if lhs === rhs {
+            return true
+        }
+        var fieldCheck:Bool = (lhs.hashValue == rhs.hashValue)
+        fieldCheck = fieldCheck && (lhs.hasObjectId == rhs.hasObjectId) && (!lhs.hasObjectId || lhs.objectId == rhs.objectId)
+        fieldCheck = fieldCheck && (lhs.hasChatId == rhs.hasChatId) && (!lhs.hasChatId || lhs.chatId == rhs.chatId)
+        fieldCheck = fieldCheck && (lhs.hasMembers == rhs.hasMembers) && (!lhs.hasMembers || lhs.members == rhs.members)
+        fieldCheck = fieldCheck && (lhs.hasSenderId == rhs.hasSenderId) && (!lhs.hasSenderId || lhs.senderId == rhs.senderId)
+        fieldCheck = fieldCheck && (lhs.hasSenderName == rhs.hasSenderName) && (!lhs.hasSenderName || lhs.senderName == rhs.senderName)
+        fieldCheck = fieldCheck && (lhs.hasSenderPicture == rhs.hasSenderPicture) && (!lhs.hasSenderPicture || lhs.senderPicture == rhs.senderPicture)
+        fieldCheck = fieldCheck && (lhs.hasRecipientId == rhs.hasRecipientId) && (!lhs.hasRecipientId || lhs.recipientId == rhs.recipientId)
+        fieldCheck = fieldCheck && (lhs.hasRecipientName == rhs.hasRecipientName) && (!lhs.hasRecipientName || lhs.recipientName == rhs.recipientName)
+        fieldCheck = fieldCheck && (lhs.hasRecipientPicture == rhs.hasRecipientPicture) && (!lhs.hasRecipientPicture || lhs.recipientPicture == rhs.recipientPicture)
+        fieldCheck = fieldCheck && (lhs.hasGroupId == rhs.hasGroupId) && (!lhs.hasGroupId || lhs.groupId == rhs.groupId)
+        fieldCheck = fieldCheck && (lhs.hasGroupName == rhs.hasGroupName) && (!lhs.hasGroupName || lhs.groupName == rhs.groupName)
+        fieldCheck = fieldCheck && (lhs.hasGroupPicture == rhs.hasGroupPicture) && (!lhs.hasGroupPicture || lhs.groupPicture == rhs.groupPicture)
+        fieldCheck = fieldCheck && (lhs.hasType == rhs.hasType) && (!lhs.hasType || lhs.type == rhs.type)
+        fieldCheck = fieldCheck && (lhs.hasText == rhs.hasText) && (!lhs.hasText || lhs.text == rhs.text)
+        fieldCheck = fieldCheck && (lhs.hasPicture == rhs.hasPicture) && (!lhs.hasPicture || lhs.picture == rhs.picture)
+        fieldCheck = fieldCheck && (lhs.hasVideo == rhs.hasVideo) && (!lhs.hasVideo || lhs.video == rhs.video)
+        fieldCheck = fieldCheck && (lhs.hasVideoDuration == rhs.hasVideoDuration) && (!lhs.hasVideoDuration || lhs.videoDuration == rhs.videoDuration)
+        fieldCheck = fieldCheck && (lhs.hasAudio == rhs.hasAudio) && (!lhs.hasAudio || lhs.audio == rhs.audio)
+        fieldCheck = fieldCheck && (lhs.hasAudioDuration == rhs.hasAudioDuration) && (!lhs.hasAudioDuration || lhs.audioDuration == rhs.audioDuration)
+        fieldCheck = fieldCheck && (lhs.hasFile == rhs.hasFile) && (!lhs.hasFile || lhs.file == rhs.file)
+        fieldCheck = fieldCheck && (lhs.hasStatus == rhs.hasStatus) && (!lhs.hasStatus || lhs.status == rhs.status)
+        fieldCheck = fieldCheck && (lhs.hasIsDeleted == rhs.hasIsDeleted) && (!lhs.hasIsDeleted || lhs.isDeleted == rhs.isDeleted)
+        fieldCheck = fieldCheck && (lhs.hasCreatedAt == rhs.hasCreatedAt) && (!lhs.hasCreatedAt || lhs.createdAt == rhs.createdAt)
+        fieldCheck = fieldCheck && (lhs.hasUpdatedAt == rhs.hasUpdatedAt) && (!lhs.hasUpdatedAt || lhs.updatedAt == rhs.updatedAt)
+        fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
+        return fieldCheck
+    }
+
+    /// protoc IMMessage.proto --swift_out="./"
+    public fileprivate(set) var objectId:String! = nil
+    public fileprivate(set) var hasObjectId:Bool = false
+
+    public fileprivate(set) var chatId:String! = nil
+    public fileprivate(set) var hasChatId:Bool = false
+
+    public fileprivate(set) var members:String! = nil
+    public fileprivate(set) var hasMembers:Bool = false
+
+    public fileprivate(set) var senderId:String! = nil
+    public fileprivate(set) var hasSenderId:Bool = false
+
+    public fileprivate(set) var senderName:String! = nil
+    public fileprivate(set) var hasSenderName:Bool = false
+
+    public fileprivate(set) var senderPicture:String! = nil
+    public fileprivate(set) var hasSenderPicture:Bool = false
+
+    public fileprivate(set) var recipientId:String! = nil
+    public fileprivate(set) var hasRecipientId:Bool = false
+
+    public fileprivate(set) var recipientName:String! = nil
+    public fileprivate(set) var hasRecipientName:Bool = false
+
+    public fileprivate(set) var recipientPicture:String! = nil
+    public fileprivate(set) var hasRecipientPicture:Bool = false
+
+    public fileprivate(set) var groupId:String! = nil
+    public fileprivate(set) var hasGroupId:Bool = false
+
+    public fileprivate(set) var groupName:String! = nil
+    public fileprivate(set) var hasGroupName:Bool = false
+
+    public fileprivate(set) var groupPicture:String! = nil
+    public fileprivate(set) var hasGroupPicture:Bool = false
+
+    public fileprivate(set) var type:String! = nil
+    public fileprivate(set) var hasType:Bool = false
+
+    public fileprivate(set) var text:String! = nil
+    public fileprivate(set) var hasText:Bool = false
+
+    public fileprivate(set) var picture:Data! = nil
+    public fileprivate(set) var hasPicture:Bool = false
+
+    public fileprivate(set) var video:Data! = nil
+    public fileprivate(set) var hasVideo:Bool = false
+
+    public fileprivate(set) var videoDuration:Int64! = nil
+    public fileprivate(set) var hasVideoDuration:Bool = false
+
+    public fileprivate(set) var audio:Data! = nil
+    public fileprivate(set) var hasAudio:Bool = false
+
+    public fileprivate(set) var audioDuration:Int64! = nil
+    public fileprivate(set) var hasAudioDuration:Bool = false
+
+    public fileprivate(set) var file:Data! = nil
+    public fileprivate(set) var hasFile:Bool = false
+
+    public fileprivate(set) var status:String! = nil
+    public fileprivate(set) var hasStatus:Bool = false
+
+    public fileprivate(set) var isDeleted:Bool! = nil
+    public fileprivate(set) var hasIsDeleted:Bool = false
+
+    public fileprivate(set) var createdAt:Int64! = nil
+    public fileprivate(set) var hasCreatedAt:Bool = false
+
+    public fileprivate(set) var updatedAt:Int64! = nil
+    public fileprivate(set) var hasUpdatedAt:Bool = false
+
+    required public init() {
+        super.init()
+    }
+    override public func isInitialized() throws {
+        if !hasObjectId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"objectId\" mark required")
+        }
+        if !hasChatId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"chatId\" mark required")
+        }
+        if !hasMembers {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"members\" mark required")
+        }
+        if !hasSenderId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"senderId\" mark required")
+        }
+        if !hasSenderName {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"senderName\" mark required")
+        }
+        if !hasSenderPicture {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"senderPicture\" mark required")
+        }
+        if !hasRecipientId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"recipientId\" mark required")
+        }
+        if !hasRecipientName {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"recipientName\" mark required")
+        }
+        if !hasRecipientPicture {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"recipientPicture\" mark required")
+        }
+        if !hasGroupId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"groupId\" mark required")
+        }
+        if !hasGroupName {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"groupName\" mark required")
+        }
+        if !hasGroupPicture {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"groupPicture\" mark required")
+        }
+        if !hasType {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"type\" mark required")
+        }
+        if !hasText {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"text\" mark required")
+        }
+        if !hasVideoDuration {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"videoDuration\" mark required")
+        }
+        if !hasAudioDuration {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"audioDuration\" mark required")
+        }
+        if !hasStatus {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"status\" mark required")
+        }
+        if !hasIsDeleted {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"isDeleted\" mark required")
+        }
+        if !hasCreatedAt {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"createdAt\" mark required")
+        }
+        if !hasUpdatedAt {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(ProtoMessage.self): field \"updatedAt\" mark required")
+        }
+    }
+    override public func writeTo(codedOutputStream: CodedOutputStream) throws {
+        if hasObjectId {
+            try codedOutputStream.writeString(fieldNumber: 1, value:objectId)
+        }
+        if hasChatId {
+            try codedOutputStream.writeString(fieldNumber: 2, value:chatId)
+        }
+        if hasMembers {
+            try codedOutputStream.writeString(fieldNumber: 3, value:members)
+        }
+        if hasSenderId {
+            try codedOutputStream.writeString(fieldNumber: 4, value:senderId)
+        }
+        if hasSenderName {
+            try codedOutputStream.writeString(fieldNumber: 5, value:senderName)
+        }
+        if hasSenderPicture {
+            try codedOutputStream.writeString(fieldNumber: 6, value:senderPicture)
+        }
+        if hasRecipientId {
+            try codedOutputStream.writeString(fieldNumber: 7, value:recipientId)
+        }
+        if hasRecipientName {
+            try codedOutputStream.writeString(fieldNumber: 8, value:recipientName)
+        }
+        if hasRecipientPicture {
+            try codedOutputStream.writeString(fieldNumber: 9, value:recipientPicture)
+        }
+        if hasGroupId {
+            try codedOutputStream.writeString(fieldNumber: 10, value:groupId)
+        }
+        if hasGroupName {
+            try codedOutputStream.writeString(fieldNumber: 11, value:groupName)
+        }
+        if hasGroupPicture {
+            try codedOutputStream.writeString(fieldNumber: 12, value:groupPicture)
+        }
+        if hasType {
+            try codedOutputStream.writeString(fieldNumber: 13, value:type)
+        }
+        if hasText {
+            try codedOutputStream.writeString(fieldNumber: 14, value:text)
+        }
+        if hasPicture {
+            try codedOutputStream.writeData(fieldNumber: 15, value:picture)
+        }
+        if hasVideo {
+            try codedOutputStream.writeData(fieldNumber: 16, value:video)
+        }
+        if hasVideoDuration {
+            try codedOutputStream.writeInt64(fieldNumber: 17, value:videoDuration)
+        }
+        if hasAudio {
+            try codedOutputStream.writeData(fieldNumber: 18, value:audio)
+        }
+        if hasAudioDuration {
+            try codedOutputStream.writeInt64(fieldNumber: 19, value:audioDuration)
+        }
+        if hasFile {
+            try codedOutputStream.writeData(fieldNumber: 20, value:file)
+        }
+        if hasStatus {
+            try codedOutputStream.writeString(fieldNumber: 21, value:status)
+        }
+        if hasIsDeleted {
+            try codedOutputStream.writeBool(fieldNumber: 22, value:isDeleted)
+        }
+        if hasCreatedAt {
+            try codedOutputStream.writeInt64(fieldNumber: 23, value:createdAt)
+        }
+        if hasUpdatedAt {
+            try codedOutputStream.writeInt64(fieldNumber: 24, value:updatedAt)
+        }
+        try unknownFields.writeTo(codedOutputStream: codedOutputStream)
+    }
+    override public func serializedSize() -> Int32 {
+        var serialize_size:Int32 = memoizedSerializedSize
+        if serialize_size != -1 {
+         return serialize_size
+        }
+
+        serialize_size = 0
+        if hasObjectId {
+            serialize_size += objectId.computeStringSize(fieldNumber: 1)
+        }
+        if hasChatId {
+            serialize_size += chatId.computeStringSize(fieldNumber: 2)
+        }
+        if hasMembers {
+            serialize_size += members.computeStringSize(fieldNumber: 3)
+        }
+        if hasSenderId {
+            serialize_size += senderId.computeStringSize(fieldNumber: 4)
+        }
+        if hasSenderName {
+            serialize_size += senderName.computeStringSize(fieldNumber: 5)
+        }
+        if hasSenderPicture {
+            serialize_size += senderPicture.computeStringSize(fieldNumber: 6)
+        }
+        if hasRecipientId {
+            serialize_size += recipientId.computeStringSize(fieldNumber: 7)
+        }
+        if hasRecipientName {
+            serialize_size += recipientName.computeStringSize(fieldNumber: 8)
+        }
+        if hasRecipientPicture {
+            serialize_size += recipientPicture.computeStringSize(fieldNumber: 9)
+        }
+        if hasGroupId {
+            serialize_size += groupId.computeStringSize(fieldNumber: 10)
+        }
+        if hasGroupName {
+            serialize_size += groupName.computeStringSize(fieldNumber: 11)
+        }
+        if hasGroupPicture {
+            serialize_size += groupPicture.computeStringSize(fieldNumber: 12)
+        }
+        if hasType {
+            serialize_size += type.computeStringSize(fieldNumber: 13)
+        }
+        if hasText {
+            serialize_size += text.computeStringSize(fieldNumber: 14)
+        }
+        if hasPicture {
+            serialize_size += picture.computeDataSize(fieldNumber: 15)
+        }
+        if hasVideo {
+            serialize_size += video.computeDataSize(fieldNumber: 16)
+        }
+        if hasVideoDuration {
+            serialize_size += videoDuration.computeInt64Size(fieldNumber: 17)
+        }
+        if hasAudio {
+            serialize_size += audio.computeDataSize(fieldNumber: 18)
+        }
+        if hasAudioDuration {
+            serialize_size += audioDuration.computeInt64Size(fieldNumber: 19)
+        }
+        if hasFile {
+            serialize_size += file.computeDataSize(fieldNumber: 20)
+        }
+        if hasStatus {
+            serialize_size += status.computeStringSize(fieldNumber: 21)
+        }
+        if hasIsDeleted {
+            serialize_size += isDeleted.computeBoolSize(fieldNumber: 22)
+        }
+        if hasCreatedAt {
+            serialize_size += createdAt.computeInt64Size(fieldNumber: 23)
+        }
+        if hasUpdatedAt {
+            serialize_size += updatedAt.computeInt64Size(fieldNumber: 24)
+        }
+        serialize_size += unknownFields.serializedSize()
+        memoizedSerializedSize = serialize_size
+        return serialize_size
+    }
+    public class func getBuilder() -> ProtoMessage.Builder {
+        return ProtoMessage.classBuilder() as! ProtoMessage.Builder
+    }
+    public func getBuilder() -> ProtoMessage.Builder {
+        return classBuilder() as! ProtoMessage.Builder
+    }
+    override public class func classBuilder() -> ProtocolBuffersMessageBuilder {
+        return ProtoMessage.Builder()
+    }
+    override public func classBuilder() -> ProtocolBuffersMessageBuilder {
+        return ProtoMessage.Builder()
+    }
+    public func toBuilder() throws -> ProtoMessage.Builder {
+        return try ProtoMessage.builderWithPrototype(prototype:self)
+    }
+    public class func builderWithPrototype(prototype:ProtoMessage) throws -> ProtoMessage.Builder {
+        return try ProtoMessage.Builder().mergeFrom(other:prototype)
+    }
+    override public func encode() throws -> Dictionary<String,Any> {
+        try isInitialized()
+        var jsonMap:Dictionary<String,Any> = Dictionary<String,Any>()
+        if hasObjectId {
+            jsonMap["objectId"] = objectId
+        }
+        if hasChatId {
+            jsonMap["chatId"] = chatId
+        }
+        if hasMembers {
+            jsonMap["members"] = members
+        }
+        if hasSenderId {
+            jsonMap["senderId"] = senderId
+        }
+        if hasSenderName {
+            jsonMap["senderName"] = senderName
+        }
+        if hasSenderPicture {
+            jsonMap["senderPicture"] = senderPicture
+        }
+        if hasRecipientId {
+            jsonMap["recipientId"] = recipientId
+        }
+        if hasRecipientName {
+            jsonMap["recipientName"] = recipientName
+        }
+        if hasRecipientPicture {
+            jsonMap["recipientPicture"] = recipientPicture
+        }
+        if hasGroupId {
+            jsonMap["groupId"] = groupId
+        }
+        if hasGroupName {
+            jsonMap["groupName"] = groupName
+        }
+        if hasGroupPicture {
+            jsonMap["groupPicture"] = groupPicture
+        }
+        if hasType {
+            jsonMap["type"] = type
+        }
+        if hasText {
+            jsonMap["text"] = text
+        }
+        if hasPicture {
+            jsonMap["picture"] = picture.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        }
+        if hasVideo {
+            jsonMap["video"] = video.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        }
+        if hasVideoDuration {
+            jsonMap["videoDuration"] = "\(videoDuration!)"
+        }
+        if hasAudio {
+            jsonMap["audio"] = audio.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        }
+        if hasAudioDuration {
+            jsonMap["audioDuration"] = "\(audioDuration!)"
+        }
+        if hasFile {
+            jsonMap["file"] = file.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        }
+        if hasStatus {
+            jsonMap["status"] = status
+        }
+        if hasIsDeleted {
+            jsonMap["isDeleted"] = isDeleted
+        }
+        if hasCreatedAt {
+            jsonMap["createdAt"] = "\(createdAt!)"
+        }
+        if hasUpdatedAt {
+            jsonMap["updatedAt"] = "\(updatedAt!)"
+        }
+        return jsonMap
+    }
+    override class public func decode(jsonMap:Dictionary<String,Any>) throws -> ProtoMessage {
+        return try ProtoMessage.Builder.decodeToBuilder(jsonMap:jsonMap).build()
+    }
+    override class public func fromJSON(data:Data, options: JSONSerialization.ReadingOptions = []) throws -> ProtoMessage {
+        return try ProtoMessage.Builder.fromJSONToBuilder(data:data, options:options).build()
+    }
+    override public func getDescription(indent:String) throws -> String {
+        var output = ""
+        if hasObjectId {
+            output += "\(indent) objectId: \(String(describing: objectId)) \n"
+        }
+        if hasChatId {
+            output += "\(indent) chatId: \(String(describing: chatId)) \n"
+        }
+        if hasMembers {
+            output += "\(indent) members: \(String(describing: members)) \n"
+        }
+        if hasSenderId {
+            output += "\(indent) senderId: \(String(describing: senderId)) \n"
+        }
+        if hasSenderName {
+            output += "\(indent) senderName: \(String(describing: senderName)) \n"
+        }
+        if hasSenderPicture {
+            output += "\(indent) senderPicture: \(String(describing: senderPicture)) \n"
+        }
+        if hasRecipientId {
+            output += "\(indent) recipientId: \(String(describing: recipientId)) \n"
+        }
+        if hasRecipientName {
+            output += "\(indent) recipientName: \(String(describing: recipientName)) \n"
+        }
+        if hasRecipientPicture {
+            output += "\(indent) recipientPicture: \(String(describing: recipientPicture)) \n"
+        }
+        if hasGroupId {
+            output += "\(indent) groupId: \(String(describing: groupId)) \n"
+        }
+        if hasGroupName {
+            output += "\(indent) groupName: \(String(describing: groupName)) \n"
+        }
+        if hasGroupPicture {
+            output += "\(indent) groupPicture: \(String(describing: groupPicture)) \n"
+        }
+        if hasType {
+            output += "\(indent) type: \(String(describing: type)) \n"
+        }
+        if hasText {
+            output += "\(indent) text: \(String(describing: text)) \n"
+        }
+        if hasPicture {
+            output += "\(indent) picture: \(String(describing: picture)) \n"
+        }
+        if hasVideo {
+            output += "\(indent) video: \(String(describing: video)) \n"
+        }
+        if hasVideoDuration {
+            output += "\(indent) videoDuration: \(String(describing: videoDuration)) \n"
+        }
+        if hasAudio {
+            output += "\(indent) audio: \(String(describing: audio)) \n"
+        }
+        if hasAudioDuration {
+            output += "\(indent) audioDuration: \(String(describing: audioDuration)) \n"
+        }
+        if hasFile {
+            output += "\(indent) file: \(String(describing: file)) \n"
+        }
+        if hasStatus {
+            output += "\(indent) status: \(String(describing: status)) \n"
+        }
+        if hasIsDeleted {
+            output += "\(indent) isDeleted: \(String(describing: isDeleted)) \n"
+        }
+        if hasCreatedAt {
+            output += "\(indent) createdAt: \(String(describing: createdAt)) \n"
+        }
+        if hasUpdatedAt {
+            output += "\(indent) updatedAt: \(String(describing: updatedAt)) \n"
+        }
+        output += unknownFields.getDescription(indent: indent)
+        return output
+    }
+    override public var hashValue:Int {
+        get {
+            var hashCode:Int = 7
+            if hasObjectId {
+                hashCode = (hashCode &* 31) &+ objectId.hashValue
+            }
+            if hasChatId {
+                hashCode = (hashCode &* 31) &+ chatId.hashValue
+            }
+            if hasMembers {
+                hashCode = (hashCode &* 31) &+ members.hashValue
+            }
+            if hasSenderId {
+                hashCode = (hashCode &* 31) &+ senderId.hashValue
+            }
+            if hasSenderName {
+                hashCode = (hashCode &* 31) &+ senderName.hashValue
+            }
+            if hasSenderPicture {
+                hashCode = (hashCode &* 31) &+ senderPicture.hashValue
+            }
+            if hasRecipientId {
+                hashCode = (hashCode &* 31) &+ recipientId.hashValue
+            }
+            if hasRecipientName {
+                hashCode = (hashCode &* 31) &+ recipientName.hashValue
+            }
+            if hasRecipientPicture {
+                hashCode = (hashCode &* 31) &+ recipientPicture.hashValue
+            }
+            if hasGroupId {
+                hashCode = (hashCode &* 31) &+ groupId.hashValue
+            }
+            if hasGroupName {
+                hashCode = (hashCode &* 31) &+ groupName.hashValue
+            }
+            if hasGroupPicture {
+                hashCode = (hashCode &* 31) &+ groupPicture.hashValue
+            }
+            if hasType {
+                hashCode = (hashCode &* 31) &+ type.hashValue
+            }
+            if hasText {
+                hashCode = (hashCode &* 31) &+ text.hashValue
+            }
+            if hasPicture {
+                hashCode = (hashCode &* 31) &+ picture.hashValue
+            }
+            if hasVideo {
+                hashCode = (hashCode &* 31) &+ video.hashValue
+            }
+            if hasVideoDuration {
+                hashCode = (hashCode &* 31) &+ videoDuration.hashValue
+            }
+            if hasAudio {
+                hashCode = (hashCode &* 31) &+ audio.hashValue
+            }
+            if hasAudioDuration {
+                hashCode = (hashCode &* 31) &+ audioDuration.hashValue
+            }
+            if hasFile {
+                hashCode = (hashCode &* 31) &+ file.hashValue
+            }
+            if hasStatus {
+                hashCode = (hashCode &* 31) &+ status.hashValue
+            }
+            if hasIsDeleted {
+                hashCode = (hashCode &* 31) &+ isDeleted.hashValue
+            }
+            if hasCreatedAt {
+                hashCode = (hashCode &* 31) &+ createdAt.hashValue
+            }
+            if hasUpdatedAt {
+                hashCode = (hashCode &* 31) &+ updatedAt.hashValue
+            }
+            hashCode = (hashCode &* 31) &+  unknownFields.hashValue
+            return hashCode
+        }
+    }
+
+
+    //Meta information declaration start
+
+    override public class func className() -> String {
+        return "ProtoMessage"
+    }
+    override public func className() -> String {
+        return "ProtoMessage"
+    }
+    //Meta information declaration end
+
+    final public class Builder : GeneratedMessageBuilder {
+        fileprivate var builderResult:ProtoMessage = ProtoMessage()
+        public func getMessage() -> ProtoMessage {
+            return builderResult
+        }
+
+        required override public init () {
+            super.init()
+        }
+        /// protoc IMMessage.proto --swift_out="./"
+        public var objectId:String {
+            get {
+                return builderResult.objectId
+            }
+            set (value) {
+                builderResult.hasObjectId = true
+                builderResult.objectId = value
+            }
+        }
+        public var hasObjectId:Bool {
+            get {
+                return builderResult.hasObjectId
+            }
+        }
+        @discardableResult
+        public func setObjectId(_ value:String) -> ProtoMessage.Builder {
+            self.objectId = value
+            return self
+        }
+        @discardableResult
+        public func clearObjectId() -> ProtoMessage.Builder{
+            builderResult.hasObjectId = false
+            builderResult.objectId = nil
+            return self
+        }
+        public var chatId:String {
+            get {
+                return builderResult.chatId
+            }
+            set (value) {
+                builderResult.hasChatId = true
+                builderResult.chatId = value
+            }
+        }
+        public var hasChatId:Bool {
+            get {
+                return builderResult.hasChatId
+            }
+        }
+        @discardableResult
+        public func setChatId(_ value:String) -> ProtoMessage.Builder {
+            self.chatId = value
+            return self
+        }
+        @discardableResult
+        public func clearChatId() -> ProtoMessage.Builder{
+            builderResult.hasChatId = false
+            builderResult.chatId = nil
+            return self
+        }
+        public var members:String {
+            get {
+                return builderResult.members
+            }
+            set (value) {
+                builderResult.hasMembers = true
+                builderResult.members = value
+            }
+        }
+        public var hasMembers:Bool {
+            get {
+                return builderResult.hasMembers
+            }
+        }
+        @discardableResult
+        public func setMembers(_ value:String) -> ProtoMessage.Builder {
+            self.members = value
+            return self
+        }
+        @discardableResult
+        public func clearMembers() -> ProtoMessage.Builder{
+            builderResult.hasMembers = false
+            builderResult.members = nil
+            return self
+        }
+        public var senderId:String {
+            get {
+                return builderResult.senderId
+            }
+            set (value) {
+                builderResult.hasSenderId = true
+                builderResult.senderId = value
+            }
+        }
+        public var hasSenderId:Bool {
+            get {
+                return builderResult.hasSenderId
+            }
+        }
+        @discardableResult
+        public func setSenderId(_ value:String) -> ProtoMessage.Builder {
+            self.senderId = value
+            return self
+        }
+        @discardableResult
+        public func clearSenderId() -> ProtoMessage.Builder{
+            builderResult.hasSenderId = false
+            builderResult.senderId = nil
+            return self
+        }
+        public var senderName:String {
+            get {
+                return builderResult.senderName
+            }
+            set (value) {
+                builderResult.hasSenderName = true
+                builderResult.senderName = value
+            }
+        }
+        public var hasSenderName:Bool {
+            get {
+                return builderResult.hasSenderName
+            }
+        }
+        @discardableResult
+        public func setSenderName(_ value:String) -> ProtoMessage.Builder {
+            self.senderName = value
+            return self
+        }
+        @discardableResult
+        public func clearSenderName() -> ProtoMessage.Builder{
+            builderResult.hasSenderName = false
+            builderResult.senderName = nil
+            return self
+        }
+        public var senderPicture:String {
+            get {
+                return builderResult.senderPicture
+            }
+            set (value) {
+                builderResult.hasSenderPicture = true
+                builderResult.senderPicture = value
+            }
+        }
+        public var hasSenderPicture:Bool {
+            get {
+                return builderResult.hasSenderPicture
+            }
+        }
+        @discardableResult
+        public func setSenderPicture(_ value:String) -> ProtoMessage.Builder {
+            self.senderPicture = value
+            return self
+        }
+        @discardableResult
+        public func clearSenderPicture() -> ProtoMessage.Builder{
+            builderResult.hasSenderPicture = false
+            builderResult.senderPicture = nil
+            return self
+        }
+        public var recipientId:String {
+            get {
+                return builderResult.recipientId
+            }
+            set (value) {
+                builderResult.hasRecipientId = true
+                builderResult.recipientId = value
+            }
+        }
+        public var hasRecipientId:Bool {
+            get {
+                return builderResult.hasRecipientId
+            }
+        }
+        @discardableResult
+        public func setRecipientId(_ value:String) -> ProtoMessage.Builder {
+            self.recipientId = value
+            return self
+        }
+        @discardableResult
+        public func clearRecipientId() -> ProtoMessage.Builder{
+            builderResult.hasRecipientId = false
+            builderResult.recipientId = nil
+            return self
+        }
+        public var recipientName:String {
+            get {
+                return builderResult.recipientName
+            }
+            set (value) {
+                builderResult.hasRecipientName = true
+                builderResult.recipientName = value
+            }
+        }
+        public var hasRecipientName:Bool {
+            get {
+                return builderResult.hasRecipientName
+            }
+        }
+        @discardableResult
+        public func setRecipientName(_ value:String) -> ProtoMessage.Builder {
+            self.recipientName = value
+            return self
+        }
+        @discardableResult
+        public func clearRecipientName() -> ProtoMessage.Builder{
+            builderResult.hasRecipientName = false
+            builderResult.recipientName = nil
+            return self
+        }
+        public var recipientPicture:String {
+            get {
+                return builderResult.recipientPicture
+            }
+            set (value) {
+                builderResult.hasRecipientPicture = true
+                builderResult.recipientPicture = value
+            }
+        }
+        public var hasRecipientPicture:Bool {
+            get {
+                return builderResult.hasRecipientPicture
+            }
+        }
+        @discardableResult
+        public func setRecipientPicture(_ value:String) -> ProtoMessage.Builder {
+            self.recipientPicture = value
+            return self
+        }
+        @discardableResult
+        public func clearRecipientPicture() -> ProtoMessage.Builder{
+            builderResult.hasRecipientPicture = false
+            builderResult.recipientPicture = nil
+            return self
+        }
+        public var groupId:String {
+            get {
+                return builderResult.groupId
+            }
+            set (value) {
+                builderResult.hasGroupId = true
+                builderResult.groupId = value
+            }
+        }
+        public var hasGroupId:Bool {
+            get {
+                return builderResult.hasGroupId
+            }
+        }
+        @discardableResult
+        public func setGroupId(_ value:String) -> ProtoMessage.Builder {
+            self.groupId = value
+            return self
+        }
+        @discardableResult
+        public func clearGroupId() -> ProtoMessage.Builder{
+            builderResult.hasGroupId = false
+            builderResult.groupId = nil
+            return self
+        }
+        public var groupName:String {
+            get {
+                return builderResult.groupName
+            }
+            set (value) {
+                builderResult.hasGroupName = true
+                builderResult.groupName = value
+            }
+        }
+        public var hasGroupName:Bool {
+            get {
+                return builderResult.hasGroupName
+            }
+        }
+        @discardableResult
+        public func setGroupName(_ value:String) -> ProtoMessage.Builder {
+            self.groupName = value
+            return self
+        }
+        @discardableResult
+        public func clearGroupName() -> ProtoMessage.Builder{
+            builderResult.hasGroupName = false
+            builderResult.groupName = nil
+            return self
+        }
+        public var groupPicture:String {
+            get {
+                return builderResult.groupPicture
+            }
+            set (value) {
+                builderResult.hasGroupPicture = true
+                builderResult.groupPicture = value
+            }
+        }
+        public var hasGroupPicture:Bool {
+            get {
+                return builderResult.hasGroupPicture
+            }
+        }
+        @discardableResult
+        public func setGroupPicture(_ value:String) -> ProtoMessage.Builder {
+            self.groupPicture = value
+            return self
+        }
+        @discardableResult
+        public func clearGroupPicture() -> ProtoMessage.Builder{
+            builderResult.hasGroupPicture = false
+            builderResult.groupPicture = nil
+            return self
+        }
+        public var type:String {
+            get {
+                return builderResult.type
+            }
+            set (value) {
+                builderResult.hasType = true
+                builderResult.type = value
+            }
+        }
+        public var hasType:Bool {
+            get {
+                return builderResult.hasType
+            }
+        }
+        @discardableResult
+        public func setType(_ value:String) -> ProtoMessage.Builder {
+            self.type = value
+            return self
+        }
+        @discardableResult
+        public func clearType() -> ProtoMessage.Builder{
+            builderResult.hasType = false
+            builderResult.type = nil
+            return self
+        }
+        public var text:String {
+            get {
+                return builderResult.text
+            }
+            set (value) {
+                builderResult.hasText = true
+                builderResult.text = value
+            }
+        }
+        public var hasText:Bool {
+            get {
+                return builderResult.hasText
+            }
+        }
+        @discardableResult
+        public func setText(_ value:String) -> ProtoMessage.Builder {
+            self.text = value
+            return self
+        }
+        @discardableResult
+        public func clearText() -> ProtoMessage.Builder{
+            builderResult.hasText = false
+            builderResult.text = nil
+            return self
+        }
+        public var picture:Data {
+            get {
+                return builderResult.picture
+            }
+            set (value) {
+                builderResult.hasPicture = true
+                builderResult.picture = value
+            }
+        }
+        public var hasPicture:Bool {
+            get {
+                return builderResult.hasPicture
+            }
+        }
+        @discardableResult
+        public func setPicture(_ value:Data) -> ProtoMessage.Builder {
+            self.picture = value
+            return self
+        }
+        @discardableResult
+        public func clearPicture() -> ProtoMessage.Builder{
+            builderResult.hasPicture = false
+            builderResult.picture = nil
+            return self
+        }
+        public var video:Data {
+            get {
+                return builderResult.video
+            }
+            set (value) {
+                builderResult.hasVideo = true
+                builderResult.video = value
+            }
+        }
+        public var hasVideo:Bool {
+            get {
+                return builderResult.hasVideo
+            }
+        }
+        @discardableResult
+        public func setVideo(_ value:Data) -> ProtoMessage.Builder {
+            self.video = value
+            return self
+        }
+        @discardableResult
+        public func clearVideo() -> ProtoMessage.Builder{
+            builderResult.hasVideo = false
+            builderResult.video = nil
+            return self
+        }
+        public var videoDuration:Int64 {
+            get {
+                return builderResult.videoDuration
+            }
+            set (value) {
+                builderResult.hasVideoDuration = true
+                builderResult.videoDuration = value
+            }
+        }
+        public var hasVideoDuration:Bool {
+            get {
+                return builderResult.hasVideoDuration
+            }
+        }
+        @discardableResult
+        public func setVideoDuration(_ value:Int64) -> ProtoMessage.Builder {
+            self.videoDuration = value
+            return self
+        }
+        @discardableResult
+        public func clearVideoDuration() -> ProtoMessage.Builder{
+            builderResult.hasVideoDuration = false
+            builderResult.videoDuration = nil
+            return self
+        }
+        public var audio:Data {
+            get {
+                return builderResult.audio
+            }
+            set (value) {
+                builderResult.hasAudio = true
+                builderResult.audio = value
+            }
+        }
+        public var hasAudio:Bool {
+            get {
+                return builderResult.hasAudio
+            }
+        }
+        @discardableResult
+        public func setAudio(_ value:Data) -> ProtoMessage.Builder {
+            self.audio = value
+            return self
+        }
+        @discardableResult
+        public func clearAudio() -> ProtoMessage.Builder{
+            builderResult.hasAudio = false
+            builderResult.audio = nil
+            return self
+        }
+        public var audioDuration:Int64 {
+            get {
+                return builderResult.audioDuration
+            }
+            set (value) {
+                builderResult.hasAudioDuration = true
+                builderResult.audioDuration = value
+            }
+        }
+        public var hasAudioDuration:Bool {
+            get {
+                return builderResult.hasAudioDuration
+            }
+        }
+        @discardableResult
+        public func setAudioDuration(_ value:Int64) -> ProtoMessage.Builder {
+            self.audioDuration = value
+            return self
+        }
+        @discardableResult
+        public func clearAudioDuration() -> ProtoMessage.Builder{
+            builderResult.hasAudioDuration = false
+            builderResult.audioDuration = nil
+            return self
+        }
+        public var file:Data {
+            get {
+                return builderResult.file
+            }
+            set (value) {
+                builderResult.hasFile = true
+                builderResult.file = value
+            }
+        }
+        public var hasFile:Bool {
+            get {
+                return builderResult.hasFile
+            }
+        }
+        @discardableResult
+        public func setFile(_ value:Data) -> ProtoMessage.Builder {
+            self.file = value
+            return self
+        }
+        @discardableResult
+        public func clearFile() -> ProtoMessage.Builder{
+            builderResult.hasFile = false
+            builderResult.file = nil
+            return self
+        }
+        public var status:String {
+            get {
+                return builderResult.status
+            }
+            set (value) {
+                builderResult.hasStatus = true
+                builderResult.status = value
+            }
+        }
+        public var hasStatus:Bool {
+            get {
+                return builderResult.hasStatus
+            }
+        }
+        @discardableResult
+        public func setStatus(_ value:String) -> ProtoMessage.Builder {
+            self.status = value
+            return self
+        }
+        @discardableResult
+        public func clearStatus() -> ProtoMessage.Builder{
+            builderResult.hasStatus = false
+            builderResult.status = nil
+            return self
+        }
+        public var isDeleted:Bool {
+            get {
+                return builderResult.isDeleted
+            }
+            set (value) {
+                builderResult.hasIsDeleted = true
+                builderResult.isDeleted = value
+            }
+        }
+        public var hasIsDeleted:Bool {
+            get {
+                return builderResult.hasIsDeleted
+            }
+        }
+        @discardableResult
+        public func setIsDeleted(_ value:Bool) -> ProtoMessage.Builder {
+            self.isDeleted = value
+            return self
+        }
+        @discardableResult
+        public func clearIsDeleted() -> ProtoMessage.Builder{
+            builderResult.hasIsDeleted = false
+            builderResult.isDeleted = nil
+            return self
+        }
+        public var createdAt:Int64 {
+            get {
+                return builderResult.createdAt
+            }
+            set (value) {
+                builderResult.hasCreatedAt = true
+                builderResult.createdAt = value
+            }
+        }
+        public var hasCreatedAt:Bool {
+            get {
+                return builderResult.hasCreatedAt
+            }
+        }
+        @discardableResult
+        public func setCreatedAt(_ value:Int64) -> ProtoMessage.Builder {
+            self.createdAt = value
+            return self
+        }
+        @discardableResult
+        public func clearCreatedAt() -> ProtoMessage.Builder{
+            builderResult.hasCreatedAt = false
+            builderResult.createdAt = nil
+            return self
+        }
+        public var updatedAt:Int64 {
+            get {
+                return builderResult.updatedAt
+            }
+            set (value) {
+                builderResult.hasUpdatedAt = true
+                builderResult.updatedAt = value
+            }
+        }
+        public var hasUpdatedAt:Bool {
+            get {
+                return builderResult.hasUpdatedAt
+            }
+        }
+        @discardableResult
+        public func setUpdatedAt(_ value:Int64) -> ProtoMessage.Builder {
+            self.updatedAt = value
+            return self
+        }
+        @discardableResult
+        public func clearUpdatedAt() -> ProtoMessage.Builder{
+            builderResult.hasUpdatedAt = false
+            builderResult.updatedAt = nil
+            return self
+        }
+        override public var internalGetResult:GeneratedMessage {
+            get {
+                return builderResult
+            }
+        }
+        @discardableResult
+        override public func clear() -> ProtoMessage.Builder {
+            builderResult = ProtoMessage()
+            return self
+        }
+        override public func clone() throws -> ProtoMessage.Builder {
+            return try ProtoMessage.builderWithPrototype(prototype:builderResult)
+        }
+        override public func build() throws -> ProtoMessage {
+            try checkInitialized()
+            return buildPartial()
+        }
+        public func buildPartial() -> ProtoMessage {
+            let returnMe:ProtoMessage = builderResult
+            return returnMe
+        }
+        @discardableResult
+        public func mergeFrom(other:ProtoMessage) throws -> ProtoMessage.Builder {
+            if other == ProtoMessage() {
+                return self
+            }
+            if other.hasObjectId {
+                objectId = other.objectId
+            }
+            if other.hasChatId {
+                chatId = other.chatId
+            }
+            if other.hasMembers {
+                members = other.members
+            }
+            if other.hasSenderId {
+                senderId = other.senderId
+            }
+            if other.hasSenderName {
+                senderName = other.senderName
+            }
+            if other.hasSenderPicture {
+                senderPicture = other.senderPicture
+            }
+            if other.hasRecipientId {
+                recipientId = other.recipientId
+            }
+            if other.hasRecipientName {
+                recipientName = other.recipientName
+            }
+            if other.hasRecipientPicture {
+                recipientPicture = other.recipientPicture
+            }
+            if other.hasGroupId {
+                groupId = other.groupId
+            }
+            if other.hasGroupName {
+                groupName = other.groupName
+            }
+            if other.hasGroupPicture {
+                groupPicture = other.groupPicture
+            }
+            if other.hasType {
+                type = other.type
+            }
+            if other.hasText {
+                text = other.text
+            }
+            if other.hasPicture {
+                picture = other.picture
+            }
+            if other.hasVideo {
+                video = other.video
+            }
+            if other.hasVideoDuration {
+                videoDuration = other.videoDuration
+            }
+            if other.hasAudio {
+                audio = other.audio
+            }
+            if other.hasAudioDuration {
+                audioDuration = other.audioDuration
+            }
+            if other.hasFile {
+                file = other.file
+            }
+            if other.hasStatus {
+                status = other.status
+            }
+            if other.hasIsDeleted {
+                isDeleted = other.isDeleted
+            }
+            if other.hasCreatedAt {
+                createdAt = other.createdAt
+            }
+            if other.hasUpdatedAt {
+                updatedAt = other.updatedAt
+            }
+            try merge(unknownField: other.unknownFields)
+            return self
+        }
+        @discardableResult
+        override public func mergeFrom(codedInputStream: CodedInputStream) throws -> ProtoMessage.Builder {
+            return try mergeFrom(codedInputStream: codedInputStream, extensionRegistry:ExtensionRegistry())
+        }
+        @discardableResult
+        override public func mergeFrom(codedInputStream: CodedInputStream, extensionRegistry:ExtensionRegistry) throws -> ProtoMessage.Builder {
+            let unknownFieldsBuilder:UnknownFieldSet.Builder = try UnknownFieldSet.builderWithUnknownFields(copyFrom:self.unknownFields)
+            while (true) {
+                let protobufTag = try codedInputStream.readTag()
+                switch protobufTag {
+                case 0: 
+                    self.unknownFields = try unknownFieldsBuilder.build()
+                    return self
+
+                case 10:
+                    objectId = try codedInputStream.readString()
+
+                case 18:
+                    chatId = try codedInputStream.readString()
+
+                case 26:
+                    members = try codedInputStream.readString()
+
+                case 34:
+                    senderId = try codedInputStream.readString()
+
+                case 42:
+                    senderName = try codedInputStream.readString()
+
+                case 50:
+                    senderPicture = try codedInputStream.readString()
+
+                case 58:
+                    recipientId = try codedInputStream.readString()
+
+                case 66:
+                    recipientName = try codedInputStream.readString()
+
+                case 74:
+                    recipientPicture = try codedInputStream.readString()
+
+                case 82:
+                    groupId = try codedInputStream.readString()
+
+                case 90:
+                    groupName = try codedInputStream.readString()
+
+                case 98:
+                    groupPicture = try codedInputStream.readString()
+
+                case 106:
+                    type = try codedInputStream.readString()
+
+                case 114:
+                    text = try codedInputStream.readString()
+
+                case 122:
+                    picture = try codedInputStream.readData()
+
+                case 130:
+                    video = try codedInputStream.readData()
+
+                case 136:
+                    videoDuration = try codedInputStream.readInt64()
+
+                case 146:
+                    audio = try codedInputStream.readData()
+
+                case 152:
+                    audioDuration = try codedInputStream.readInt64()
+
+                case 162:
+                    file = try codedInputStream.readData()
+
+                case 170:
+                    status = try codedInputStream.readString()
+
+                case 176:
+                    isDeleted = try codedInputStream.readBool()
+
+                case 184:
+                    createdAt = try codedInputStream.readInt64()
+
+                case 192:
+                    updatedAt = try codedInputStream.readInt64()
+
+                default:
+                    if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
+                        unknownFields = try unknownFieldsBuilder.build()
+                        return self
+                    }
+                }
+            }
+        }
+        class override public func decodeToBuilder(jsonMap:Dictionary<String,Any>) throws -> ProtoMessage.Builder {
+            let resultDecodedBuilder = ProtoMessage.Builder()
+            if let jsonValueObjectId = jsonMap["objectId"] as? String {
+                resultDecodedBuilder.objectId = jsonValueObjectId
+            }
+            if let jsonValueChatId = jsonMap["chatId"] as? String {
+                resultDecodedBuilder.chatId = jsonValueChatId
+            }
+            if let jsonValueMembers = jsonMap["members"] as? String {
+                resultDecodedBuilder.members = jsonValueMembers
+            }
+            if let jsonValueSenderId = jsonMap["senderId"] as? String {
+                resultDecodedBuilder.senderId = jsonValueSenderId
+            }
+            if let jsonValueSenderName = jsonMap["senderName"] as? String {
+                resultDecodedBuilder.senderName = jsonValueSenderName
+            }
+            if let jsonValueSenderPicture = jsonMap["senderPicture"] as? String {
+                resultDecodedBuilder.senderPicture = jsonValueSenderPicture
+            }
+            if let jsonValueRecipientId = jsonMap["recipientId"] as? String {
+                resultDecodedBuilder.recipientId = jsonValueRecipientId
+            }
+            if let jsonValueRecipientName = jsonMap["recipientName"] as? String {
+                resultDecodedBuilder.recipientName = jsonValueRecipientName
+            }
+            if let jsonValueRecipientPicture = jsonMap["recipientPicture"] as? String {
+                resultDecodedBuilder.recipientPicture = jsonValueRecipientPicture
+            }
+            if let jsonValueGroupId = jsonMap["groupId"] as? String {
+                resultDecodedBuilder.groupId = jsonValueGroupId
+            }
+            if let jsonValueGroupName = jsonMap["groupName"] as? String {
+                resultDecodedBuilder.groupName = jsonValueGroupName
+            }
+            if let jsonValueGroupPicture = jsonMap["groupPicture"] as? String {
+                resultDecodedBuilder.groupPicture = jsonValueGroupPicture
+            }
+            if let jsonValueType = jsonMap["type"] as? String {
+                resultDecodedBuilder.type = jsonValueType
+            }
+            if let jsonValueText = jsonMap["text"] as? String {
+                resultDecodedBuilder.text = jsonValueText
+            }
+            if let jsonValuePicture = jsonMap["picture"] as? String {
+                resultDecodedBuilder.picture = Data(base64Encoded:jsonValuePicture, options: Data.Base64DecodingOptions(rawValue:0))!
+            }
+            if let jsonValueVideo = jsonMap["video"] as? String {
+                resultDecodedBuilder.video = Data(base64Encoded:jsonValueVideo, options: Data.Base64DecodingOptions(rawValue:0))!
+            }
+            if let jsonValueVideoDuration = jsonMap["videoDuration"] as? String {
+                resultDecodedBuilder.videoDuration = Int64(jsonValueVideoDuration)!
+            } else if let jsonValueVideoDuration = jsonMap["videoDuration"] as? Int {
+                resultDecodedBuilder.videoDuration = Int64(jsonValueVideoDuration)
+            }
+            if let jsonValueAudio = jsonMap["audio"] as? String {
+                resultDecodedBuilder.audio = Data(base64Encoded:jsonValueAudio, options: Data.Base64DecodingOptions(rawValue:0))!
+            }
+            if let jsonValueAudioDuration = jsonMap["audioDuration"] as? String {
+                resultDecodedBuilder.audioDuration = Int64(jsonValueAudioDuration)!
+            } else if let jsonValueAudioDuration = jsonMap["audioDuration"] as? Int {
+                resultDecodedBuilder.audioDuration = Int64(jsonValueAudioDuration)
+            }
+            if let jsonValueFile = jsonMap["file"] as? String {
+                resultDecodedBuilder.file = Data(base64Encoded:jsonValueFile, options: Data.Base64DecodingOptions(rawValue:0))!
+            }
+            if let jsonValueStatus = jsonMap["status"] as? String {
+                resultDecodedBuilder.status = jsonValueStatus
+            }
+            if let jsonValueIsDeleted = jsonMap["isDeleted"] as? Bool {
+                resultDecodedBuilder.isDeleted = jsonValueIsDeleted
+            }
+            if let jsonValueCreatedAt = jsonMap["createdAt"] as? String {
+                resultDecodedBuilder.createdAt = Int64(jsonValueCreatedAt)!
+            } else if let jsonValueCreatedAt = jsonMap["createdAt"] as? Int {
+                resultDecodedBuilder.createdAt = Int64(jsonValueCreatedAt)
+            }
+            if let jsonValueUpdatedAt = jsonMap["updatedAt"] as? String {
+                resultDecodedBuilder.updatedAt = Int64(jsonValueUpdatedAt)!
+            } else if let jsonValueUpdatedAt = jsonMap["updatedAt"] as? Int {
+                resultDecodedBuilder.updatedAt = Int64(jsonValueUpdatedAt)
+            }
+            return resultDecodedBuilder
+        }
+        override class public func fromJSONToBuilder(data:Data, options: JSONSerialization.ReadingOptions = []) throws -> ProtoMessage.Builder {
+            let jsonData = try JSONSerialization.jsonObject(with:data, options: options)
+            guard let jsDataCast = jsonData as? Dictionary<String,Any> else {
+              throw ProtocolBuffersError.invalidProtocolBuffer("Invalid JSON data")
+            }
+            return try ProtoMessage.Builder.decodeToBuilder(jsonMap:jsDataCast)
+        }
+    }
+
+}
+
 extension ProtoUser: GeneratedMessageProtocol {
     public class func parseArrayDelimitedFrom(inputStream: InputStream) throws -> Array<ProtoUser> {
         var mergedArray = Array<ProtoUser>()
@@ -1771,6 +3272,224 @@ extension ProtoFriend.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.picture = newSubscriptValue
+            default: return
+            }
+        }
+    }
+}
+extension ProtoMessage: GeneratedMessageProtocol {
+    public class func parseArrayDelimitedFrom(inputStream: InputStream) throws -> Array<ProtoMessage> {
+        var mergedArray = Array<ProtoMessage>()
+        while let value = try parseDelimitedFrom(inputStream: inputStream) {
+          mergedArray.append(value)
+        }
+        return mergedArray
+    }
+    public class func parseDelimitedFrom(inputStream: InputStream) throws -> ProtoMessage? {
+        return try ProtoMessage.Builder().mergeDelimitedFrom(inputStream: inputStream)?.build()
+    }
+    public class func parseFrom(data: Data) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(data: data, extensionRegistry:ImmessageRoot.default.extensionRegistry).build()
+    }
+    public class func parseFrom(data: Data, extensionRegistry:ExtensionRegistry) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(data: data, extensionRegistry:extensionRegistry).build()
+    }
+    public class func parseFrom(inputStream: InputStream) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(inputStream: inputStream).build()
+    }
+    public class func parseFrom(inputStream: InputStream, extensionRegistry:ExtensionRegistry) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(inputStream: inputStream, extensionRegistry:extensionRegistry).build()
+    }
+    public class func parseFrom(codedInputStream: CodedInputStream) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(codedInputStream: codedInputStream).build()
+    }
+    public class func parseFrom(codedInputStream: CodedInputStream, extensionRegistry:ExtensionRegistry) throws -> ProtoMessage {
+        return try ProtoMessage.Builder().mergeFrom(codedInputStream: codedInputStream, extensionRegistry:extensionRegistry).build()
+    }
+    public subscript(key: String) -> Any? {
+        switch key {
+        case "objectId": return self.objectId
+        case "chatId": return self.chatId
+        case "members": return self.members
+        case "senderId": return self.senderId
+        case "senderName": return self.senderName
+        case "senderPicture": return self.senderPicture
+        case "recipientId": return self.recipientId
+        case "recipientName": return self.recipientName
+        case "recipientPicture": return self.recipientPicture
+        case "groupId": return self.groupId
+        case "groupName": return self.groupName
+        case "groupPicture": return self.groupPicture
+        case "type": return self.type
+        case "text": return self.text
+        case "picture": return self.picture
+        case "video": return self.video
+        case "videoDuration": return self.videoDuration
+        case "audio": return self.audio
+        case "audioDuration": return self.audioDuration
+        case "file": return self.file
+        case "status": return self.status
+        case "isDeleted": return self.isDeleted
+        case "createdAt": return self.createdAt
+        case "updatedAt": return self.updatedAt
+        default: return nil
+        }
+    }
+}
+extension ProtoMessage.Builder: GeneratedMessageBuilderProtocol {
+    public typealias GeneratedMessageType = ProtoMessage
+    public subscript(key: String) -> Any? {
+        get { 
+            switch key {
+            case "objectId": return self.objectId
+            case "chatId": return self.chatId
+            case "members": return self.members
+            case "senderId": return self.senderId
+            case "senderName": return self.senderName
+            case "senderPicture": return self.senderPicture
+            case "recipientId": return self.recipientId
+            case "recipientName": return self.recipientName
+            case "recipientPicture": return self.recipientPicture
+            case "groupId": return self.groupId
+            case "groupName": return self.groupName
+            case "groupPicture": return self.groupPicture
+            case "type": return self.type
+            case "text": return self.text
+            case "picture": return self.picture
+            case "video": return self.video
+            case "videoDuration": return self.videoDuration
+            case "audio": return self.audio
+            case "audioDuration": return self.audioDuration
+            case "file": return self.file
+            case "status": return self.status
+            case "isDeleted": return self.isDeleted
+            case "createdAt": return self.createdAt
+            case "updatedAt": return self.updatedAt
+            default: return nil
+            }
+        }
+        set (newSubscriptValue) { 
+            switch key {
+            case "objectId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.objectId = newSubscriptValue
+            case "chatId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.chatId = newSubscriptValue
+            case "members":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.members = newSubscriptValue
+            case "senderId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.senderId = newSubscriptValue
+            case "senderName":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.senderName = newSubscriptValue
+            case "senderPicture":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.senderPicture = newSubscriptValue
+            case "recipientId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.recipientId = newSubscriptValue
+            case "recipientName":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.recipientName = newSubscriptValue
+            case "recipientPicture":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.recipientPicture = newSubscriptValue
+            case "groupId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.groupId = newSubscriptValue
+            case "groupName":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.groupName = newSubscriptValue
+            case "groupPicture":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.groupPicture = newSubscriptValue
+            case "type":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.type = newSubscriptValue
+            case "text":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.text = newSubscriptValue
+            case "picture":
+                guard let newSubscriptValue = newSubscriptValue as? Data else {
+                    return
+                }
+                self.picture = newSubscriptValue
+            case "video":
+                guard let newSubscriptValue = newSubscriptValue as? Data else {
+                    return
+                }
+                self.video = newSubscriptValue
+            case "videoDuration":
+                guard let newSubscriptValue = newSubscriptValue as? Int64 else {
+                    return
+                }
+                self.videoDuration = newSubscriptValue
+            case "audio":
+                guard let newSubscriptValue = newSubscriptValue as? Data else {
+                    return
+                }
+                self.audio = newSubscriptValue
+            case "audioDuration":
+                guard let newSubscriptValue = newSubscriptValue as? Int64 else {
+                    return
+                }
+                self.audioDuration = newSubscriptValue
+            case "file":
+                guard let newSubscriptValue = newSubscriptValue as? Data else {
+                    return
+                }
+                self.file = newSubscriptValue
+            case "status":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.status = newSubscriptValue
+            case "isDeleted":
+                guard let newSubscriptValue = newSubscriptValue as? Bool else {
+                    return
+                }
+                self.isDeleted = newSubscriptValue
+            case "createdAt":
+                guard let newSubscriptValue = newSubscriptValue as? Int64 else {
+                    return
+                }
+                self.createdAt = newSubscriptValue
+            case "updatedAt":
+                guard let newSubscriptValue = newSubscriptValue as? Int64 else {
+                    return
+                }
+                self.updatedAt = newSubscriptValue
             default: return
             }
         }
