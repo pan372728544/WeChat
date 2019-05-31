@@ -19,22 +19,28 @@ class ChatViewController: UIViewController {
         tableView.backgroundColor = UIColor.orange
         return tableView
     }()
+    
+    // 聊天列表数组
+    fileprivate var msgArray : [DBChat] = [DBChat]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         
-
-        // Do any additional setup after loading the view.
         
         // 初始化View
         setupMainView()
+        
+        searchAndReload()
+        
+        registerNotification()
     }
     
 
     func setupMainView()   {
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        self.tableView.register(ChatGoupListTableViewCell.self, forCellReuseIdentifier: "ChatGoupListTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.white
@@ -48,16 +54,15 @@ class ChatViewController: UIViewController {
 extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return msgArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
-
-        cell?.imageView?.image = UIImage.init(named: "QQ20190513")
-        cell?.backgroundColor = UIColor.black
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatGoupListTableViewCell") as! ChatGoupListTableViewCell
+        
+        cell.textMes = msgArray[indexPath.row]
+        return cell
         
     }
     
@@ -67,8 +72,48 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        let receiver : DBChat = msgArray[indexPath.row]
+        
+        let que = "objectId = \'\(receiver.recipientId)\'"
+        let dbUsers =  RealmTool.getDBUserById(que)
+        
+        let chatVc = ChatRoomViewController(dbUsers: dbUsers)
+        self.navigationController?.pushViewController(chatVc, animated: true)
 
     }
     
+}
+
+
+extension ChatViewController {
+    
+    
+    // 查询数据并且刷新列表
+    func searchAndReload() {
+        // 查询聊天列表数据
+        msgArray.removeAll()
+        msgArray =  IMDataManager.share.searchRealmGroupList()
+        self.tableView.reloadData()
+    }
+    
+    @objc func updateGroupList(nofification:Notification)  {
+        
+        searchAndReload()
+    }
+    
+}
+
+extension ChatViewController {
+    
+    // 通知
+    func registerNotification(){
+        
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateGroupList(nofification:)),
+                                               name: NSNotification.Name(rawValue: "GroupListSuccess"),
+                                               object: nil)
+    }
 }

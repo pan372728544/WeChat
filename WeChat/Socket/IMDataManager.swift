@@ -64,58 +64,31 @@ class IMDataManager: NSObject {
 //    }
     
 //
-//    // 查询聊天列表数据
-//    func searchRealmGroupList(curr : Int) -> [GroupMessage] {
-//
-//        // 返回的数组
-//        var msgArray : [GroupMessage] = [GroupMessage]()
-//
-//        let messages : Results<GroupListMessage>
-//
-//        messages =  RealmTool.getGroupMessages()
-//
-//        // 数据库总数据
-//        let  messageCount = messages.count
-//        if messageCount == 0 {
-//            return msgArray
-//        }
-//
-//        // 遍历数据
-//        for mess in messages {
-//
-//            // 创建聊天类型数据
-//            let textMsg = GroupMessage.Builder()
-//            textMsg.text = mess.text!
-//            textMsg.groupId = Int64(mess.groupId)
-//
-//            // realm类型用户信息
-//            let userRealm : UserInfoRealm = mess.userInfo!
-//
-//            // 创建聊天用户类型数据
-//            let  userInfo = UserInfo.Builder()
-//            userInfo.name = userRealm.name!
-//            userInfo.level = Int64(userRealm.level)
-//            userInfo.iconUrl = userRealm.iconUrl!
-//            userInfo.userId = userRealm.userId!
-//
-//            // 用户信息
-//            textMsg.user = try! userInfo.build()
-//
-//            let msg = try? textMsg.build()
-//            if msg != nil {
-//
-//                let userId : Int64 = Int64(LogInName!.suffix(1))!
-//                if (msg?.groupId)! - 1000 !=  userId {
-//                    msgArray.append(msg!)
-//                }
-//
-//            }
-//
-//        }
-//
-//        return msgArray
-//    }
-//
+    // 查询聊天列表数据
+    func searchRealmGroupList() -> [DBChat] {
+
+        // 返回的数组
+        var msgArray : [DBChat] = [DBChat]()
+        
+        let messages : Results<DBChat>
+        
+        messages =  RealmTool.getGroupMessages()
+        
+        // 数据库总数据
+        let  messageCount = messages.count
+        if messageCount == 0 {
+            return msgArray
+        }
+        
+        // 遍历数据
+        for mess in messages {
+            
+            msgArray.append(mess)
+        }
+        
+        return msgArray
+    }
+
 //
 //    // 查询聊天记录 数据
 //    func searchRealmChatMessagesList(currentPage : Int,group : GroupMessage) -> ([TextMessage],Int) {
@@ -396,6 +369,7 @@ extension IMDataManager : ZJSocketDelegate {
         let build = try! chatMsg.toBuilder()
         self.insertProtoMessage(cupid: build)
         notificationToReceiveMessage()
+        notificationToGroupList()
     }
     
 
@@ -418,6 +392,11 @@ extension IMDataManager {
     func notificationToReceiveMessage()  {
         
         NotificationCenter.default.post(name: NSNotification.Name("ReceiveMessageSuccess"), object: self, userInfo:nil)
+    }
+    
+    func notificationToGroupList()  {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("GroupListSuccess"), object: self, userInfo:nil)
     }
 }
 

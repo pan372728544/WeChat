@@ -121,6 +121,7 @@ class DBChat: Object {
     @objc dynamic var chatId = ""
     
     @objc dynamic var recipientId = ""
+    @objc dynamic var recipientName = ""
     @objc dynamic var picture = ""
     @objc dynamic var groupId = ""
     

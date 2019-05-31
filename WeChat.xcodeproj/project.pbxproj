@@ -42,6 +42,7 @@
 		38AA0269229FE8E700755C8D /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0268229FE8E600755C8D /* Checksum.swift */; };
 		38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA027A229FFA3600755C8D /* Immessage.proto.swift */; };
 		38AA028122A0E0FE00755C8D /* NextPushId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA028022A0E0FD00755C8D /* NextPushId.swift */; };
+		38AA028722A1298800755C8D /* ChatGoupListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA028622A1298800755C8D /* ChatGoupListTableViewCell.swift */; };
 		38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */; };
 		38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */; };
 		38D5A14C22954E63002BBBA7 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */; };
@@ -118,6 +119,7 @@
 		38AA0268229FE8E600755C8D /* Checksum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
 		38AA027A229FFA3600755C8D /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
 		38AA028022A0E0FD00755C8D /* NextPushId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPushId.swift; sourceTree = "<group>"; };
+		38AA028622A1298800755C8D /* ChatGoupListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGoupListTableViewCell.swift; sourceTree = "<group>"; };
 		38D5A0FE2292B5EC002BBBA7 /* ContactSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearchViewController.swift; sourceTree = "<group>"; };
 		38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		38D5A14B22954E63002BBBA7 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			children = (
 				38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */,
 				38AA0266229FCCEC00755C8D /* ChatRoomOtherTableViewCell.swift */,
+				38AA028622A1298800755C8D /* ChatGoupListTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				38EDD7D5228E74A300E9935A /* Socket.swift in Sources */,
 				38AA0269229FE8E700755C8D /* Checksum.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
+				38AA028722A1298800755C8D /* ChatGoupListTableViewCell.swift in Sources */,
 				38278D80228B9A4E00884EB0 /* WelComeViewController.swift in Sources */,
 				38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */,
 			);

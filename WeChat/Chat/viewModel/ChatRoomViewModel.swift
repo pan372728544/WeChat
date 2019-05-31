@@ -421,6 +421,7 @@ extension ChatRoomViewModel {
         let timeInterval = Date().timeIntervalSince1970
         dbChat.chatId = IMDataManager.share.getChatId(receiveId: (self.dbUser?.objectId)!)
         dbChat.recipientId = (self.dbUser?.objectId)!
+        dbChat.recipientName = (self.dbUser?.name)!
         dbChat.picture = (self.dbUser?.picture)!
         dbChat.groupId = ""
         dbChat.lastMessage =   self.lastText

@@ -50,7 +50,7 @@ extension RealmTool  {
         //        Realm.Configuration.defaultConfiguration = config
         
         // 配置二 数据库迁移 （数据库发生变化版本号也要变化）
-        let currentVersion = 10
+        let currentVersion = 11
         print(getRealmPath())
         let config = Realm.Configuration(fileURL: URL.init(string: getRealmPath()), inMemoryIdentifier: nil, syncConfiguration: nil, encryptionKey: nil, readOnly: false, schemaVersion: UInt64(currentVersion), migrationBlock: { (migration, oldVersion) in
             
@@ -143,11 +143,11 @@ extension RealmTool {
 //    }
 //
 //
-//    /// 获取 所保存的 groupMessage
-//    public class func getGroupMessages() -> Results<GroupListMessage> {
-//        let realm = self.defaultRealm()
-//        return realm.objects(GroupListMessage.self)
-//    }
+    /// 获取 所保存的 groupMessage
+    public class func getGroupMessages() -> Results<DBChat> {
+        let realm = self.defaultRealm()
+        return realm.objects(DBChat.self)
+    }
 //
 //    /// 获取 指定id (主键) 的 ChatMessage
 //    public class func getMessage(from id : Int) -> ChatMessage? {
