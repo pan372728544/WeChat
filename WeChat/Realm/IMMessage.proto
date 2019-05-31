@@ -73,4 +73,19 @@ message ProtoMessage {
     
 }
 
-
+message ProtoChat {
+    // protoc IMMessage.proto --swift_out="./"
+    required string chatId = 1;
+    required string recipientId = 2;
+    required string picture = 3;
+    required string groupId = 4;
+    required string lastMessage = 5;
+    required string lastMessageName = 6;
+    required int64 lastMessageDate = 7;
+    required int64 lastIncoming = 8;
+    
+    required bool isArchived = 9;
+    required bool isDeleted = 10;
+    required int64 createdAt = 11;
+    required int64 updatedAt = 12;
+}

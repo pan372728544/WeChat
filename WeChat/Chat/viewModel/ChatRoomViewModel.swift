@@ -48,6 +48,8 @@ class ChatRoomViewModel: NSObject {
     // 最大页数
     private var maxCount :  Int = 0
     
+    private var lastText : String = ""
+    
     
     func bingData(data: DBUser)  {
         self.dbUser = data
@@ -307,6 +309,9 @@ extension ChatRoomViewModel {
         let message : DBMessage =  RealmTool.getMessages().last!
         
         updateAndappendMessage(chatMsg: message)
+        
+        insertDataToChatList()
+        
     }
 }
 
@@ -337,20 +342,18 @@ extension ChatRoomViewModel {
             print("")
         }
 
+        self.lastText = self.textField.text ?? ""
         
         if (cupid?.0.isSuccess)! {
             print("聊天消息发送成功 \(self.textField.text)")
         } else {
             let chatMsgBuild = cupid?.2
             chatMsgBuild?.status = "false"
-            let chatMsg = try! chatMsgBuild?.build()
-//            updateAndappendMessage(chatMsg: chatMsg)
-//
-//            // 更新聊天列表数据库 和 插入数据到聊天记录数据库
-//            MessageDataManager.shareInstance.handleMsgList(chatMsg: chatMsg)
-//
-//            // 上面已经存储数据到数据库
-//            MessageDataManager.shareInstance.notificationToGroupList()
+            
+            IMDataManager.share.insertProtoMessage(cupid: chatMsgBuild!)
+            
+            NotificationCenter.default.post(name: NSNotification.Name("ReceiveMessageSuccess"), object: self, userInfo:nil)
+
         }
         // 清空数据框
         self.textField.text = ""
@@ -408,6 +411,32 @@ extension ChatRoomViewModel {
         msgArray.append(chatMsg)
         self.tableView.reloadData()
         scrollToEnd()
+    }
+    
+    
+    func insertDataToChatList() {
+        
+        // 创建会话列表
+        let dbChat = DBChat()
+        let timeInterval = Date().timeIntervalSince1970
+        dbChat.chatId = IMDataManager.share.getChatId(receiveId: (self.dbUser?.objectId)!)
+        dbChat.recipientId = (self.dbUser?.objectId)!
+        dbChat.picture = (self.dbUser?.picture)!
+        dbChat.groupId = ""
+        dbChat.lastMessage =   self.lastText
+        dbChat.lastMessageDate = Int64(timeInterval)
+        
+        let currentUser = RealmTool.getDBUser().first
+        
+        dbChat.lastMessageName = (currentUser?.name)!
+        
+        dbChat.lastIncoming = 0
+        dbChat.isArchived = true
+        dbChat.isDeleted = false
+        dbChat.createdAt = Int64(timeInterval)
+        dbChat.updatedAt = Int64(timeInterval)
+        
+        RealmTool.insertSessionList(by: dbChat)
     }
     
     

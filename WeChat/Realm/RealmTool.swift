@@ -101,14 +101,14 @@ extension RealmTool {
                realm.add(messages,update: true)
         }
     }
-//
-//    /// 保存群组列表
-//    public class func insertMessage(by message : GroupListMessage) {
-//        let realm = self.defaultRealm()
-//        try! realm.write {
-//            realm.add(message)
-//        }
-//    }
+
+    /// 保存会话列表
+    public class func insertSessionList(by message : DBChat) {
+        let realm = self.defaultRealm()
+        try! realm.write {
+             realm.add(message,update: true)
+        }
+    }
 
 }
 //

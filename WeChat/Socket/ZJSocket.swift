@@ -246,6 +246,8 @@ extension ZJSocket {
         }
         message.createdAt = 0
         
+        
+        
         // 获取对应的data
         let chatData = (try! message.build()).data()
         
