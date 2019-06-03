@@ -109,6 +109,8 @@ extension AppDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
 //                Toast.showCenterWithText(text: "自动登录成功")
                 self.loadFriendList()
+                // 加入房间
+                socketClient.sendJoinRoom()
             }
             
             

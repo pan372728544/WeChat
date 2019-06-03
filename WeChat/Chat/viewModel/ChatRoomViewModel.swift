@@ -50,6 +50,15 @@ class ChatRoomViewModel: NSObject {
     
     private var lastText : String = ""
     
+    // 加载视图高度
+     let loadingH : CGFloat =  44
+    // 下拉刷新
+    fileprivate var indicatorView : UIActivityIndicatorView = {
+        
+        var  indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: -44, width: Screen_W, height: 44))
+        indicatorView.backgroundColor = UIColor.red
+        return indicatorView
+    }()
     
     func bingData(data: DBUser)  {
         self.dbUser = data
@@ -57,6 +66,14 @@ class ChatRoomViewModel: NSObject {
     }
     
     
+    func bindVC(vc: BaseViewController)  {
+        self.vc = vc
+    }
+    func bindTablView(tableView: UITableView)  {
+        self.tableView = tableView
+        setupMainView()
+        setupChatInputView()
+    }
     func loadDataRequest()  {
         
         let chatId = IMDataManager.share.getChatId(receiveId: (self.dbUser?.objectId)!)
@@ -76,15 +93,6 @@ class ChatRoomViewModel: NSObject {
             index += 1
         }
         reloadTableView()
-    }
-    
-    func bindVC(vc: BaseViewController)  {
-        self.vc = vc
-    }
-    func bindTablView(tableView: UITableView)  {
-        self.tableView = tableView
-        setupMainView()
-        setupChatInputView()
     }
     
 }
@@ -107,6 +115,7 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
         if currentId == msg.senderId {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomMeTableViewCell") as! ChatRoomMeTableViewCell
             cell.textMes = msg
+
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomOtherTableViewCell") as! ChatRoomOtherTableViewCell
@@ -124,51 +133,56 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
             return IMDataManager.share.getChatTextSize(text: msg.text).height + 45 + 40
         }
         return IMDataManager.share.getChatTextSize(text: msg.text).height + 45
-        
     }
-//
-//    // scrollview
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
-//        if maxCount == 1 {
-//            indicatorView.stopAnimating()
-//        } else {
-//
-//        }
-//    }
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if  currentPage == maxCount {
-//            self.tableView.contentInset.top = 0
-//        }
-//    }
-//
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//
-//        // 滑动距离大于loading添加新的数据
-//        if scrollView.contentOffset.y == -loadingH {
-//
-//            currentPage += 1
-//            if currentPage > maxCount {
-//                currentPage = maxCount
-//                indicatorView.stopAnimating()
-//                return
-//            } else if currentPage == maxCount {
-//                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-//                    self.searchChatLoad()
-//                }
-//
-//                indicatorView.stopAnimating()
-//                return
-//            }
-//            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-//
-//                self.searchChatLoad()
-//            }
-//
-//        }
-//    }
-//
+
+    // scrollview
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+
+        if maxCount == 1 {
+            indicatorView.stopAnimating()
+        } else {
+
+        }
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.contentOffset.y < -loadingH-NavaBar_H {
+            if currentPage >= maxCount {
+                self.tableView.contentInset.top = NavaBar_H
+            } else {
+                self.tableView.contentInset.top =  loadingH+NavaBar_H
+            }
+
+        }
+    }
+    
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        // 滑动距离大于loading添加新的数据
+        if scrollView.contentOffset.y == -loadingH-NavaBar_H {
+
+            currentPage += 1
+            if currentPage > maxCount {
+                currentPage = maxCount
+                indicatorView.stopAnimating()
+                return
+            } else if currentPage == maxCount {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                    self.loadDataRequest()
+                }
+
+                indicatorView.stopAnimating()
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+
+                self.loadDataRequest()
+            }
+
+        }
+    }
+
 
 
     
@@ -181,16 +195,28 @@ extension ChatRoomViewModel {
     
     func setupMainView()   {
         
-        self.tableView!.register(ChatRoomMeTableViewCell.self, forCellReuseIdentifier: "ChatRoomMeTableViewCell")
-        self.tableView!.register(ChatRoomOtherTableViewCell.self, forCellReuseIdentifier: "ChatRoomOtherTableViewCell")
+        self.tableView.register(ChatRoomMeTableViewCell.self, forCellReuseIdentifier: "ChatRoomMeTableViewCell")
+        self.tableView.register(ChatRoomOtherTableViewCell.self, forCellReuseIdentifier: "ChatRoomOtherTableViewCell")
         
-        self.tableView!.delegate = self
-        self.tableView!.dataSource = self
-        self.tableView!.backgroundColor = UIColor.tableViewBackGroundColor()
-        self.tableView!.sectionHeaderHeight = 0.1
-        self.tableView!.sectionFooterHeight = 0.1
-        self.tableView!.separatorStyle = .none
-        self.tableView!.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.backgroundColor = UIColor.tableViewBackGroundColor()
+        self.tableView.sectionHeaderHeight = 0.1
+        self.tableView.sectionFooterHeight = 0.1
+        self.tableView.separatorStyle = .none
+        self.tableView.estimatedSectionFooterHeight = 0
+        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.estimatedRowHeight = 0
+        self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        self.tableView.contentInsetAdjustmentBehavior = .never
+        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: viewBottom_H, right: 0)
+        
+        
+        //加载
+        indicatorView.backgroundColor = UIColor.tableViewBackGroundColor()
+        indicatorView.startAnimating()
+        indicatorView.style = UIActivityIndicatorView.Style.gray
+        self.tableView.addSubview(indicatorView)
         
         
     }
@@ -280,7 +306,7 @@ extension ChatRoomViewModel {
         UIView.animate(withDuration: duration) {
             self.effectView!.frame.origin.y = y - self.viewBottom_Height
         }
-        self.tableView!.frame.size.height = Screen_H - endFrame.size.height-viewBottom_Height
+        self.tableView!.frame.size.height = Screen_H - endFrame.size.height
         
         
         // 滚动到tableview底部
@@ -345,7 +371,7 @@ extension ChatRoomViewModel {
         self.lastText = self.textField.text ?? ""
         
         if (cupid?.0.isSuccess)! {
-            print("聊天消息发送成功 \(self.textField.text)")
+            print("聊天消息发送成功 \(self.textField.text ?? " ")")
         } else {
             let chatMsgBuild = cupid?.2
             chatMsgBuild?.status = "false"
@@ -353,7 +379,7 @@ extension ChatRoomViewModel {
             IMDataManager.share.insertProtoMessage(cupid: chatMsgBuild!)
             
             NotificationCenter.default.post(name: NSNotification.Name("ReceiveMessageSuccess"), object: self, userInfo:nil)
-
+            NotificationCenter.default.post(name: NSNotification.Name("GroupListSuccess"), object: self, userInfo:nil)
         }
         // 清空数据框
         self.textField.text = ""
@@ -379,18 +405,17 @@ extension ChatRoomViewModel {
         let oldOffset = self.tableView.contentSize.height - self.tableView.contentOffset.y
         
         finishedCallback()
+        self.tableView.contentInset.top = NavaBar_H
         
-        self.tableView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
         if currentPage == 1 {
             scrollToEnd()
+            return
         }
         if oldOffset == 0 {
             return
         }
         let  offset = self.tableView.contentSize.height - oldOffset
-        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
-        
-        
+        self.tableView.contentOffset.y =  offset
     }
     
     

@@ -24,7 +24,7 @@ class SocketManager : NSObject {
         
         if dbUser.first == nil {
             Toast.showCenterWithText(text: "还没有登录")
-            return
+//            return
         }
         
 
@@ -40,8 +40,7 @@ class SocketManager : NSObject {
                 // 读取消息
                 socketClient.startReadMsg()
 
-                // 加入房间
-                socketClient.sendJoinRoom()
+    
                 // 发送心跳包
                 self.addHeartBeatTimer()
                 completionHandler(true)

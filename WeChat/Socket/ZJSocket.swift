@@ -231,13 +231,13 @@ extension ZJSocket {
         
 
         
-        message.status = "success"
+        message.status = "true"
         message.isDeleted = false
         
         
         // 发送时间
         let timeInterval = Date().timeIntervalSince1970
-       
+
         if timeOld != Int64(timeInterval) {
             message.updatedAt = Int64(timeInterval)
             timeOld = message.updatedAt

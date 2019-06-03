@@ -129,7 +129,8 @@ extension LoginViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             Toast.showCenterWithText(text: "登录成功")
         }
-        
+        // 加入房间
+        socketClient.sendJoinRoom()
         socketClient.sendLoadFriends()
     }
     
@@ -148,6 +149,7 @@ extension LoginViewController {
         // 发送登录消息
         socketClient.sendLogin(phone: self.textField.text!.removeAllSapce)
         
+
     }
     
 }

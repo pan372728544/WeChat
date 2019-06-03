@@ -73,14 +73,14 @@ class ChatRoomMeTableViewCell: UITableViewCell {
             
             contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell, height: heightCell)
             
-            let oriImg = UIImage.init(named: "ChatRoom_Bubble_AA_Sender")
+            let oriImg = UIImage.init(named: "ChatRoom_Bubble_Text_Sender_Green")
             
             let edgeInsets = UIEdgeInsets(top: oriImg!.size.height*0.7, left: oriImg!.size.width*0.3, bottom: oriImg!.size.height*0.29, right: oriImg!.size.width*0.3)
             
             
             let resiImg = oriImg!.resizableImage(withCapInsets: edgeInsets, resizingMode: UIImage.ResizingMode.stretch)
             // 计算图片尺寸
-            imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 18  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 25)
+            imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 18  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 22)
             imgPao.image = resiImg
             
             if  heightCell > 20 {
@@ -89,7 +89,7 @@ class ChatRoomMeTableViewCell: UITableViewCell {
                 contentLabel.textAlignment = NSTextAlignment.right
             }
             
-            imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
+            imgFaild.frame = CGRect(x: imgPao.frame.origin.x-25, y: imgPao.centerY-12, width: 20, height: 20)
             imgFaild.isHidden = textMes?.status == "true"
             
         }
