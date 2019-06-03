@@ -311,12 +311,12 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        print("\(section)--willDisplayHeaderView")
+
         
 
     }
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-//                print("\(section)--didEndDisplayingHeaderView")
+        
     }
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

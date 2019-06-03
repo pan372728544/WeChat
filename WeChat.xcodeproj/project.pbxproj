@@ -258,10 +258,9 @@
 		38278C9B2285884100884EB0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				3836BD9522A524DB0015B733 /* vc */,
 				38AA0263229FCC8800755C8D /* view */,
 				38AA0260229FBED400755C8D /* viewModel */,
-				38278C9C2285885C00884EB0 /* ChatViewController.swift */,
-				38278D6622897C6000884EB0 /* ChatRoomViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -328,6 +327,31 @@
 				38278D84228B9AF900884EB0 /* ChatMessage.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		3836BD9522A524DB0015B733 /* vc */ = {
+			isa = PBXGroup;
+			children = (
+				3836BD9722A524F10015B733 /* room */,
+				3836BD9622A524E60015B733 /* list */,
+			);
+			path = vc;
+			sourceTree = "<group>";
+		};
+		3836BD9622A524E60015B733 /* list */ = {
+			isa = PBXGroup;
+			children = (
+				38278C9C2285885C00884EB0 /* ChatViewController.swift */,
+			);
+			path = list;
+			sourceTree = "<group>";
+		};
+		3836BD9722A524F10015B733 /* room */ = {
+			isa = PBXGroup;
+			children = (
+				38278D6622897C6000884EB0 /* ChatRoomViewController.swift */,
+			);
+			path = room;
 			sourceTree = "<group>";
 		};
 		38AA01AA2297867500755C8D /* ContactCell */ = {

@@ -13,10 +13,9 @@ class ChatViewController: UIViewController {
     fileprivate lazy var tableView : UITableView = {
         let tableView =  UITableView(frame: CGRect(x: 0,
                                                    y: 0,
-                                                   width: self.view.frame.size.width,
-                                                   height: self.view.frame.size.height),
+                                                   width: Screen_W,
+                                                   height: Screen_H),
                                      style: UITableView.Style.plain)
-        tableView.backgroundColor = UIColor.orange
         return tableView
     }()
     
@@ -32,10 +31,13 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.white
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        
+//          self.extendedLayoutIncludesOpaqueBars = true
         // 初始化View
         setupMainView()
         
@@ -50,10 +52,16 @@ class ChatViewController: UIViewController {
         self.tableView.register(ChatGoupListTableViewCell.self, forCellReuseIdentifier: "ChatGoupListTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorStyle = .none
+
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.contentInsetAdjustmentBehavior = .never
+        self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
         view.addSubview(self.tableView)
         self.tableView.tableHeaderView = searchController.searchBar
+        
+        
         let viewNew = UIView(frame: self.tableView.bounds)
         viewNew.backgroundColor = UIColor.Gray237Color()
         self.tableView.backgroundView = viewNew
@@ -64,7 +72,7 @@ class ChatViewController: UIViewController {
         effectView = UIVisualEffectView(effect: blur)
         effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
         effectView?.backgroundColor = UIColor.Gray237Color()
-        effectView?.alpha = 0.9
+        effectView?.alpha = 0.0
         self.view.addSubview(effectView!)
         
         let viewH = 1/UIScreen.main.scale
@@ -110,6 +118,16 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
 
     }
     
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
+        
+        let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
+        changeNavigation(scrollsetOffY)
+    }
+    
 }
 
 
@@ -136,11 +154,24 @@ extension ChatViewController {
     // 通知
     func registerNotification(){
         
-        
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateGroupList(nofification:)),
                                                name: NSNotification.Name(rawValue: "GroupListSuccess"),
                                                object: nil)
+    }
+    
+    
+    func changeNavigation(_ offset : CGFloat)  {
+        
+        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
+        let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
+        
+        effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
+        
+        
+        print("\(offset),\(new),\(new/tableHeadH)")
+        viewLine1.isHidden = offset <= -tableHeadH
+        
+        
     }
 }

@@ -59,6 +59,7 @@ extension ChatGoupListTableViewCell {
     
     func setupView()  {
         
+        self.backgroundColor = UIColor.white
         imgTou.frame = CGRect(x: 15, y: 15, width: 45, height: 45)
         imgTou.contentMode = .scaleAspectFill
         imgTou.layer.masksToBounds = true
