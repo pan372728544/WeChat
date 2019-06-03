@@ -137,7 +137,9 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
 
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-
+        if currentPage != maxCount {
+            self.tableView.contentInset.top =  loadingH+NavaBar_H
+        }
         if maxCount == 1 {
             indicatorView.stopAnimating()
         } else {
@@ -145,17 +147,6 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
         }
     }
 
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView.contentOffset.y < -loadingH-NavaBar_H {
-            if currentPage >= maxCount {
-                self.tableView.contentInset.top = NavaBar_H
-            } else {
-                self.tableView.contentInset.top =  loadingH+NavaBar_H
-            }
-
-        }
-    }
-    
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
@@ -166,6 +157,7 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
             if currentPage > maxCount {
                 currentPage = maxCount
                 indicatorView.stopAnimating()
+                self.tableView.contentInset.top =  NavaBar_H
                 return
             } else if currentPage == maxCount {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {

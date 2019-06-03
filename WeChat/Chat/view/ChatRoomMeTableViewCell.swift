@@ -44,20 +44,18 @@ class ChatRoomMeTableViewCell: UITableViewCell {
         didSet {
             timeLabel.isHidden = true
             if textMes?.updatedAt != 0 {
-                
-                
-                let currentData = Date()
+
                 let dataFormatter = DateFormatter()
                 dataFormatter.dateFormat = "YYYY-MM-dd HH:mm"
-                let customDate = dataFormatter.string(from: currentData)
-                
-                
+
+                let data = Date(timeIntervalSince1970: TimeInterval((textMes?.updatedAt)!))
+                let customDate = dataFormatter.string(from: data)
                 timeLabel.text = customDate
                 
                 timeLabel.isHidden = false
             }
-            
-            let url = URL(string: (textMes?.senderPicture)!)
+
+            let url  = URL(string: (textMes?.senderPicture)!)!
             imgTou.kf.setImage(with: url)
             imgTou.frame.origin.y = textMes?.updatedAt != 0 ? 15+40 : 15
             

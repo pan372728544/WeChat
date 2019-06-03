@@ -236,13 +236,17 @@ extension ZJSocket {
         
         
         // 发送时间
-        let timeInterval = Date().timeIntervalSince1970
-
-        if timeOld != Int64(timeInterval) {
+        let timeInterval : TimeInterval = Date().timeIntervalSince1970
+        
+        if timeOld + 60 <= Int64(timeInterval) {
             message.updatedAt = Int64(timeInterval)
             timeOld = message.updatedAt
         } else {
             message.updatedAt = 0
+            if timeOld == 0 {
+                message.updatedAt = Int64(timeInterval)
+            }
+            timeOld = Int64(timeInterval)
         }
         message.createdAt = 0
         
