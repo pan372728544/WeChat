@@ -328,8 +328,6 @@ extension ChatRoomViewModel {
         
         updateAndappendMessage(chatMsg: message)
         
-        insertDataToChatList()
-        
     }
 }
 
@@ -430,32 +428,6 @@ extension ChatRoomViewModel {
         scrollToEnd()
     }
     
-    
-    func insertDataToChatList() {
-        
-        // 创建会话列表
-        let dbChat = DBChat()
-        let timeInterval = Date().timeIntervalSince1970
-        dbChat.chatId = IMDataManager.share.getChatId(receiveId: (self.dbUser?.objectId)!)
-        dbChat.recipientId = (self.dbUser?.objectId)!
-        dbChat.recipientName = (self.dbUser?.name)!
-        dbChat.picture = (self.dbUser?.picture)!
-        dbChat.groupId = ""
-        dbChat.lastMessage =   self.lastText
-        dbChat.lastMessageDate = Int64(timeInterval)
-        
-        let currentUser = RealmTool.getDBUser().first
-        
-        dbChat.lastMessageName = (currentUser?.name)!
-        
-        dbChat.lastIncoming = 0
-        dbChat.isArchived = true
-        dbChat.isDeleted = false
-        dbChat.createdAt = Int64(timeInterval)
-        dbChat.updatedAt = Int64(timeInterval)
-        
-        RealmTool.insertSessionList(by: dbChat)
-    }
     
     
 }

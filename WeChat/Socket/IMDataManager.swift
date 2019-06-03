@@ -153,8 +153,14 @@ extension IMDataManager : ZJSocketDelegate {
     // 收到消息
     func socket(_ socket: ZJSocket, chatMsg: ProtoMessage) {
         
+        
+        print("收到服务器消息：\(chatMsg.text)")
+        
         let build = try! chatMsg.toBuilder()
         self.insertProtoMessage(cupid: build)
+     
+        insertDataToChatList(chatMag: chatMsg)
+        
         notificationToReceiveMessage()
         notificationToGroupList()
     }
@@ -275,6 +281,53 @@ extension IMDataManager {
         
     }
     
+    
+    func insertDataToChatList(chatMag: ProtoMessage) {
+        
+        // 创建会话列表
+        let dbChat = DBChat()
+        let timeInterval = Date().timeIntervalSince1970
+        
+        let  currentId = self.getCurrentId()
+        
+        var receiveId = ""
+        var receiveName = ""
+        var receivePic = ""
+        
+        if  currentId == chatMag.senderId {
+            receiveId = chatMag.recipientId
+            receiveName = chatMag.recipientName
+            receivePic = chatMag.recipientPicture
+        } else {
+            receiveId = chatMag.senderId
+            receiveName = chatMag.senderName
+            receivePic = chatMag.senderPicture
+        }
+        
+        
+        dbChat.chatId = IMDataManager.share.getChatId(receiveId: receiveId)
+        dbChat.recipientId = receiveId
+        dbChat.recipientName = receiveName
+        dbChat.picture = receivePic
+        dbChat.groupId = ""
+        dbChat.lastMessage =   chatMag.text
+        if chatMag.updatedAt == 0 {
+            dbChat.lastMessageDate = Int64(timeInterval)
+        } else {
+            dbChat.lastMessageDate = chatMag.updatedAt
+        }
+
+        
+        dbChat.lastMessageName = chatMag.senderName
+        
+        dbChat.lastIncoming = 0
+        dbChat.isArchived = true
+        dbChat.isDeleted = false
+        dbChat.createdAt = Int64(timeInterval)
+        dbChat.updatedAt = Int64(timeInterval)
+        
+        RealmTool.insertSessionList(by: dbChat)
+    }
     
     func getChatId(receiveId : String) -> String {
         let members = [self.getCurrentId(), receiveId]

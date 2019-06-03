@@ -24,7 +24,6 @@ class SocketManager : NSObject {
         
         if dbUser.first == nil {
             Toast.showCenterWithText(text: "还没有登录")
-//            return
         }
         
 

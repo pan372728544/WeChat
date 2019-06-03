@@ -44,6 +44,7 @@ class ChatViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.white
+        self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
         
 
@@ -68,7 +69,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 80
+        return 72
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
