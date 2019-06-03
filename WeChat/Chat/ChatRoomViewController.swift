@@ -9,6 +9,10 @@
 import UIKit
 import RealmSwift
 
+enum VCType {
+    case detail,chatlist
+}
+
 class ChatRoomViewController: BaseViewController {
 
     
@@ -25,25 +29,37 @@ class ChatRoomViewController: BaseViewController {
 
     open var dbUsers : Results<DBUser>?
     
+    open var type : VCType!
     fileprivate var chatRoomVM : ChatRoomViewModel = ChatRoomViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = dbUsers?.first?.name
         
-        effectView!.alpha = 0.9
+        if self.type == .chatlist {
+            effectView!.alpha = 0.0
+            
+            viewLine1.isHidden = true
+            
+            self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        } else {
+            effectView!.alpha = 0.9
+            
+            viewLine1.isHidden = false
+        }
 
-        viewLine1.isHidden = false
        
         self.view.backgroundColor = UIColor.white
         setup()
     }
     
     
-    init(dbUsers : Results<DBUser>) {
+    init(dbUsers : Results<DBUser>,type: VCType) {
         
         super .init(nibName: nil, bundle: nil)
         self.dbUsers = dbUsers
+        self.type = type
     }
     
     required init?(coder aDecoder: NSCoder) {

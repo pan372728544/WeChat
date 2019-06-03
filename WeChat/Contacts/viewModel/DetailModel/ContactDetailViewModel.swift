@@ -218,7 +218,7 @@ extension ContactDetailViewModel : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           let tempAry : [String] = sectionAry[indexPath.section] as! [String]
         if tempAry[indexPath.row] == "发消息" {
-            let chat = ChatRoomViewController(dbUsers: dbUsers!)
+            let chat = ChatRoomViewController(dbUsers: dbUsers!,type: .detail)
             self.vc?.navigationController?.pushViewController(chat, animated: true)
 
         }

@@ -20,15 +20,22 @@ class ChatViewController: UIViewController {
         return tableView
     }()
     
+    fileprivate   var  effectView : UIVisualEffectView?
+    fileprivate var viewLine1: UIView = UIView()
     // 聊天列表数组
     fileprivate var msgArray : [DBChat] = [DBChat]()
-    
+    fileprivate var searchController : SearchViewController = {
+        
+        let searchController = SearchViewController.init(searchResultsController: ContactSearchViewController())
+        return searchController
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         // 初始化View
         setupMainView()
         
@@ -46,7 +53,26 @@ class ChatViewController: UIViewController {
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorStyle = .none
         view.addSubview(self.tableView)
+        self.tableView.tableHeaderView = searchController.searchBar
+        let viewNew = UIView(frame: self.tableView.bounds)
+        viewNew.backgroundColor = UIColor.Gray237Color()
+        self.tableView.backgroundView = viewNew
         
+        // 添加毛玻璃效果
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
+        
+        effectView = UIVisualEffectView(effect: blur)
+        effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
+        effectView?.backgroundColor = UIColor.Gray237Color()
+        effectView?.alpha = 0.9
+        self.view.addSubview(effectView!)
+        
+        let viewH = 1/UIScreen.main.scale
+        
+        viewLine1 = UIView(frame: CGRect(x: 0, y: NavaBar_H-viewH, width: Screen_W, height: viewH))
+        viewLine1.backgroundColor = UIColor.Gray213Color()
+        viewLine1.isHidden = true
+        self.view.addSubview(viewLine1)
 
     }
 
@@ -79,7 +105,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         let que = "objectId = \'\(receiver.recipientId)\'"
         let dbUsers =  RealmTool.getDBUserById(que)
         
-        let chatVc = ChatRoomViewController(dbUsers: dbUsers)
+        let chatVc = ChatRoomViewController(dbUsers: dbUsers,type: .chatlist)
         self.navigationController?.pushViewController(chatVc, animated: true)
 
     }
