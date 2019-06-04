@@ -32,8 +32,10 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        
+
+ 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         
@@ -54,7 +56,12 @@ class ChatViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorStyle = .none
-
+        self.tableView.sectionHeaderHeight = 0.1
+        self.tableView.sectionFooterHeight = 0.1
+        self.tableView.separatorStyle = .none
+        self.tableView.estimatedSectionFooterHeight = 0
+        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.estimatedRowHeight = 0
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.contentInsetAdjustmentBehavior = .never
         self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
@@ -68,15 +75,15 @@ class ChatViewController: UIViewController {
         
         // 添加毛玻璃效果
         let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
-        
+
         effectView = UIVisualEffectView(effect: blur)
         effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
-        effectView?.backgroundColor = UIColor.Gray237Color()
+        effectView?.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 0.0
         self.view.addSubview(effectView!)
-        
+
         let viewH = 1/UIScreen.main.scale
-        
+
         viewLine1 = UIView(frame: CGRect(x: 0, y: NavaBar_H-viewH, width: Screen_W, height: viewH))
         viewLine1.backgroundColor = UIColor.Gray213Color()
         viewLine1.isHidden = true
@@ -164,12 +171,10 @@ extension ChatViewController {
     func changeNavigation(_ offset : CGFloat)  {
         
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
+        let new : CGFloat = offset + tableHeadH 
         
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
         
-        
-        print("\(offset),\(new),\(new/tableHeadH)")
         viewLine1.isHidden = offset <= -tableHeadH
         
         

@@ -216,7 +216,7 @@ extension ContactsViewModel {
         
         effectView = UIVisualEffectView(effect: blur)
         effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
-        effectView?.backgroundColor = UIColor.Gray237Color()
+        effectView?.backgroundColor = UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 0
         self.view.addSubview(effectView!)
         
@@ -408,7 +408,7 @@ extension ContactsViewModel {
     func changeNavigation(_ offset : CGFloat)  {
 
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        let new : CGFloat = offset + tableHeadH > tableHeadH ? tableHeadH : offset + tableHeadH
+        let new : CGFloat = offset + tableHeadH 
 
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
       

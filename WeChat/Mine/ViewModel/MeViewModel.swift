@@ -309,9 +309,9 @@ extension MeViewModel {
         switch pan.state {
             
         case .changed:
-            self.tableView.frame.origin.y = Screen_H + translation.y*0.5
+            self.tableView.frame.origin.y = Screen_H + translation.y*0.1
             
-            self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344 + translation.y*0.2, width: Screen_W, height: 344)
+            self.imgv?.frame = CGRect(x: 0, y: Screen_H-Tabbar_H-344 + translation.y*0.3, width: Screen_W, height: 344)
             
             self.photoButton?.backgroundColor = UIColor.clear
             if translation.y < -200 {

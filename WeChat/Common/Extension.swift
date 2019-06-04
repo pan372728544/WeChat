@@ -267,6 +267,17 @@ extension UIImage {
         return img!
     }
     
+    
+    static func from(color: UIColor,width: CGFloat,height: CGFloat) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: width, height: height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+    }
 }
 
 

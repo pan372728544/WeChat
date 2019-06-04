@@ -39,10 +39,11 @@ class ChatRoomViewController: BaseViewController {
         if self.type == .chatlist {
             effectView!.alpha = 0.0
             
-            viewLine1.isHidden = true
+            viewLine1.isHidden = false
             
-            self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
+                  self.navigationController?.navigationBar.barTintColor = UIColor.blue
+            self.navigationController?.navigationBar.isTranslucent = true
+  
         } else {
             effectView!.alpha = 0.9
             
@@ -77,6 +78,17 @@ class ChatRoomViewController: BaseViewController {
         self.chatRoomVM.removeNotification()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if self.type == .chatlist {
+//            let img = UIImage.from(color: UIColor.Gray237Color())
+//
+//            self.navigationController?.navigationBar.setBackgroundImage(img, for: UIBarMetrics.default)
+//            self.navigationController?.navigationBar.shadowImage = UIImage()
+//            self.navigationController?.navigationController?.navigationBar.tintColor = UIColor.blue
+        }
+    }
 
 }
 
@@ -99,4 +111,12 @@ extension ChatRoomViewController {
 extension ChatRoomViewController {
    
     
+//        override func willMove(toParent parent: UIViewController?) {
+//
+//            print("\(parent)==willMove")
+//        }
+//        override func didMove(toParent parent: UIViewController?) {
+//            
+//                print("\(parent)==didMove")
+//        }
 }
