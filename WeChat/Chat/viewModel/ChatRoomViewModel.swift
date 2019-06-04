@@ -52,6 +52,9 @@ class ChatRoomViewModel: NSObject {
     
     // 加载视图高度
      let loadingH : CGFloat =  44
+    
+      fileprivate var addBtn : UIButton!
+    
     // 下拉刷新
     fileprivate var indicatorView : UIActivityIndicatorView = {
         
@@ -222,6 +225,7 @@ extension ChatRoomViewModel {
         effectView?.frame = CGRect(x: 0, y: Screen_H-viewBottom_H, width: Screen_W, height: viewBottom_H)
         effectView?.backgroundColor = UIColor.Gray237Color()
         effectView?.alpha = 0.9
+        effectView?.isUserInteractionEnabled = true
         self.vc!.view.addSubview(effectView!)
         
         effectView?.contentView.addSubview(self.textField)
@@ -231,14 +235,21 @@ extension ChatRoomViewModel {
         imgV = imgV?.withRenderingMode(.alwaysTemplate)
         voiceBtn.tintColor = UIColor.black
         voiceBtn.setBackgroundImage(imgV, for: .normal)
+        var imgV2 = UIImage.init(named: "ToolViewKeyboard")
+        imgV2 = imgV2?.withRenderingMode(.alwaysTemplate)
+        voiceBtn.setBackgroundImage(imgV2, for: .selected)
         effectView?.contentView.addSubview(voiceBtn)
         
-        let addBtn = UIButton(frame: CGRect(x: Screen_W-5-voiceBtn.width, y: 10, width: voiceBtn.width, height: voiceBtn.width))
-        var imgA = UIImage.init(named: "ToolViewKeyboard")
+        addBtn = UIButton(frame: CGRect(x: Screen_W-5-voiceBtn.width, y: 10, width: voiceBtn.width, height: voiceBtn.width))
+        var imgA = UIImage.init(named: "TypeSelectorBtn_Black")
         imgA = imgA?.withRenderingMode(.alwaysTemplate)
         addBtn.tintColor = UIColor.black
         addBtn.setBackgroundImage(imgA, for: .normal)
+        var imgB = UIImage.init(named: "ToolViewKeyboard")
+        imgB = imgB?.withRenderingMode(.alwaysTemplate)
+        addBtn.setBackgroundImage(imgB, for: .selected)
         effectView?.contentView.addSubview(addBtn)
+        addBtn.addTarget(self, action: #selector(addBtnClick(_:)), for: UIControl.Event.touchUpInside)
         
         let emotionBtn = UIButton(frame: CGRect(x: addBtn.left-5-voiceBtn.width, y: 10, width: voiceBtn.width, height: voiceBtn.width))
         var imgE = UIImage.init(named: "ToolViewEmotion")
@@ -374,6 +385,14 @@ extension ChatRoomViewModel {
         // 清空数据框
         self.textField.text = ""
         
+    }
+}
+
+extension ChatRoomViewModel {
+    
+   @objc func addBtnClick(_ btn: UIButton)  {
+    btn.isSelected = !btn.isSelected
+
     }
 }
 
