@@ -367,7 +367,7 @@ extension ChatRoomViewModel {
             chatMsgBuild?.status = "false"
             
             IMDataManager.share.insertProtoMessage(cupid: chatMsgBuild!)
-            
+            IMDataManager.share.insertDataToChatList(chatMag: (try! chatMsgBuild?.build())!)
             NotificationCenter.default.post(name: NSNotification.Name("ReceiveMessageSuccess"), object: self, userInfo:nil)
             NotificationCenter.default.post(name: NSNotification.Name("GroupListSuccess"), object: self, userInfo:nil)
         }

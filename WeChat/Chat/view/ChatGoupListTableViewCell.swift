@@ -78,7 +78,7 @@ extension ChatGoupListTableViewCell {
         contentLabel.frame = CGRect(x: imgTou.right + 10, y:nameLabel.bottom + 8 , width: Screen_W-100, height: 15)
         contentLabel.numberOfLines = 1
         contentLabel.font = UIFont.systemFont(ofSize: 14)
-        contentLabel.textColor = UIColor.init(r: 115, g: 115, b: 115)
+        contentLabel.textColor = UIColor.init(r: 155, g: 155, b: 155)
         self.contentView.addSubview(contentLabel)
         
         
@@ -88,8 +88,8 @@ extension ChatGoupListTableViewCell {
         self.contentView.addSubview(viewLine1)
         
         timeLabel.frame = CGRect(x: Screen_W-100-15, y:15 , width: 100, height: 15)
-        timeLabel.font = UIFont.systemFont(ofSize: 14)
-        timeLabel.textColor = UIColor.init(r: 115, g: 115, b: 115)
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textColor = UIColor.init(r: 155, g: 155, b: 155)
         timeLabel.textAlignment = .right
         self.contentView.addSubview(timeLabel)
 
