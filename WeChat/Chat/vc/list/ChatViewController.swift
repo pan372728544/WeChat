@@ -129,6 +129,12 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         let que = "objectId = \'\(receiver.recipientId)\'"
         let dbUsers =  RealmTool.getDBUserById(que)
         
+        if dbUsers.first == nil {
+            socketClient.sendFridenDetail(phone: receiver.recipientId)
+            Toast.showCenterWithText(text: "好友信息暂未获取，稍后重试")
+           return
+        }
+        
         let chatVc = ChatRoomViewController(dbUsers: dbUsers,type: .chatlist)
         self.navigationController?.pushViewController(chatVc, animated: true)
 
@@ -142,6 +148,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
+        
     }
     
 }
@@ -174,6 +181,7 @@ extension ChatViewController {
                                                selector: #selector(updateGroupList(nofification:)),
                                                name: NSNotification.Name(rawValue: "GroupListSuccess"),
                                                object: nil)
+        
     }
     
     
@@ -185,9 +193,9 @@ extension ChatViewController {
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
         
         viewLine1.isHidden = offset <= -tableHeadH
-        
-        
+
     }
+    
 }
 
 

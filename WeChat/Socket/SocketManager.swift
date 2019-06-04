@@ -39,6 +39,9 @@ class SocketManager : NSObject {
                 // 读取消息
                 socketClient.startReadMsg()
 
+                if RealmTool.getDBUser().first != nil {
+                    socketClient.sendJoinRoom()
+                }
     
                 // 发送心跳包
                 self.addHeartBeatTimer()

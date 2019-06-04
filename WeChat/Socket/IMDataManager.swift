@@ -134,10 +134,15 @@ extension IMDataManager : ZJSocketDelegate {
     }
     
     // 好友列表
-    func socket(_ socket: ZJSocket, friend user: ProtoFriend) {
-        let build = try! user.toBuilder()
-        // 更新插入数据
-        IMDataManager.share.insertProtoFriend(cupid: build)
+    func socket(_ socket: ZJSocket, friends user: [ProtoFriend]) {
+        
+        for item in user {
+            let build = try! item.toBuilder()
+            // 更新插入数据
+            IMDataManager.share.insertProtoFriend(cupid: build)
+        }
+        
+
     }
     
     

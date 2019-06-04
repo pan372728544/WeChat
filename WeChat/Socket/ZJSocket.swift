@@ -19,7 +19,7 @@ protocol ZJSocketDelegate : class {
     // 登录
     func socket(_ socket : ZJSocket, login user : ProtoUser)
     // 获取好友列表
-    func socket(_ socket : ZJSocket, friend user : ProtoFriend)
+    func socket(_ socket : ZJSocket, friends user : [ProtoFriend])
     
     // 获取好友详情
     func socket(_ socket : ZJSocket, friendDetail user : ProtoUser)
@@ -59,6 +59,7 @@ extension ZJSocket {
     // 关闭服务器连接
     func closeServer() {
         isConnected = false
+        print("关闭服务器--closeServer")
         return tcpClient.close()
     }
     
@@ -108,6 +109,7 @@ extension ZJSocket {
             // 收到消息
             let chatMsg = try! ProtoMessage.parseFrom(data: data)
             
+//              Toast.showCenterWithText(text: "收到消息：\(chatMsg.text)")
 //            Toast.showCenterWithText(text: "收到消息； \(chatMsg.text)")
             delegate?.socket(self, chatMsg: chatMsg)
         case 10:
@@ -118,8 +120,17 @@ extension ZJSocket {
             let protoUser = try! ProtoUser.parseFrom(data: data)
             delegate?.socket(self, login: protoUser)
         case 201 :
-            let protoFriend = try! ProtoFriend.parseFrom(data: data)
-            delegate?.socket(self, friend: protoFriend)
+            let array : [Data] = NSKeyedUnarchiver.unarchiveObject(with: data) as! [Data]
+            
+            var friendAry : [ProtoFriend] = [ProtoFriend]()
+            
+            for item in array {
+                let protoFriend = try! ProtoFriend.parseFrom(data: item)
+                friendAry.append(protoFriend)
+            }
+        
+            delegate?.socket(self, friends: friendAry)
+            print("")
         case 202 :
             let protoUser = try! ProtoUser.parseFrom(data: data)
             delegate?.socket(self, friendDetail: protoUser)

@@ -13,6 +13,11 @@ class SearchViewController: UISearchController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.view.backgroundColor = UIColor.clear
     }
     
     fileprivate var searResult : ContactSearchViewController?
