@@ -67,7 +67,7 @@ extension ZJSocket {
         DispatchQueue.global().async {
             while isConnected {
                 
-                Thread.sleep(forTimeInterval: 0.3)
+                Thread.sleep(forTimeInterval: 0.2)
                 // 1.取出长度消息
                 if let lengthMsg = self.tcpClient.read(4) {
                     let lData = Data(bytes: lengthMsg, count: 4)
@@ -107,6 +107,8 @@ extension ZJSocket {
         case 2:
             // 收到消息
             let chatMsg = try! ProtoMessage.parseFrom(data: data)
+            
+//            Toast.showCenterWithText(text: "收到消息； \(chatMsg.text)")
             delegate?.socket(self, chatMsg: chatMsg)
         case 10:
                print("T##items: Any...##Any")
