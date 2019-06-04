@@ -41,11 +41,10 @@ class ChatRoomViewController: BaseViewController {
             
             viewLine1.isHidden = false
             
-                  self.navigationController?.navigationBar.barTintColor = UIColor.blue
-            self.navigationController?.navigationBar.isTranslucent = true
+  
   
         } else {
-            effectView!.alpha = 0.9
+            effectView!.alpha = 1
             
             viewLine1.isHidden = false
         }

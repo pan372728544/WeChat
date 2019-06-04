@@ -42,7 +42,7 @@ class BaseViewController: UIViewController {
         
         effectView = UIVisualEffectView(effect: blur)
         effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: NavaBar_H)
-        effectView?.backgroundColor = UIColor.Gray237Color()
+        effectView?.backgroundColor = UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 0
         self.view.addSubview(effectView!)
         
