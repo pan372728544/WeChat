@@ -35,7 +35,9 @@ class IMDataManager: NSObject {
             
             msgArray.append(mess)
         }
-        
+        msgArray = msgArray.sorted(by: { (s0, s1) -> Bool in
+            s0.updatedAt > s1.updatedAt
+        })
         return msgArray
     }
 
