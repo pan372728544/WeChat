@@ -38,8 +38,17 @@ class ChatViewController: UIViewController {
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+        let rightButton = UIButton(type: .custom)
+        rightButton.setImage(UIImage(named: "Fav_List_Add_Icon_Normal"), for: .normal)
+        rightButton.imageView?.contentMode = .scaleAspectFill
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        rightButton.backgroundColor = UIColor.clear
+        rightButton.addTarget(self, action: #selector(more), for: .touchUpInside)
+        let right = UIBarButtonItem(customView: rightButton)
         
-//          self.extendedLayoutIncludesOpaqueBars = true
+        navigationItem.rightBarButtonItem = right
+        
         // 初始化View
         setupMainView()
         
@@ -179,4 +188,17 @@ extension ChatViewController {
         
         
     }
+}
+
+
+
+extension ChatViewController  {
+    
+    
+    @objc func more() {
+        
+    }
+    
+    
+    
 }
