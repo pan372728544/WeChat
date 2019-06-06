@@ -57,9 +57,9 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
             nameLabel.frame.origin.y = imgTou.frame.origin.y
             contentLabel.text = textMes?.text
     
-            let widthCell = IMDataManager.share.getChatTextSize(text: (textMes?.text)!).width
+            let widthCell = IMDataManager.share.getChatTextSize(text: contentLabel.attributedText!).width
             
-            let heightCell = IMDataManager.share.getChatTextSize(text: (textMes?.text)!).height
+            let heightCell = IMDataManager.share.getChatTextSize(text: contentLabel.attributedText!).height
             contentLabel.frame.size.height = heightCell
             contentLabel.frame.size.width = widthCell
 

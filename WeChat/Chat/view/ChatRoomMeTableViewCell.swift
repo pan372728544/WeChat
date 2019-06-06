@@ -61,15 +61,23 @@ class ChatRoomMeTableViewCell: UITableViewCell {
             
             nameLabel.text = textMes?.senderName
             nameLabel.frame.origin.y = imgTou.frame.origin.y
-            contentLabel.text = textMes?.text
-            let widthCell = IMDataManager.share.getChatTextSize(text: (textMes?.text)!).width
+//            contentLabel.text = textMes?.text
             
-            let heightCell = IMDataManager.share.getChatTextSize(text: (textMes?.text)!).height
+            contentLabel.attributedText = AttrStringGenerator.generateEmoticon((textMes?.text)!)
             
-            contentLabel.frame.size.height = heightCell
-            contentLabel.frame.size.width = widthCell
+            let widthCell = IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon((textMes?.text)!)).width
             
-            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell, height: heightCell)
+            let heightCell = IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon((textMes?.text)!)).height
+            
+//            contentLabel.frame.size.height = heightCell
+//            contentLabel.frame.size.width = widthCell
+//
+            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell+4, height: heightCell)
+            
+            
+//            contentLabel.frame = CGRect(x: Screen_W-150-widthCell, y: imgTou.frame.origin.y+10+1.5 , width: widthCell+3, height: heightCell)
+            contentLabel.textAlignment = .left
+//            contentLabel.backgroundColor = UIColor.randomColor()
             
             let oriImg = UIImage.init(named: "ChatRoom_Bubble_Text_Sender_Green")
             
@@ -81,11 +89,11 @@ class ChatRoomMeTableViewCell: UITableViewCell {
             imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 18  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 22)
             imgPao.image = resiImg
             
-            if  heightCell > 20 {
-                contentLabel.textAlignment = NSTextAlignment.left
-            } else {
-                contentLabel.textAlignment = NSTextAlignment.right
-            }
+//            if  heightCell > 20 {
+//                contentLabel.textAlignment = NSTextAlignment.left
+//            } else {
+//                contentLabel.textAlignment = NSTextAlignment.right
+//            }
             
             imgFaild.frame = CGRect(x: imgPao.frame.origin.x-25, y: imgPao.centerY-12, width: 20, height: 20)
             imgFaild.isHidden = textMes?.status == "true"
@@ -140,7 +148,7 @@ extension ChatRoomMeTableViewCell {
         contentLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 16)
-        contentLabel.textAlignment = NSTextAlignment.right
+//        contentLabel.textAlignment = NSTextAlignment.right
         self.contentView.addSubview(contentLabel)
         
     }

@@ -55,6 +55,9 @@ class ChatRoomViewModel: NSObject {
     
       fileprivate var addBtn : UIButton!
     
+    
+    fileprivate var actionBarView : ChatActionBarView!
+    
     // 下拉刷新
     fileprivate var indicatorView : UIActivityIndicatorView = {
         
@@ -133,9 +136,9 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
         
         let msg : DBMessage = msgArray[indexPath.row]
         if msg.updatedAt != 0 {
-            return IMDataManager.share.getChatTextSize(text: msg.text).height + 45 + 40
+            return IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon(msg.text)).height + 45 + 40
         }
-        return IMDataManager.share.getChatTextSize(text: msg.text).height + 45
+        return IMDataManager.share.getChatTextSize(text:  AttrStringGenerator.generateEmoticon(msg.text)).height + 45
     }
 
     // scrollview
@@ -218,47 +221,18 @@ extension ChatRoomViewModel {
     
     func setupChatInputView() {
         
-        // 添加毛玻璃效果
-        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
         
-        effectView = UIVisualEffectView(effect: blur)
-        effectView?.frame = CGRect(x: 0, y: Screen_H-viewBottom_H, width: Screen_W, height: viewBottom_H)
-        effectView?.backgroundColor = UIColor.Gray237Color()
-        effectView?.alpha = 0.9
-        effectView?.isUserInteractionEnabled = true
-        self.vc!.view.addSubview(effectView!)
+        // 输入框视图
+        actionBarView = ChatActionBarView(frame: CGRect(x: 0, y: Screen_H-Bottom_H-kChatActionBarOriginalHeight, width: Screen_H, height: kChatActionBarOriginalHeight+Bottom_H))
         
-        effectView?.contentView.addSubview(self.textField)
+        actionBarView.actionBarViewClickBlock = { (text,type) in
+            
+            self.sendMessage(type: type,send: text)
+        }
+        self.vc?.view.addSubview(actionBarView)
         
-        let voiceBtn = UIButton(frame: CGRect(x: 10, y: 10, width: 35, height: 35))
-        var imgV = UIImage.init(named: "ToolViewInputVoice")
-        imgV = imgV?.withRenderingMode(.alwaysTemplate)
-        voiceBtn.tintColor = UIColor.black
-        voiceBtn.setBackgroundImage(imgV, for: .normal)
-        var imgV2 = UIImage.init(named: "ToolViewKeyboard")
-        imgV2 = imgV2?.withRenderingMode(.alwaysTemplate)
-        voiceBtn.setBackgroundImage(imgV2, for: .selected)
-        effectView?.contentView.addSubview(voiceBtn)
-        
-        addBtn = UIButton(frame: CGRect(x: Screen_W-5-voiceBtn.width, y: 10, width: voiceBtn.width, height: voiceBtn.width))
-        var imgA = UIImage.init(named: "TypeSelectorBtn_Black")
-        imgA = imgA?.withRenderingMode(.alwaysTemplate)
-        addBtn.tintColor = UIColor.black
-        addBtn.setBackgroundImage(imgA, for: .normal)
-        var imgB = UIImage.init(named: "ToolViewKeyboard")
-        imgB = imgB?.withRenderingMode(.alwaysTemplate)
-        addBtn.setBackgroundImage(imgB, for: .selected)
-        effectView?.contentView.addSubview(addBtn)
-        addBtn.addTarget(self, action: #selector(addBtnClick(_:)), for: UIControl.Event.touchUpInside)
-        
-        let emotionBtn = UIButton(frame: CGRect(x: addBtn.left-5-voiceBtn.width, y: 10, width: voiceBtn.width, height: voiceBtn.width))
-        var imgE = UIImage.init(named: "ToolViewEmotion")
-        imgE = imgE?.withRenderingMode(.alwaysTemplate)
-        emotionBtn.tintColor = UIColor.black
-        emotionBtn.setBackgroundImage(imgE, for: .normal)
-        effectView?.contentView.addSubview(emotionBtn)
-        
-
+    
+      
     }
 
     
@@ -295,7 +269,7 @@ extension ChatRoomViewModel {
     //MARK:键盘通知相关操作
     @objc func keyBoardWillShow(_ notification:Notification){
         
-        print("keyBoardWillShow")
+//        print("keyBoardWillShow")
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
@@ -307,7 +281,8 @@ extension ChatRoomViewModel {
         
         // 3.执行动画
         UIView.animate(withDuration: duration) {
-            self.effectView!.frame.origin.y = y - self.viewBottom_Height
+            UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: 7)!)
+            self.actionBarView!.frame.origin.y = y - self.viewBottom_Height
         }
         self.tableView!.frame.size.height = Screen_H - endFrame.size.height
         
@@ -317,13 +292,14 @@ extension ChatRoomViewModel {
     }
     
     @objc func keyBoardWillHide(_ notification:Notification){
-        print("keyBoardWillHide")
+//        print("keyBoardWillHide")
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         
         //2.执行动画
         UIView.animate(withDuration: duration) {
-            self.effectView!.frame.origin.y = Screen_H - self.viewBottom_H
+            UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: 7)!)
+            self.actionBarView!.frame.origin.y = Screen_H - self.viewBottom_H
         }
         
         UIView.performWithoutAnimation {
@@ -345,20 +321,34 @@ extension ChatRoomViewModel {
 extension ChatRoomViewModel: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        sendMessage(type: .text)
+//        sendMessage(type: .text)
         return true
     }
 }
 
 extension ChatRoomViewModel {
     // 发送消息
-     func sendMessage(type: MessageType)  {
+    func sendMessage(type: MessageType,send: Any)  {
+        
+        
+        
+        let attr = AttrStringGenerator.generateEmoticon(send as! String)
+        
+        
+        
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        
+        let rect:CGRect = attr.boundingRect(with: CGSize(width: Screen_W - 140, height: CGFloat(MAXFLOAT)), options: option, context: nil)
+        
+        
+        print("\(rect.size)=====")
+        
         
         var cupid : (Result,Data, ProtoMessage.Builder)?
         
         switch type {
         case .text:
-            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: self.textField.text ?? "", picture: nil, video: nil, audio: nil, file: nil)
+            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: send as! String ?? "", picture: nil, video: nil, audio: nil, file: nil)
         case .picture:
             cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: nil, picture: UIImage(), video: nil, audio: nil, file: nil)
         case .video:
