@@ -53,4 +53,8 @@ class TitleStyle {
     /// 标题视图类型
     var type : TitleType = .emoticon
     
+    var cols = 8
+    var rows = 3
+    
+    
 }

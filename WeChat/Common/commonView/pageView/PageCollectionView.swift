@@ -214,9 +214,9 @@ extension PageCollectionView : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let itemCount = dataSource?.pageCollectionView(self, numberOfItemsInSection: section) ?? 0
-        
+
         if section == 0 {
-            pageControl.numberOfPages = (itemCount - 1) / (kEmoticonDefaultCols * kEmoticonDefaultRows) + 1
+            pageControl.numberOfPages = (itemCount - 1) / (style.cols * style.rows) + 1
         }
 
         
@@ -263,7 +263,7 @@ extension PageCollectionView : UICollectionViewDelegate {
             let itemCount = dataSource?.pageCollectionView(self, numberOfItemsInSection: indexPath.section) ?? 0
             
             if indexPath.section == 0 {
-                pageControl.numberOfPages = (itemCount - 1) / (kEmoticonDefaultCols * kEmoticonDefaultRows) + 1
+                pageControl.numberOfPages = (itemCount - 1) / (style.cols * style.rows) + 1
             } else {
                 pageControl.numberOfPages = (itemCount - 1) / (kEmoticonCols * kEmoticonRows) + 1
             }
@@ -278,7 +278,7 @@ extension PageCollectionView : UICollectionViewDelegate {
         
         // 3.根据indexPath设置pageControl
         if indexPath.section == 0 {
-            pageControl.currentPage = indexPath.item / (kEmoticonDefaultCols * kEmoticonDefaultRows)
+            pageControl.currentPage = indexPath.item / (style.cols * style.rows)
         } else {
             pageControl.currentPage = indexPath.item / (kEmoticonCols * kEmoticonRows)
         }

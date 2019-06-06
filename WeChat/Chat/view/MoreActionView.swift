@@ -32,9 +32,11 @@ extension MoreActionView {
         let style = TitleStyle()
         style.type = .moreAction
         style.titleHeight = 0
+        style.rows = 2
+        style.cols = 4
         let layout = PageCollectionViewLayout()
-        layout.cols = 4
-        layout.rows = 2
+//        layout.cols = 4
+//        layout.rows = 2
         
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 10

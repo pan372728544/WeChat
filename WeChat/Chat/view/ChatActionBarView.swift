@@ -41,11 +41,7 @@ class ChatActionBarView: UIView {
         case `default`, text, emotion, share
     }
     
-    fileprivate  var emoticonView : EmoticonView!
-    
-    
-    fileprivate  var moreActionView : MoreActionView!
-    
+
     var keyboardType: ChatKeyboardType? = .default
     weak var delegate: ChatActionBarViewDelegate?
     var inputTextViewCurrentHeight: CGFloat = kChatActionBarOriginalHeight
@@ -132,6 +128,17 @@ class ChatActionBarView: UIView {
         recordButton.isHidden = true
         return recordButton
         }()
+    fileprivate lazy var emoticonView : EmoticonView? = {
+        let emoticonView  = EmoticonView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
+        return emoticonView
+    }()
+    
+    
+    fileprivate lazy var moreActionView : MoreActionView? = {
+        let    moreActionView  = MoreActionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
+        return moreActionView
+    }()
+    
     
     override init (frame: CGRect) {
         super.init(frame : frame)
@@ -180,9 +187,8 @@ class ChatActionBarView: UIView {
         effectView?.contentView.addSubview(self.moreButton)
     
         
-        emoticonView  = EmoticonView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
         
-        emoticonView.emoticonClickCallback = {[weak self] emoticon in
+        emoticonView?.emoticonClickCallback = {[weak self] emoticon in
             // 1.判断是否是删除按钮
             if emoticon.text == "compose_emotion_delete" {
                 self?.inputTextView.deleteBackward()
@@ -194,7 +200,7 @@ class ChatActionBarView: UIView {
             self?.inputTextView.replace(range, withText: emoticon.text)
         }
         
-        emoticonView.emoticonClickSend = {
+        emoticonView?.emoticonClickSend = {
             
             print(self.inputTextView.text)
             
@@ -205,12 +211,9 @@ class ChatActionBarView: UIView {
         
         
         
-        
-        moreActionView  = MoreActionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
-        
-        moreActionView.moreActionClickCallback = {[weak self] emoticon in
-      
-            
+        moreActionView?.moreActionClickCallback = {[weak self] emoticon in
+
+
             switch emoticon.text {
             case "照片":
                 Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
@@ -237,8 +240,8 @@ class ChatActionBarView: UIView {
             default:
                     Toast.showCenterWithText(text: "未知")
             }
-            
-       
+
+
         }
         
      
