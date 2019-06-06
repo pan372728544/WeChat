@@ -34,7 +34,6 @@ extension EmoticonView {
         let style = TitleStyle()
         style.isScrollEnable = true
         style.selectedColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
-//        style.selectedColor = UIColor.clear
         style.normalColor = UIColor.init(r: 255, g: 255, b: 255)
         let layout = PageCollectionViewLayout()
         layout.cols = 8

@@ -168,6 +168,12 @@
 		3838D49322A8BFCA008FFC5A /* ali_9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3838D48722A8BFCA008FFC5A /* ali_9.gif */; };
 		3838D49422A8BFCA008FFC5A /* ali_5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3838D48822A8BFCA008FFC5A /* ali_5.gif */; };
 		3838D49522A8BFCA008FFC5A /* ali_11.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3838D48922A8BFCA008FFC5A /* ali_11.gif */; };
+		3838D49722A90CED008FFC5A /* MoreActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49622A90CED008FFC5A /* MoreActionView.swift */; };
+		3838D49922A90D29008FFC5A /* MoreActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49822A90D29008FFC5A /* MoreActionViewCell.swift */; };
+		3838D49B22A9106F008FFC5A /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49A22A9106F008FFC5A /* MoreViewModel.swift */; };
+		3838D49D22A910C2008FFC5A /* MoreAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49C22A910C2008FFC5A /* MoreAction.swift */; };
+		3838D49F22A910F7008FFC5A /* MoreActionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49E22A910F7008FFC5A /* MoreActionPackage.swift */; };
+		3838D4A122A912A9008FFC5A /* MoreAction.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3838D4A022A912A9008FFC5A /* MoreAction.plist */; };
 		38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA025E229FB58900755C8D /* BaseViewController.swift */; };
 		38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */; };
 		38AA0265229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */; };
@@ -378,6 +384,12 @@
 		3838D48722A8BFCA008FFC5A /* ali_9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ali_9.gif; sourceTree = "<group>"; };
 		3838D48822A8BFCA008FFC5A /* ali_5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ali_5.gif; sourceTree = "<group>"; };
 		3838D48922A8BFCA008FFC5A /* ali_11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ali_11.gif; sourceTree = "<group>"; };
+		3838D49622A90CED008FFC5A /* MoreActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActionView.swift; sourceTree = "<group>"; };
+		3838D49822A90D29008FFC5A /* MoreActionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActionViewCell.swift; sourceTree = "<group>"; };
+		3838D49A22A9106F008FFC5A /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		3838D49C22A910C2008FFC5A /* MoreAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAction.swift; sourceTree = "<group>"; };
+		3838D49E22A910F7008FFC5A /* MoreActionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActionPackage.swift; sourceTree = "<group>"; };
+		3838D4A022A912A9008FFC5A /* MoreAction.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MoreAction.plist; sourceTree = "<group>"; };
 		38AA025E229FB58900755C8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMeTableViewCell.swift; sourceTree = "<group>"; };
@@ -484,6 +496,7 @@
 				38278C812285542F00884EB0 /* ViewController.swift */,
 				38278C832285542F00884EB0 /* Main.storyboard */,
 				3836BE8722A78FEF0015B733 /* Expression.plist */,
+				3838D4A022A912A9008FFC5A /* MoreAction.plist */,
 				3838D47B22A8BFA1008FFC5A /* ali.plist */,
 				3838D47D22A8BFB8008FFC5A /* Ali */,
 				3836BE9422A799430015B733 /* Expression */,
@@ -643,6 +656,7 @@
 			isa = PBXGroup;
 			children = (
 				3836BE8C22A7916A0015B733 /* EmoticonViewModel.swift */,
+				3838D49A22A9106F008FFC5A /* MoreViewModel.swift */,
 			);
 			path = emoticon;
 			sourceTree = "<group>";
@@ -660,6 +674,8 @@
 			children = (
 				3836BE9022A792160015B733 /* EmoticonPackage.swift */,
 				3836BE9222A7922A0015B733 /* Emoticon.swift */,
+				3838D49C22A910C2008FFC5A /* MoreAction.swift */,
+				3838D49E22A910F7008FFC5A /* MoreActionPackage.swift */,
 			);
 			path = emoticon;
 			sourceTree = "<group>";
@@ -850,6 +866,8 @@
 				3836BD9922A666A90015B733 /* ChatActionBarView.swift */,
 				3836BDB022A74CF00015B733 /* EmoticonView.swift */,
 				3836BDB222A74D7A0015B733 /* EmoticonViewCell.swift */,
+				3838D49622A90CED008FFC5A /* MoreActionView.swift */,
+				3838D49822A90D29008FFC5A /* MoreActionViewCell.swift */,
 				3836BD9B22A66A1F0015B733 /* ChatButton.swift */,
 				3836BD9D22A6795C0015B733 /* ChatShareMoreView.swift */,
 				3836BD9F22A67F380015B733 /* ChatShareMoreCollectionViewCell.swift */,
@@ -1128,6 +1146,7 @@
 				3836C00922A79A540015B733 /* Expression_23@2x.png in Resources */,
 				3836C02322A79A540015B733 /* Expression_69@2x.png in Resources */,
 				3838D49222A8BFCA008FFC5A /* ali_1.gif in Resources */,
+				3838D4A122A912A9008FFC5A /* MoreAction.plist in Resources */,
 				3838D48B22A8BFCA008FFC5A /* ali_7.gif in Resources */,
 				3836C00D22A79A540015B733 /* Expression_2@2x.png in Resources */,
 				38278C8A2285543000884EB0 /* LaunchScreen.storyboard in Resources */,
@@ -1270,6 +1289,7 @@
 				38EDD782228D081900E9935A /* MeModel.swift in Sources */,
 				38EDD77F228C330D00E9935A /* MeHeaderCellViewModel.swift in Sources */,
 				3836BE9322A7922A0015B733 /* Emoticon.swift in Sources */,
+				3838D49D22A910C2008FFC5A /* MoreAction.swift in Sources */,
 				38EDD790228D439800E9935A /* IMMessage.proto in Sources */,
 				38278D85228B9AF900884EB0 /* ChatMessage.swift in Sources */,
 				38EDD77A228C2CBB00E9935A /* MeOtherTableViewCell.swift in Sources */,
@@ -1282,6 +1302,7 @@
 				38278C822285542F00884EB0 /* ViewController.swift in Sources */,
 				3836BDA522A74AE10015B733 /* PageView.swift in Sources */,
 				3836BDAB22A74B2C0015B733 /* ContentView.swift in Sources */,
+				3838D49922A90D29008FFC5A /* MoreActionViewCell.swift in Sources */,
 				38EDD78B228D3D5F00E9935A /* ContactsTableViewCell.swift in Sources */,
 				3836BDA222A68B880015B733 /* FullyHorizontalFlowLayout.swift in Sources */,
 				38EDD79D228E462700E9935A /* IndexView.swift in Sources */,
@@ -1303,6 +1324,7 @@
 				38AA0265229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift in Sources */,
 				38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */,
 				38EDD776228C2C8B00E9935A /* MeOtherViewModel.swift in Sources */,
+				3838D49B22A9106F008FFC5A /* MoreViewModel.swift in Sources */,
 				38278C9D2285885C00884EB0 /* ChatViewController.swift in Sources */,
 				38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */,
 				38278C802285542F00884EB0 /* AppDelegate.swift in Sources */,
@@ -1338,10 +1360,12 @@
 				38EDD7D5228E74A300E9935A /* Socket.swift in Sources */,
 				38AA0269229FE8E700755C8D /* Checksum.swift in Sources */,
 				3836BE8D22A7916A0015B733 /* EmoticonViewModel.swift in Sources */,
+				3838D49722A90CED008FFC5A /* MoreActionView.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
 				38AA028722A1298800755C8D /* ChatGoupListTableViewCell.swift in Sources */,
 				38278D80228B9A4E00884EB0 /* WelComeViewController.swift in Sources */,
 				38D5A0FF2292B5ED002BBBA7 /* ContactSearchViewController.swift in Sources */,
+				3838D49F22A910F7008FFC5A /* MoreActionPackage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

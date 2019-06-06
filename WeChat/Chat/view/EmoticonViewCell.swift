@@ -47,8 +47,6 @@ class EmoticonViewCell: UICollectionViewCell {
 extension EmoticonViewCell {
     func setupView()  {
         
-    
-//        iconImageView.backgroundColor = UIColor.white
         iconImageView.contentMode = .scaleToFill
         self.contentView.addSubview(iconImageView)
     }

@@ -42,6 +42,10 @@ class ChatActionBarView: UIView {
     }
     
     fileprivate  var emoticonView : EmoticonView!
+    
+    
+    fileprivate  var moreActionView : MoreActionView!
+    
     var keyboardType: ChatKeyboardType? = .default
     weak var delegate: ChatActionBarViewDelegate?
     var inputTextViewCurrentHeight: CGFloat = kChatActionBarOriginalHeight
@@ -101,20 +105,17 @@ class ChatActionBarView: UIView {
         return emotionBtn
         }()
     
-       fileprivate lazy var shareButton: ChatButton = {
+       fileprivate lazy var moreButton: ChatButton = {
 
-        let shareButton = ChatButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let moreButton = ChatButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         var imgA = UIImage.init(named: "TypeSelectorBtn_Black")
         imgA = imgA?.withRenderingMode(.alwaysTemplate)
-        shareButton.tintColor = UIColor.black
-        shareButton.setBackgroundImage(imgA, for: .normal)
-        var imgB = UIImage.init(named: "ToolViewKeyboard")
-        imgB = imgB?.withRenderingMode(.alwaysTemplate)
-        shareButton.setBackgroundImage(imgB, for: .selected)
-        shareButton.showTypingKeyboard = false
-//        shareButton.addTarget(self, action: #selector(addBtnClick(_:)), for: UIControl.Event.touchUpInside)
+        moreButton.tintColor = UIColor.black
+        moreButton.setBackgroundImage(imgA, for: .normal)
+        moreButton.showTypingKeyboard = false
+        moreButton.addTarget(self, action: #selector(moreBtnClick(_:)), for: UIControl.Event.touchUpInside)
         
-        return shareButton
+        return moreButton
         
         }()
     
@@ -175,8 +176,8 @@ class ChatActionBarView: UIView {
         effectView?.contentView.addSubview(self.emotionButton)
         
         
-        self.shareButton.frame = CGRect(x: self.emotionButton.right+kChatActionBarMargin, y: kChatActionBarMargin, width: kChatActionBarBtnHeight, height: kChatActionBarBtnHeight)
-        effectView?.contentView.addSubview(self.shareButton)
+        self.moreButton.frame = CGRect(x: self.emotionButton.right+kChatActionBarMargin, y: kChatActionBarMargin, width: kChatActionBarBtnHeight, height: kChatActionBarBtnHeight)
+        effectView?.contentView.addSubview(self.moreButton)
     
         
         emoticonView  = EmoticonView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
@@ -201,6 +202,46 @@ class ChatActionBarView: UIView {
             
             self.inputTextView.text = ""
         }
+        
+        
+        
+        
+        moreActionView  = MoreActionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
+        
+        moreActionView.moreActionClickCallback = {[weak self] emoticon in
+      
+            
+            switch emoticon.text {
+            case "照片":
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "拍摄":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "视频通话":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "位置":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "红包":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "转账":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "语音输入":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "收藏":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "个人名片":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "文件":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            case "卡券":
+                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+            default:
+                    Toast.showCenterWithText(text: "未知")
+            }
+            
+       
+        }
+        
+     
     }
 
 
@@ -220,6 +261,21 @@ extension ChatActionBarView {
         inputTextView.becomeFirstResponder()
         inputTextView.selectedTextRange = range
     }
+    
+    @objc func moreBtnClick(_ btn: UIButton) {
+        
+        btn.isSelected = !btn.isSelected
+        
+        // 切换键盘
+        let range = inputTextView.selectedTextRange
+        inputTextView.resignFirstResponder()
+        inputTextView.inputView = inputTextView.inputView != moreActionView ? moreActionView : nil
+        
+//
+        inputTextView.becomeFirstResponder()
+        inputTextView.selectedTextRange = range
+    }
+    
     
 }
 

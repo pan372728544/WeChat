@@ -49,10 +49,7 @@ extension PageCollectionViewLayout {
             if i != 0 {
                 self.rows = 2
                 self.cols = 4
-            } else {
-                self.rows = 3
-                self.cols = 8
-            }
+            } 
             // 0.计算item宽度&高度
             let itemW = (collectionView!.bounds.width - sectionInset.left - sectionInset.right - minimumInteritemSpacing * CGFloat(cols - 1)) / CGFloat(cols)
             let itemH = (collectionView!.bounds.height - sectionInset.top - sectionInset.bottom - minimumLineSpacing * CGFloat(rows - 1)) / CGFloat(rows)

@@ -26,8 +26,8 @@ let kEmoticonAddWidth: CGFloat = 55
 let kEmoticonCols : Int = 4
 let kEmoticonRows : Int = 2
 
-let kEmoticonDefaultCols : Int = 8
-let kEmoticonDefaultRows : Int = 3
+var kEmoticonDefaultCols : Int = 8
+var kEmoticonDefaultRows : Int = 3
 
 class PageCollectionView: UIView {
     
@@ -48,6 +48,8 @@ class PageCollectionView: UIView {
     fileprivate var shadowView : UIView!
     
     fileprivate var buttonSetting : UIButton!
+    
+    fileprivate var  buttonAdd : UIButton!
     
     init(frame: CGRect, titles : [String], style : TitleStyle, isTitleInTop : Bool, layout : PageCollectionViewLayout) {
         self.titles = titles
@@ -114,7 +116,7 @@ extension PageCollectionView {
         effectView.contentView.addSubview(collectionView)
         
 
-        let buttonAdd = UIButton(frame: CGRect(x: 0, y: titleY, width: kEmoticonAddWidth, height: style.titleHeight))
+        buttonAdd = UIButton(frame: CGRect(x: 0, y: titleY, width: kEmoticonAddWidth, height: style.titleHeight))
         
         
         var imgV = UIImage.init(named: "watch-settings-add")
@@ -158,6 +160,25 @@ extension PageCollectionView {
         safeBottomView = UIView(frame: CGRect(x: 0, y: bounds.height-Bottom_H, width: Screen_H, height: Bottom_H))
         safeBottomView.backgroundColor = UIColor.white
         effectView.contentView.addSubview(safeBottomView)
+        
+        
+        
+        
+        if style.type == .moreAction {
+            kEmoticonDefaultCols = 4
+            kEmoticonDefaultRows = 2
+            buttonAdd.isHidden = true
+            shadowView.isHidden = true
+            safeBottomView.backgroundColor = UIColor.clear
+            
+        } else {
+            kEmoticonDefaultCols = 8
+            kEmoticonDefaultRows = 3
+            buttonAdd.isHidden = false
+            shadowView.isHidden = false
+            safeBottomView.backgroundColor = UIColor.white
+        }
+        
     }
 }
 

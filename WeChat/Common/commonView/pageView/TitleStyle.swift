@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum TitleType {
+    case emoticon,moreAction
+}
+
 class TitleStyle {
     /// 是否是滚动的Title
     var isScrollEnable : Bool = false
@@ -28,7 +32,7 @@ class TitleStyle {
     var bottomLineColor : UIColor = UIColor.orange
     /// 底部滚动条的高度
     var bottomLineH : CGFloat = 2
-    
+
     
     /// 是否进行缩放
     var isNeedScale : Bool = false
@@ -45,4 +49,8 @@ class TitleStyle {
     var coverH : CGFloat = 25
     /// 设置圆角大小
     var coverRadius : CGFloat = 12
+    
+    /// 标题视图类型
+    var type : TitleType = .emoticon
+    
 }
