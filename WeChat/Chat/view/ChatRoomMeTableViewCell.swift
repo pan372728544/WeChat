@@ -25,6 +25,10 @@ class ChatRoomMeTableViewCell: UITableViewCell {
     // 发送失败图片
     internal var imgFaild: UIImageView = UIImageView()
     
+    
+    // 图片
+    internal var imageContent: UIImageView = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -61,23 +65,17 @@ class ChatRoomMeTableViewCell: UITableViewCell {
             
             nameLabel.text = textMes?.senderName
             nameLabel.frame.origin.y = imgTou.frame.origin.y
-//            contentLabel.text = textMes?.text
             
             contentLabel.attributedText = AttrStringGenerator.generateEmoticon((textMes?.text)!)
             
             let widthCell = IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon((textMes?.text)!)).width
             
             let heightCell = IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon((textMes?.text)!)).height
-            
-//            contentLabel.frame.size.height = heightCell
-//            contentLabel.frame.size.width = widthCell
-//
-            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell+4, height: heightCell)
-            
-            
-//            contentLabel.frame = CGRect(x: Screen_W-150-widthCell, y: imgTou.frame.origin.y+10+1.5 , width: widthCell+3, height: heightCell)
+
+            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell, height: heightCell)
+
             contentLabel.textAlignment = .left
-//            contentLabel.backgroundColor = UIColor.randomColor()
+
             
             let oriImg = UIImage.init(named: "ChatRoom_Bubble_Text_Sender_Green")
             
@@ -89,14 +87,82 @@ class ChatRoomMeTableViewCell: UITableViewCell {
             imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 18  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 22)
             imgPao.image = resiImg
             
-//            if  heightCell > 20 {
-//                contentLabel.textAlignment = NSTextAlignment.left
-//            } else {
-//                contentLabel.textAlignment = NSTextAlignment.right
-//            }
+            if  heightCell > 20 {
+                contentLabel.textAlignment = NSTextAlignment.left
+            } else {
+                contentLabel.textAlignment = NSTextAlignment.right
+            }
             
             imgFaild.frame = CGRect(x: imgPao.frame.origin.x-25, y: imgPao.centerY-12, width: 20, height: 20)
             imgFaild.isHidden = textMes?.status == "true"
+            
+            
+            if textMes?.type == "picture" {
+                imgPao.isHidden = true
+                contentLabel.isHidden = true
+                imageContent.isHidden = false
+                
+                
+                let image = UIImage(data: (textMes?.picture)!)
+                
+                let w : CGFloat = (image?.size.width)!
+                let h : CGFloat  =  (image?.size.height)!
+                imageContent.frame = CGRect(x: Screen_W-15-40-10-w-10+4, y: imgTou.frame.origin.y , width: w, height: h)
+                
+                
+                // 检查图片类型
+                let type  =   textMes?.picture!.kf.imageFormat
+                
+                if type == .GIF {
+                    // 加载Gif图片, 并且转成Data类型,"my.gif就是gif图片"
+                    //                guard let path = Bundle.main.path(forResource: "ali_5.gif", ofType: nil) else { return }
+                    //                guard let data = NSData(contentsOfFile: path) else { return }
+                    
+                    // 从data中读取数据: 将data转成CGImageSource对象
+                    guard let imageSource = CGImageSourceCreateWithData(textMes?.picture! as! CFData, nil) else { return }
+                    let imageCount = CGImageSourceGetCount(imageSource)
+                    
+                    // 便利所有的图片
+                    var images = [UIImage]()
+                    var totalDuration : TimeInterval = 0
+                    for i in 0..<imageCount {
+                        // .取出图片
+                        guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+                        let image = UIImage(cgImage: cgImage)
+                        if i == 0 {
+                            imageContent.image = image
+                        }
+                        images.append(image)
+                        
+                        // 取出持续的时间
+                        guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+                        guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+                        guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+                        totalDuration += frameDuration.doubleValue
+                    }
+                    
+                    // 设置imageView的属性
+                    imageContent.animationImages = images
+                    imageContent.animationDuration = totalDuration
+                    imageContent.animationRepeatCount = 0
+                    
+                    imageContent.startAnimating()
+                    
+                } else {
+                    imageContent.image = image
+                }
+                
+                
+                
+
+                
+            } else {
+                imgPao.isHidden = false
+                contentLabel.isHidden = false
+                imageContent.isHidden = true
+            }
+            
+            
             
         }
         
@@ -148,8 +214,13 @@ extension ChatRoomMeTableViewCell {
         contentLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 16)
-//        contentLabel.textAlignment = NSTextAlignment.right
         self.contentView.addSubview(contentLabel)
+        
+        
+        imageContent.frame =  CGRect(x: 0, y: 0, width: 0, height: 0)
+        imageContent.contentMode = .scaleToFill
+        self.contentView.addSubview(imageContent)
+        
         
     }
     

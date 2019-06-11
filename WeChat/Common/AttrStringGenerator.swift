@@ -57,6 +57,7 @@ class AttrStringGenerator: NSObject {
             chatMsgMAttr.replaceCharacters(in: result.range, with: imageAttrStr)
         }
         
+        chatMsgMAttr.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)], range: NSRange(location: 0, length: chatMsgMAttr.length))
         return chatMsgMAttr
     }
     

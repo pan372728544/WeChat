@@ -41,14 +41,14 @@ class ChatRoomViewModel: NSObject {
     // 模型数组
     fileprivate var msgArray : [DBMessage] = [DBMessage]()
     // 每次加载多少条数据
-    private let page :  Int = 10
+    fileprivate let page :  Int = 10
     
     // 当前页数
-    private var currentPage :  Int = 1
+    fileprivate var currentPage :  Int = 1
     // 最大页数
-    private var maxCount :  Int = 0
+    fileprivate var maxCount :  Int = 0
     
-    private var lastText : String = ""
+    fileprivate var lastText : String = ""
     
     // 加载视图高度
      let loadingH : CGFloat =  44
@@ -57,7 +57,7 @@ class ChatRoomViewModel: NSObject {
     
     
     fileprivate var actionBarView : ChatActionBarView!
-    
+    fileprivate var isChangeKeyBoard : Bool = false
     // 下拉刷新
     fileprivate var indicatorView : UIActivityIndicatorView = {
         
@@ -135,8 +135,24 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let msg : DBMessage = msgArray[indexPath.row]
+        
+        
         if msg.updatedAt != 0 {
+            
+            if msg.type == "picture" {
+                let image = UIImage(data: (msg.picture)!)
+
+                let h : CGFloat  =  (image?.size.height)!
+                return h + 45 + 40
+            }
+            
             return IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon(msg.text)).height + 45 + 40
+        }
+        if msg.type == "picture" {
+            let image = UIImage(data: (msg.picture)!)
+            
+            let h : CGFloat  =  (image?.size.height)!
+            return h  + 45
         }
         return IMDataManager.share.getChatTextSize(text:  AttrStringGenerator.generateEmoticon(msg.text)).height + 45
     }
@@ -223,8 +239,9 @@ extension ChatRoomViewModel {
         
         
         // 输入框视图
-        actionBarView = ChatActionBarView(frame: CGRect(x: 0, y: Screen_H-Bottom_H-kChatActionBarOriginalHeight, width: Screen_H, height: kChatActionBarOriginalHeight+Bottom_H))
+        actionBarView = ChatActionBarView(frame: CGRect(x: 0, y: Screen_H-Bottom_H-kChatActionBarOriginalHeight, width: Screen_H, height: kChatActionBarOriginalHeight+Bottom_H+kChatActionBarKeyBoardBackHeight))
         
+        actionBarView.delegate = self
         actionBarView.actionBarViewClickBlock = { (text,type) in
             
             self.sendMessage(type: type,send: text)
@@ -270,6 +287,11 @@ extension ChatRoomViewModel {
     @objc func keyBoardWillShow(_ notification:Notification){
         
 //        print("keyBoardWillShow")
+        
+        if isChangeKeyBoard {
+//            return
+        }
+        
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
@@ -293,6 +315,10 @@ extension ChatRoomViewModel {
     
     @objc func keyBoardWillHide(_ notification:Notification){
 //        print("keyBoardWillHide")
+        if isChangeKeyBoard {
+            isChangeKeyBoard = false
+            return
+        }
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         
@@ -330,27 +356,13 @@ extension ChatRoomViewModel {
     // 发送消息
     func sendMessage(type: MessageType,send: Any)  {
         
-        
-        
-        let attr = AttrStringGenerator.generateEmoticon(send as! String)
-        
-        
-        
-        let option = NSStringDrawingOptions.usesLineFragmentOrigin
-        
-        let rect:CGRect = attr.boundingRect(with: CGSize(width: Screen_W - 140, height: CGFloat(MAXFLOAT)), options: option, context: nil)
-        
-        
-        print("\(rect.size)=====")
-        
-        
         var cupid : (Result,Data, ProtoMessage.Builder)?
         
         switch type {
         case .text:
-            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: send as! String ?? "", picture: nil, video: nil, audio: nil, file: nil)
+            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: send as? String ?? "", picture: nil, video: nil, audio: nil, file: nil)
         case .picture:
-            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: nil, picture: UIImage(), video: nil, audio: nil, file: nil)
+            cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: nil, picture: send as? Data, video: nil, audio: nil, file: nil)
         case .video:
             cupid =   socketClient.sendMessage(recipient: self.dbUser!, text: nil, picture: nil, video: nil, audio: nil, file: nil)
         case .file:
@@ -439,4 +451,44 @@ extension ChatRoomViewModel {
     
     
     
+}
+
+extension ChatRoomViewModel: ChatActionBarViewDelegate {
+    func chatActionBarEmotionKeyboardClickType(type: ActionBarClickItemType, text: String?) {
+        switch type {
+        case .EmotionImage:
+            print("发送表情图片")
+            
+            let file = Bundle.main.path(forResource: text!, ofType: "gif")
+            
+            let url = URL.init(fileURLWithPath: file!)
+            
+            let data = try! Data(contentsOf: url)
+            sendMessage(type: .picture, send: data as Any)
+            
+        case .MorePhoto:
+            print("发送图片")
+        default:
+            print(" ")
+        }
+    }
+
+    
+    func chatActionBarRecordVoiceHideKeyboard(chatBtn: ChatButton) {
+        
+    }
+    
+    func chatActionBarShowEmotionKeyboard(chatBtn: ChatButton) {
+        isChangeKeyBoard = chatBtn.showTypingKeyboard
+        if chatBtn.isSelected {
+            isChangeKeyBoard = chatBtn.isSelected
+        }
+    }
+    
+    func chatActionBarShowMoreActionKeyboard(chatBtn: ChatButton) {
+        
+    }
+    
+    
+
 }

@@ -26,7 +26,7 @@ class MoreActionViewCell: UICollectionViewCell {
         
         didSet {
             
-            let width : CGFloat = 70
+            let width : CGFloat = 60
             iconImageView.frame =  CGRect(x: (self.width-width)/2, y: 0, width: width, height: width)
             iconImageView.backgroundColor = UIColor.white
             iconImageView.image = UIImage(named: emoticon!.image)

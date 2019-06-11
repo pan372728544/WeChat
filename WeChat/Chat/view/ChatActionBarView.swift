@@ -9,11 +9,17 @@
 import UIKit
 
 
+enum ActionBarClickItemType {
+    case EmotionImage,MorePhoto,MoreVideo,MoreCall,MoerLocation
+}
+
 
 let kChatActionBarOriginalHeight: CGFloat = 55      //ActionBar orginal height
 let kChatActionBarTextViewMaxHeight: CGFloat = 120   //Expandable textview max height
 let kChatActionBarBtnHeight: CGFloat = 35
 let kChatActionBarMargin: CGFloat = 8
+
+let kChatActionBarKeyBoardBackHeight: CGFloat = 250      //ActionBar orginal height
 /**
  *  表情按钮和分享按钮来控制键盘位置
  */
@@ -22,23 +28,27 @@ protocol ChatActionBarViewDelegate: class {
      不显示任何自定义键盘，并且回调中处理键盘frame
      当唤醒的自定义键盘时候，这时候点击切换录音 button。需要隐藏掉
      */
-    func chatActionBarRecordVoiceHideKeyboard()
+    func chatActionBarRecordVoiceHideKeyboard(chatBtn: ChatButton)
     
     /**
      显示表情键盘，并且处理键盘高度
      */
-    func chatActionBarShowEmotionKeyboard()
+    func chatActionBarShowEmotionKeyboard(chatBtn: ChatButton)
     
     /**
-     显示分享键盘，并且处理键盘高度
+     显示更多键盘，并且处理键盘高度
      */
-    func chatActionBarShowShareKeyboard()
+    func chatActionBarShowMoreActionKeyboard(chatBtn: ChatButton)
+    
+    
+    
+    func chatActionBarEmotionKeyboardClickType(type: ActionBarClickItemType,text: String?)
 }
 
 class ChatActionBarView: UIView {
 
     enum ChatKeyboardType: Int {
-        case `default`, text, emotion, share
+        case `default`, text, emotion, more
     }
     
 
@@ -47,9 +57,9 @@ class ChatActionBarView: UIView {
     var inputTextViewCurrentHeight: CGFloat = kChatActionBarOriginalHeight
     
     fileprivate  var  effectView : UIVisualEffectView?
-        fileprivate var dbUser :DBUser?
+    fileprivate var dbUser :DBUser?
     
-        var actionBarViewClickBlock : ((String,MessageType) -> Void)?
+    var actionBarViewClickBlock : ((String,MessageType) -> Void)?
     fileprivate lazy var inputTextView: UITextView = {
         
         let inputTextView = UITextView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -60,7 +70,7 @@ class ChatActionBarView: UIView {
         inputTextView.layer.cornerRadius = 5.0
         inputTextView.scrollsToTop = false
         inputTextView.textContainerInset =  UIEdgeInsets(top: 7, left: 5, bottom: 5, right: 5)
-
+        
         inputTextView.backgroundColor = UIColor.white
         inputTextView.returnKeyType = .send
         inputTextView.isHidden = false
@@ -69,7 +79,7 @@ class ChatActionBarView: UIView {
         inputTextView.scrollsToTop = false
         inputTextView.delegate = self
         return inputTextView
-        }()
+    }()
     
     fileprivate lazy var voiceButton: ChatButton = {
 
@@ -81,7 +91,6 @@ class ChatActionBarView: UIView {
         var imgV2 = UIImage.init(named: "ToolViewKeyboard")
         imgV2 = imgV2?.withRenderingMode(.alwaysTemplate)
         voiceBtn.setBackgroundImage(imgV2, for: .selected)
-        voiceBtn.showTypingKeyboard = false
         return voiceBtn
     }()
       fileprivate lazy var emotionButton: ChatButton = {
@@ -96,7 +105,6 @@ class ChatActionBarView: UIView {
         var imgB = UIImage.init(named: "ToolViewKeyboard")
         imgB = imgB?.withRenderingMode(.alwaysTemplate)
         emotionBtn.setBackgroundImage(imgB, for: .selected)
-        emotionBtn.showTypingKeyboard = false
         emotionBtn.addTarget(self, action: #selector(emotionBtnClick(_:)), for: UIControl.Event.touchUpInside)
         return emotionBtn
         }()
@@ -108,7 +116,6 @@ class ChatActionBarView: UIView {
         imgA = imgA?.withRenderingMode(.alwaysTemplate)
         moreButton.tintColor = UIColor.black
         moreButton.setBackgroundImage(imgA, for: .normal)
-        moreButton.showTypingKeyboard = false
         moreButton.addTarget(self, action: #selector(moreBtnClick(_:)), for: UIControl.Event.touchUpInside)
         
         return moreButton
@@ -129,13 +136,13 @@ class ChatActionBarView: UIView {
         return recordButton
         }()
     fileprivate lazy var emoticonView : EmoticonView? = {
-        let emoticonView  = EmoticonView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
+        let emoticonView  = EmoticonView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: kChatActionBarKeyBoardBackHeight+Bottom_H))
         return emoticonView
     }()
     
     
     fileprivate lazy var moreActionView : MoreActionView? = {
-        let    moreActionView  = MoreActionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 250+Bottom_H))
+        let    moreActionView  = MoreActionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: kChatActionBarKeyBoardBackHeight+Bottom_H))
         return moreActionView
     }()
     
@@ -157,7 +164,7 @@ class ChatActionBarView: UIView {
         // 添加毛玻璃效果
         let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
         effectView = UIVisualEffectView(effect: blur)
-        effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: kChatActionBarOriginalHeight+Bottom_H)
+        effectView?.frame = CGRect(x: 0, y: 0, width: Screen_W, height: kChatActionBarOriginalHeight+Bottom_H+kChatActionBarKeyBoardBackHeight)
         effectView?.backgroundColor = UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 1.0
         effectView?.isUserInteractionEnabled = true
@@ -188,16 +195,26 @@ class ChatActionBarView: UIView {
     
         
         
-        emoticonView?.emoticonClickCallback = {[weak self] emoticon in
-            // 1.判断是否是删除按钮
-            if emoticon.text == "compose_emotion_delete" {
-                self?.inputTextView.deleteBackward()
-                return
-            }
+        emoticonView?.emoticonClickCallback = {[weak self] (emoticon,indexPath) in
             
-            // 2.获取光标位置
-            guard let range = self?.inputTextView.selectedTextRange else { return }
-            self?.inputTextView.replace(range, withText: emoticon.text)
+            if indexPath.section == 0 {
+                
+                // 1.判断是否是删除按钮
+                if emoticon.text == "compose_emotion_delete" {
+                    self?.inputTextView.deleteBackward()
+                    return
+                }
+                
+                // 2.获取光标位置
+                guard let range = self?.inputTextView.selectedTextRange else { return }
+                self?.inputTextView.replace(range, withText: emoticon.text)
+                
+            } else {
+
+                self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .EmotionImage, text: emoticon.image)
+                print("点击了图片表情：\(emoticon.text)")
+            }
+          
         }
         
         emoticonView?.emoticonClickSend = {
@@ -253,29 +270,48 @@ class ChatActionBarView: UIView {
 
 extension ChatActionBarView {
     
-    @objc func emotionBtnClick(_ btn: UIButton) {
+    @objc func emotionBtnClick(_ btn: ChatButton) {
     
         btn.isSelected = !btn.isSelected
+        
+        btn.showTypingKeyboard = (inputTextView.inputView != nil)
+        delegate?.chatActionBarShowEmotionKeyboard(chatBtn: btn)
         
         // 切换键盘
         let range = inputTextView.selectedTextRange
+
+
         inputTextView.resignFirstResponder()
-        inputTextView.inputView = inputTextView.inputView == nil ? emoticonView : nil
-        inputTextView.becomeFirstResponder()
+
+        DispatchQueue.main.asyncAfter(wallDeadline: .now()+0.1) {
+            self.inputTextView.inputView = self.inputTextView.inputView == nil ? self.emoticonView : nil
+            self.inputTextView.becomeFirstResponder()
+
+            btn.showTypingKeyboard = false
+        }
+
+        
+
         inputTextView.selectedTextRange = range
     }
     
-    @objc func moreBtnClick(_ btn: UIButton) {
+    @objc func moreBtnClick(_ btn: ChatButton) {
         
         btn.isSelected = !btn.isSelected
         
+        btn.showTypingKeyboard = (inputTextView.inputView != nil)
+        delegate?.chatActionBarShowMoreActionKeyboard(chatBtn: btn)
         // 切换键盘
         let range = inputTextView.selectedTextRange
         inputTextView.resignFirstResponder()
         inputTextView.inputView = inputTextView.inputView != moreActionView ? moreActionView : nil
         
-//
-        inputTextView.becomeFirstResponder()
+        //
+        DispatchQueue.main.asyncAfter(wallDeadline: .now()+0.1) {
+            
+            self.inputTextView.becomeFirstResponder()
+            btn.showTypingKeyboard = false
+        }
         inputTextView.selectedTextRange = range
     }
     

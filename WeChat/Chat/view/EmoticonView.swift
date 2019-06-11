@@ -12,7 +12,7 @@ private let kEmoticonCellID = "kEmoticonCellID"
 
 class EmoticonView: UIView {
     
-    var emoticonClickCallback : ((Emoticon) -> Void)?
+    var emoticonClickCallback : ((Emoticon,IndexPath) -> Void)?
     
     var emoticonClickSend : (() -> Void)?
     
@@ -79,9 +79,10 @@ extension EmoticonView : PageCollectionViewDataSource {
 
 extension EmoticonView : PageCollectionViewDelegate {
     func pageCollectionView(_ pageCollectionView: PageCollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let emoticon = EmoticonViewModel.share.packages[indexPath.section].emoticons[indexPath.item]
         if let emoticonClickCallback = emoticonClickCallback {
-            emoticonClickCallback(emoticon)
+            emoticonClickCallback(emoticon,indexPath)
         }
     }
     

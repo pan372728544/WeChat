@@ -20,6 +20,9 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
     // 气泡
     internal var imgPao: UIImageView = UIImageView()
     
+    // 图片
+    internal var imageContent: UIImageView = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -77,6 +80,75 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
             
             
             contentLabel.frame.size.height = heightCell
+            
+            
+            
+            
+            
+            if textMes?.type == "picture" {
+                imgPao.isHidden = true
+                contentLabel.isHidden = true
+                imageContent.isHidden = false
+                
+                let image = UIImage(data: (textMes?.picture)!)
+                let w : CGFloat = (image?.size.width)!
+                let h : CGFloat  =  (image?.size.height)!
+                imageContent.frame = CGRect(x: 15 + 40 + 10 + 10 - 2, y: imgTou.frame.origin.y , width: w, height: h)
+                
+                
+                // 检查图片类型
+                let type  =   textMes?.picture!.kf.imageFormat
+                
+                if type == .GIF {
+    
+                    guard let imageSource = CGImageSourceCreateWithData(textMes?.picture! as! CFData, nil) else { return }
+                    let imageCount = CGImageSourceGetCount(imageSource)
+                    
+                    // 便利所有的图片
+                    var images = [UIImage]()
+                    var totalDuration : TimeInterval = 0
+                    for i in 0..<imageCount {
+                        // .取出图片
+                        guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+                        let image = UIImage(cgImage: cgImage)
+                        if i == 0 {
+                            imageContent.image = image
+                        }
+                        images.append(image)
+                        
+                        // 取出持续的时间
+                        guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+                        guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+                        guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+                        totalDuration += frameDuration.doubleValue
+                    }
+                    
+                    // 设置imageView的属性
+                    imageContent.animationImages = images
+                    imageContent.animationDuration = totalDuration
+                    imageContent.animationRepeatCount = 0
+                    
+                    imageContent.startAnimating()
+                    
+                } else {
+                    imageContent.image = image
+                }
+                
+                
+                
+                
+                
+            } else {
+                imgPao.isHidden = false
+                contentLabel.isHidden = false
+                imageContent.isHidden = true
+            }
+            
+            
+            
+            
+            
+            
         }
     }
     
@@ -114,6 +186,10 @@ extension ChatRoomOtherTableViewCell {
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(contentLabel)
+        
+        imageContent.frame =  CGRect(x: 0, y: 0, width: 0, height: 0)
+        imageContent.contentMode = .scaleToFill
+        self.contentView.addSubview(imageContent)
         
     }
     

@@ -177,7 +177,7 @@ extension ZJSocket {
     }
     
     // 发送消息
-    func sendMessage(recipient: DBUser, text: String?, picture: UIImage?, video: URL?, audio: String?,file: String?)  -> (re: Result,da: Data,ch: ProtoMessage.Builder){
+    func sendMessage(recipient: DBUser, text: String?, picture: Data?, video: URL?, audio: String?,file: String?)  -> (re: Result,da: Data,ch: ProtoMessage.Builder){
         // 获取当前用户
         let userInfo = getUserInfo()
         
@@ -214,7 +214,7 @@ extension ZJSocket {
         } else if (picture != nil) {
             typeNew = "picture"
             textNew = "[图片]"
-            message.picture = (picture?.pngData())!
+            message.picture = (picture)!
         } else if (video != nil) {
             typeNew = "video"
             textNew = "[视频]"

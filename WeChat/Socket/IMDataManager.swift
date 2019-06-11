@@ -353,8 +353,8 @@ extension IMDataManager {
     
     
     func getChatTextSize(text : NSAttributedString) -> CGSize {
-//        let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)]
-        let option = NSStringDrawingOptions.usesFontLeading
+
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect:CGRect = text.boundingRect(with: CGSize(width: Screen_W - 140, height: CGFloat(MAXFLOAT)), options: option, context: nil)
         
         return rect.size

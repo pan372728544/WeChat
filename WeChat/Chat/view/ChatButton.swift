@@ -14,7 +14,7 @@ class ChatButton: UIButton {
     
     
     override init(frame: CGRect) {
-        self.showTypingKeyboard = true
+        self.showTypingKeyboard = false
         super.init(frame: frame)
     }
     

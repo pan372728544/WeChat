@@ -37,8 +37,6 @@
 		38278D8B228BE51900884EB0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278D8A228BE51900884EB0 /* PhoneTextField.swift */; };
 		3836BD9A22A666A90015B733 /* ChatActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BD9922A666A90015B733 /* ChatActionBarView.swift */; };
 		3836BD9C22A66A1F0015B733 /* ChatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BD9B22A66A1F0015B733 /* ChatButton.swift */; };
-		3836BD9E22A6795C0015B733 /* ChatShareMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BD9D22A6795C0015B733 /* ChatShareMoreView.swift */; };
-		3836BDA022A67F380015B733 /* ChatShareMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BD9F22A67F380015B733 /* ChatShareMoreCollectionViewCell.swift */; };
 		3836BDA222A68B880015B733 /* FullyHorizontalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BDA122A68B880015B733 /* FullyHorizontalFlowLayout.swift */; };
 		3836BDA522A74AE10015B733 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BDA422A74AE10015B733 /* PageView.swift */; };
 		3836BDA722A74B060015B733 /* TitleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836BDA622A74B060015B733 /* TitleStyle.swift */; };
@@ -253,8 +251,6 @@
 		38278D8A228BE51900884EB0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		3836BD9922A666A90015B733 /* ChatActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatActionBarView.swift; sourceTree = "<group>"; };
 		3836BD9B22A66A1F0015B733 /* ChatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatButton.swift; sourceTree = "<group>"; };
-		3836BD9D22A6795C0015B733 /* ChatShareMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatShareMoreView.swift; sourceTree = "<group>"; };
-		3836BD9F22A67F380015B733 /* ChatShareMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatShareMoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		3836BDA122A68B880015B733 /* FullyHorizontalFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullyHorizontalFlowLayout.swift; sourceTree = "<group>"; };
 		3836BDA422A74AE10015B733 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		3836BDA622A74B060015B733 /* TitleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStyle.swift; sourceTree = "<group>"; };
@@ -869,8 +865,6 @@
 				3838D49622A90CED008FFC5A /* MoreActionView.swift */,
 				3838D49822A90D29008FFC5A /* MoreActionViewCell.swift */,
 				3836BD9B22A66A1F0015B733 /* ChatButton.swift */,
-				3836BD9D22A6795C0015B733 /* ChatShareMoreView.swift */,
-				3836BD9F22A67F380015B733 /* ChatShareMoreCollectionViewCell.swift */,
 				3836BDA122A68B880015B733 /* FullyHorizontalFlowLayout.swift */,
 			);
 			path = view;
@@ -1308,7 +1302,6 @@
 				38EDD79D228E462700E9935A /* IndexView.swift in Sources */,
 				38EDD7D3228E74A300E9935A /* Result.swift in Sources */,
 				38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */,
-				3836BD9E22A6795C0015B733 /* ChatShareMoreView.swift in Sources */,
 				38D5A15B22955E19002BBBA7 /* ContactModel.swift in Sources */,
 				38EDD7D2228E74A300E9935A /* TCPClient.swift in Sources */,
 				3836BE9122A792160015B733 /* EmoticonPackage.swift in Sources */,
@@ -1330,7 +1323,6 @@
 				38278C802285542F00884EB0 /* AppDelegate.swift in Sources */,
 				3836BDB122A74CF00015B733 /* EmoticonView.swift in Sources */,
 				3836BDA922A74B190015B733 /* TitleView.swift in Sources */,
-				3836BDA022A67F380015B733 /* ChatShareMoreCollectionViewCell.swift in Sources */,
 				3838D47A22A89B28008FFC5A /* AttrStringGenerator.swift in Sources */,
 				38EDD778228C2CAD00E9935A /* MeHeaderTableViewCell.swift in Sources */,
 				38AA028122A0E0FE00755C8D /* NextPushId.swift in Sources */,
