@@ -233,31 +233,30 @@ class ChatActionBarView: UIView {
   
             switch emoticon.text {
             case "照片":
-                          self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MorePhoto, text: nil)
-                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MorePhoto, text: nil)
             case "拍摄":
-                          self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MoreCamera, text: nil)
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MoreCamera, text: nil)
+                
             case "视频通话":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "位置":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "红包":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "转账":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "语音输入":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "收藏":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "个人名片":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "文件":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "卡券":
-                    Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
+                Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             default:
-                    Toast.showCenterWithText(text: "未知")
+                Toast.showCenterWithText(text: "未知")
             }
 
 

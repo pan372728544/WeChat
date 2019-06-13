@@ -360,7 +360,61 @@ extension IMDataManager {
         return rect.size
     }
     
+    
+    // 传入图片计算图片的宽度高度
+    func getChatImageWH(image : UIImage) -> (CGFloat,CGFloat) {
+        var w : CGFloat = (image.size.width)
+        var h : CGFloat  =  (image.size.height)
+        if w >= MaxPhotoWH {
+            
+            h = MaxPhotoWH*h/w
+            w = MaxPhotoWH
+            
+            if h >= MaxPhotoWH {
+                w = w*MaxPhotoWH/h
+                h = MaxPhotoWH
+            }
+        }
+        return (w,h)
+    }
 
+    
+    // 传入图片计算图片的宽度高度
+    func setImageWithGif(imageData : Data,imageContent: UIImageView) {
+        // 加载Gif图片, 并且转成Data类型,"my.gif就是gif图片"
+        //                guard let path = Bundle.main.path(forResource: "ali_5.gif", ofType: nil) else { return }
+        //                guard let data = NSData(contentsOfFile: path) else { return }
+        
+        // 从data中读取数据: 将data转成CGImageSource对象
+        guard let imageSource = CGImageSourceCreateWithData(imageData as! CFData, nil) else { return }
+        let imageCount = CGImageSourceGetCount(imageSource)
+        
+        // 便利所有的图片
+        var images = [UIImage]()
+        var totalDuration : TimeInterval = 0
+        for i in 0..<imageCount {
+            // .取出图片
+            guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+            let image = UIImage(cgImage: cgImage)
+            if i == 0 {
+                imageContent.image = image
+            }
+            images.append(image)
+            
+            // 取出持续的时间
+            guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+            guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+            guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+            totalDuration += frameDuration.doubleValue
+        }
+        
+        // 设置imageView的属性
+        imageContent.animationImages = images
+        imageContent.animationDuration = totalDuration
+        imageContent.animationRepeatCount = 0
+        
+        imageContent.startAnimating()
+    }
 }
 
 

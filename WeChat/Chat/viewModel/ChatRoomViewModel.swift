@@ -141,16 +141,9 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
             
             if msg.type == "picture" {
                 let image = UIImage(data: (msg.picture)!)
-
-                var w : CGFloat = (image?.size.width)!
-                var h : CGFloat  =  (image?.size.height)!
                 
-                if w >= 180 {
-                    
-                    h = 180*h/w
-                    w = 180
-                }
-                return h + 45 + 40
+                let (_,imageH) = IMDataManager.share.getChatImageWH(image: image!)
+                return imageH + 45 + 40
             }
             
             return IMDataManager.share.getChatTextSize(text: AttrStringGenerator.generateEmoticon(msg.text)).height + 45 + 40
@@ -158,15 +151,8 @@ extension ChatRoomViewModel : UITableViewDelegate,UITableViewDataSource {
         if msg.type == "picture" {
             let image = UIImage(data: (msg.picture)!)
             
-            var w : CGFloat = (image?.size.width)!
-            var h : CGFloat  =  (image?.size.height)!
-            
-            if w >= 180 {
-                
-                h = 180*h/w
-                w = 180
-            }
-            return h  + 45
+            let (_,imageH) = IMDataManager.share.getChatImageWH(image: image!)
+            return imageH + 45
         }
         return IMDataManager.share.getChatTextSize(text:  AttrStringGenerator.generateEmoticon(msg.text)).height + 45
     }
@@ -483,7 +469,7 @@ extension ChatRoomViewModel: ChatActionBarViewDelegate {
         case .MorePhoto:
             print("发送图片")
             self.photoEvent()
-        case .MoreVideo:
+        case .MoreCamera:
             print("发送图片")
             self.cameraEvent()
         default:
@@ -534,8 +520,10 @@ extension ChatRoomViewModel:UIImagePickerControllerDelegate,UINavigationControll
         let imagePicker = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
         
+        let newImage =  imagePicker.fixOrientation()
+        
         self.vc?.dismiss(animated: true, completion: {
-            let data = imagePicker.pngData()
+            let data = newImage.pngData()
             
             self.sendMessage(type: .picture, send: data as Any)
         })

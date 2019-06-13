@@ -78,12 +78,7 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
             imgPao.frame = CGRect(x: 15 + 40 + 5  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 25)
             imgPao.image = resiImg
             
-            
             contentLabel.frame.size.height = heightCell
-            
-            
-            
-            
             
             if textMes?.type == "picture" {
                 imgPao.isHidden = true
@@ -91,57 +86,10 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
                 imageContent.isHidden = false
                 
                 let image = UIImage(data: (textMes?.picture)!)
-                var w : CGFloat = (image?.size.width)!
-                var h : CGFloat  =  (image?.size.height)!
+                let (imageW,imageH) = IMDataManager.share.getChatImageWH(image: image!)
+                imageContent.frame = CGRect(x: 15 + 40 + 10 + 10 - 2, y: imgTou.frame.origin.y , width: imageW, height: imageH)
                 
-                if w >= 180 {
-                    
-                    h = 180*h/w
-                    w = 180
-                }
-                imageContent.frame = CGRect(x: 15 + 40 + 10 + 10 - 2, y: imgTou.frame.origin.y , width: w, height: h)
-                
-                
-                // 检查图片类型
-                let type  =   textMes?.picture!.kf.imageFormat
-                
-                if type == .GIF {
-    
-                    guard let imageSource = CGImageSourceCreateWithData(textMes?.picture! as! CFData, nil) else { return }
-                    let imageCount = CGImageSourceGetCount(imageSource)
-                    
-                    // 便利所有的图片
-                    var images = [UIImage]()
-                    var totalDuration : TimeInterval = 0
-                    for i in 0..<imageCount {
-                        // .取出图片
-                        guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
-                        let image = UIImage(cgImage: cgImage)
-                        if i == 0 {
-                            imageContent.image = image
-                        }
-                        images.append(image)
-                        
-                        // 取出持续的时间
-                        guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
-                        guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
-                        guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
-                        totalDuration += frameDuration.doubleValue
-                    }
-                    
-                    // 设置imageView的属性
-                    imageContent.animationImages = images
-                    imageContent.animationDuration = totalDuration
-                    imageContent.animationRepeatCount = 0
-                    
-                    imageContent.startAnimating()
-                    
-                } else {
-                    imageContent.image = image
-                }
-                
-                
-                
+                IMDataManager.share.setImageWithGif(imageData: (textMes?.picture!)!, imageContent: imageContent)
                 
                 
             } else {
@@ -149,12 +97,7 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
                 contentLabel.isHidden = false
                 imageContent.isHidden = true
             }
-            
-            
-            
-            
-            
-            
+ 
         }
     }
     
@@ -195,6 +138,8 @@ extension ChatRoomOtherTableViewCell {
         
         imageContent.frame =  CGRect(x: 0, y: 0, width: 0, height: 0)
         imageContent.contentMode = .scaleToFill
+        imageContent.layer.cornerRadius = 5
+        imageContent.layer.masksToBounds = true
         self.contentView.addSubview(imageContent)
         
     }

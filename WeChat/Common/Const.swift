@@ -33,3 +33,7 @@ let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.49", port: 9999)
 let MeCellH : CGFloat = 56
 
 let ContactCellH : CGFloat = 56
+
+
+/// 聊天图片最大显示宽度和高度
+let MaxPhotoWH : CGFloat = 138
