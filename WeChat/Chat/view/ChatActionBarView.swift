@@ -10,7 +10,7 @@ import UIKit
 
 
 enum ActionBarClickItemType {
-    case EmotionImage,MorePhoto,MoreVideo,MoreCall,MoerLocation
+    case EmotionImage,MorePhoto,MoreCamera,MoreVideo,MoreCall,MoerLocation
 }
 
 
@@ -229,12 +229,14 @@ class ChatActionBarView: UIView {
         
         
         moreActionView?.moreActionClickCallback = {[weak self] emoticon in
-
-
+            
+  
             switch emoticon.text {
             case "照片":
+                          self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MorePhoto, text: nil)
                 Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "拍摄":
+                          self?.delegate?.chatActionBarEmotionKeyboardClickType(type: .MoreCamera, text: nil)
                     Toast.showCenterWithText(text: "点击了：\(emoticon.text)")
             case "视频通话":
                     Toast.showCenterWithText(text: "点击了：\(emoticon.text)")

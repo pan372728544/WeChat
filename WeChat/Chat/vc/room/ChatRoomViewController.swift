@@ -57,10 +57,11 @@ class ChatRoomViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.chatRoomVM.registerNotification()
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -69,7 +70,7 @@ class ChatRoomViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+                self.chatRoomVM.registerNotification()
         if self.type == .chatlist {
 
             effectView?.frame.origin.x = -Screen_W

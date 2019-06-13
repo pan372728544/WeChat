@@ -105,8 +105,15 @@ class ChatRoomMeTableViewCell: UITableViewCell {
                 
                 let image = UIImage(data: (textMes?.picture)!)
                 
-                let w : CGFloat = (image?.size.width)!
-                let h : CGFloat  =  (image?.size.height)!
+                var w : CGFloat = (image?.size.width)!
+                var h : CGFloat  =  (image?.size.height)!
+                
+                if w >= 180 {
+                    
+                    h = 180*h/w
+                    w = 180
+                }
+                
                 imageContent.frame = CGRect(x: Screen_W-15-40-10-w-10+4, y: imgTou.frame.origin.y , width: w, height: h)
                 
                 

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WeChat/SwiftSocket/Sources/TCPClient.swift"
-            timestampString = "581941494.573383"
+            filePath = "WeChat/Socket/IMDataManager.swift"
+            timestampString = "581994222.0924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "connect(timeout:)"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "socket(_:chatMsg:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WeChat/SwiftSocket/Sources/TCPClient.swift"
-            timestampString = "581941494.573706"
+            filePath = "WeChat/Chat/viewModel/ChatRoomViewModel.swift"
+            timestampString = "582080094.932851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "connect(timeout:)"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
+            landmarkName = "sendMessage(type:send:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WeChat.ChatRoomViewModel.sendMessage(type: WeChat.MessageType, send: Any) -&gt; ()"
+                  moduleName = "WeChat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/panzhijun/Desktop/Demo/WeChat/WeChat/Chat/viewModel/ChatRoomViewModel.swift"
+                  timestampString = "582080095.173327"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "390"
+                  endingLineNumber = "390"
+                  offsetFromSymbolStart = "3657">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WeChat.ChatRoomViewModel.sendMessage(type: WeChat.MessageType, send: Any) -&gt; ()"
+                  moduleName = "WeChat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/panzhijun/Desktop/Demo/WeChat/WeChat/Chat/viewModel/ChatRoomViewModel.swift"
+                  timestampString = "582080095.175094"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "390"
+                  endingLineNumber = "390"
+                  offsetFromSymbolStart = "6329">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeChat/Chat/vc/room/ChatRoomViewController.swift"
+            timestampString = "582080094.934106"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeChat/Chat/vc/room/ChatRoomViewController.swift"
+            timestampString = "582080094.9341919"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "viewWillDisappear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
