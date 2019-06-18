@@ -412,6 +412,7 @@ extension ContactsViewModel {
 
         effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
       
+        print(effectView?.alpha)
         viewLine1.isHidden = offset <= -tableHeadH
 
 

@@ -89,7 +89,14 @@ class ChatRoomOtherTableViewCell: UITableViewCell {
                 let (imageW,imageH) = IMDataManager.share.getChatImageWH(image: image!)
                 imageContent.frame = CGRect(x: 15 + 40 + 10 + 10 - 2, y: imgTou.frame.origin.y , width: imageW, height: imageH)
                 
-                IMDataManager.share.setImageWithGif(imageData: (textMes?.picture!)!, imageContent: imageContent)
+                // 检查图片类型
+                let type  =   textMes?.picture!.kf.imageFormat
+                if type == .GIF {
+                    IMDataManager.share.setImageWithGif(imageData: (textMes?.picture!)!, imageContent: imageContent)
+                } else {
+                    imageContent.image = image
+                }
+                
                 
                 
             } else {

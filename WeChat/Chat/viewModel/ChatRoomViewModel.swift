@@ -224,10 +224,12 @@ extension ChatRoomViewModel {
         self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         self.tableView.contentInsetAdjustmentBehavior = .never
         self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: viewBottom_H, right: 0)
-        
+        // tablview背景图片
+        let tableViewBackview = UIImageView(image: UIImage(named: "IMG_1813.JPG"))
+        self.tableView.backgroundView = tableViewBackview
         
         //加载
-        indicatorView.backgroundColor = UIColor.tableViewBackGroundColor()
+        indicatorView.backgroundColor = UIColor.clear
         indicatorView.startAnimating()
         indicatorView.style = UIActivityIndicatorView.Style.gray
         self.tableView.addSubview(indicatorView)

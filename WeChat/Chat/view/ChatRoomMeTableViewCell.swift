@@ -110,9 +110,16 @@ class ChatRoomMeTableViewCell: UITableViewCell {
                 
                 imgFaild.frame = CGRect(x: imageContent.frame.origin.x-25, y: imageContent.centerY-12, width: 20, height: 20)
                 // 检查图片类型
-//                let type  =   textMes?.picture!.kf.imageFormat
-                
-                IMDataManager.share.setImageWithGif(imageData: (textMes?.picture!)!, imageContent: imageContent)
+                let type  =   textMes?.picture!.kf.imageFormat
+                if type == .GIF {
+                                IMDataManager.share.setImageWithGif(imageData: (textMes?.picture!)!, imageContent: imageContent)
+                } else {
+                    
+                    let datai = image?.compressImageMid(maxLength: 1024*300)
+                    
+                    imageContent.image = UIImage(data: datai!)
+                }
+   
 
             } else {
                 imgPao.isHidden = false

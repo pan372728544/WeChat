@@ -27,13 +27,17 @@ let NavaBar_H : CGFloat = StatusBar_H + 44
 
 
 var isConnected = false
-let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.49", port: 9999)
+let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.42", port: 9999)
 
 
 let MeCellH : CGFloat = 56
 
 let ContactCellH : CGFloat = 56
 
+let DiscoverCellH : CGFloat = 56
+
 
 /// 聊天图片最大显示宽度和高度
 let MaxPhotoWH : CGFloat = 138
+
+let SAVE_SUCCESS = "保存成功"
