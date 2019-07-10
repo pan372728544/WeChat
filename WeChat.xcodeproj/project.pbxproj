@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1106FB67327138F07037CE1E /* Pods_WeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEC367348D0EE0E4A23D293 /* Pods_WeChat.framework */; };
+		380FF76A22D4432A0064FF21 /* MomentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76922D4432A0064FF21 /* MomentsTableViewCell.swift */; };
+		380FF76C22D443D40064FF21 /* MomentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76B22D443D40064FF21 /* MomentsViewModel.swift */; };
+		380FF76E22D460AA0064FF21 /* MomentsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76D22D460AA0064FF21 /* MomentsCellViewModel.swift */; };
+		380FF77022D4679F0064FF21 /* momnets.json in Resources */ = {isa = PBXBuildFile; fileRef = 380FF76F22D4679F0064FF21 /* momnets.json */; };
+		380FF77222D57CFB0064FF21 /* Moments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77122D57CFB0064FF21 /* Moments.swift */; };
+		380FF77422D5B7680064FF21 /* MomentsImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77322D5B7680064FF21 /* MomentsImageCollectionViewCell.swift */; };
 		38278C802285542F00884EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278C7F2285542F00884EB0 /* AppDelegate.swift */; };
 		38278C822285542F00884EB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278C812285542F00884EB0 /* ViewController.swift */; };
 		38278C852285542F00884EB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38278C832285542F00884EB0 /* Main.storyboard */; };
@@ -253,6 +259,12 @@
 
 /* Begin PBXFileReference section */
 		1A25D5BE1CAA4A1353DB313D /* Pods-WeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeChat/Pods-WeChat.release.xcconfig"; sourceTree = "<group>"; };
+		380FF76922D4432A0064FF21 /* MomentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsTableViewCell.swift; sourceTree = "<group>"; };
+		380FF76B22D443D40064FF21 /* MomentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewModel.swift; sourceTree = "<group>"; };
+		380FF76D22D460AA0064FF21 /* MomentsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsCellViewModel.swift; sourceTree = "<group>"; };
+		380FF76F22D4679F0064FF21 /* momnets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = momnets.json; sourceTree = "<group>"; };
+		380FF77122D57CFB0064FF21 /* Moments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moments.swift; sourceTree = "<group>"; };
+		380FF77322D5B7680064FF21 /* MomentsImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		38278C7C2285542F00884EB0 /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38278C7F2285542F00884EB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38278C812285542F00884EB0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -886,6 +898,12 @@
 			isa = PBXGroup;
 			children = (
 				389195B722B8F2170027D7F5 /* MomentsViewController.swift */,
+				380FF76922D4432A0064FF21 /* MomentsTableViewCell.swift */,
+				380FF76B22D443D40064FF21 /* MomentsViewModel.swift */,
+				380FF76D22D460AA0064FF21 /* MomentsCellViewModel.swift */,
+				380FF77322D5B7680064FF21 /* MomentsImageCollectionViewCell.swift */,
+				380FF76F22D4679F0064FF21 /* momnets.json */,
+				380FF77122D57CFB0064FF21 /* Moments.swift */,
 			);
 			path = moments;
 			sourceTree = "<group>";
@@ -1282,6 +1300,7 @@
 				3836C01D22A79A540015B733 /* Expression_73@2x.png in Resources */,
 				3836C01F22A79A540015B733 /* Expression_99@2x.png in Resources */,
 				3836BFF722A79A540015B733 /* Expression_38@2x.png in Resources */,
+				380FF77022D4679F0064FF21 /* momnets.json in Resources */,
 				3836C01222A79A540015B733 /* Expression_78@2x.png in Resources */,
 				3836C00722A79A540015B733 /* Expression_28@2x.png in Resources */,
 				3836BFD522A79A540015B733 /* Expression_48@2x.png in Resources */,
@@ -1491,6 +1510,7 @@
 				3836BDA222A68B880015B733 /* FullyHorizontalFlowLayout.swift in Sources */,
 				38EDD79D228E462700E9935A /* IndexView.swift in Sources */,
 				38EDD7D3228E74A300E9935A /* Result.swift in Sources */,
+				380FF76C22D443D40064FF21 /* MomentsViewModel.swift in Sources */,
 				38AD0B0822B767E800110A64 /* JXNumberPageControlDelegate.swift in Sources */,
 				38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */,
 				38D5A15B22955E19002BBBA7 /* ContactModel.swift in Sources */,
@@ -1498,6 +1518,7 @@
 				3836BE9122A792160015B733 /* EmoticonPackage.swift in Sources */,
 				3836BD9C22A66A1F0015B733 /* ChatButton.swift in Sources */,
 				38EDD7D4228E74A300E9935A /* UDPClient.swift in Sources */,
+				380FF76A22D4432A0064FF21 /* MomentsTableViewCell.swift in Sources */,
 				38AD0B0D22B876CA00110A64 /* DiscoverTableViewCell.swift in Sources */,
 				38AD0B0922B767E800110A64 /* JXDefaultPageControlDelegate.swift in Sources */,
 				38D5A15F2295651A002BBBA7 /* ContactBaseTableViewCell.swift in Sources */,
@@ -1523,6 +1544,7 @@
 				3836BDA922A74B190015B733 /* TitleView.swift in Sources */,
 				3838D47A22A89B28008FFC5A /* AttrStringGenerator.swift in Sources */,
 				38AD0AF622B767E800110A64 /* JXNetworkingDataSource.swift in Sources */,
+				380FF77222D57CFB0064FF21 /* Moments.swift in Sources */,
 				38EDD778228C2CAD00E9935A /* MeHeaderTableViewCell.swift in Sources */,
 				38AD0B0222B767E800110A64 /* JXPhotoBrowserDelegate.swift in Sources */,
 				38AD0AF922B767E800110A64 /* JXPhotoBrowserNetworkingCell.swift in Sources */,
@@ -1546,6 +1568,7 @@
 				38EDD77D228C2D4E00E9935A /* MeProtocol.swift in Sources */,
 				38D5A15222955ACE002BBBA7 /* ContactDetailOtherTableViewCell.swift in Sources */,
 				38AD0B0522B767E800110A64 /* JXLocalDataSource.swift in Sources */,
+				380FF77422D5B7680064FF21 /* MomentsImageCollectionViewCell.swift in Sources */,
 				38278D72228A50FB00884EB0 /* Theme.swift in Sources */,
 				38D5A11F2293F7D7002BBBA7 /* SearchViewController.swift in Sources */,
 				38278D74228A9FA000884EB0 /* ThemeSelectViewController.swift in Sources */,
@@ -1563,6 +1586,7 @@
 				3838D49722A90CED008FFC5A /* MoreActionView.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
 				38AD0AFA22B767E800110A64 /* UICollectionView+JX.swift in Sources */,
+				380FF76E22D460AA0064FF21 /* MomentsCellViewModel.swift in Sources */,
 				38AA028722A1298800755C8D /* ChatGoupListTableViewCell.swift in Sources */,
 				38AD0AFC22B767E800110A64 /* JXNamespace.swift in Sources */,
 				38AD0B0322B767E800110A64 /* JXPhotoBrowserTransitioningDelegate.swift in Sources */,

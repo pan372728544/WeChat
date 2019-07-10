@@ -10,6 +10,8 @@ import UIKit
 
 class MomentsViewController: BaseViewController {
 
+    fileprivate let momentVM = MomentsViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,18 +19,18 @@ class MomentsViewController: BaseViewController {
         view.backgroundColor = .white
         effectView?.alpha = 1
 
-        // Do any additional setup after loading the view.
+        setup()
     }
     
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension MomentsViewController {
+    
+    func setup()  {
+        momentVM.loadData()
+        momentVM.bindView(view: self.view)
+        momentVM.bindViewController(vc: self)
     }
-    */
-
+    
 }
