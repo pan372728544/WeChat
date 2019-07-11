@@ -14,6 +14,8 @@
 		380FF77022D4679F0064FF21 /* momnets.json in Resources */ = {isa = PBXBuildFile; fileRef = 380FF76F22D4679F0064FF21 /* momnets.json */; };
 		380FF77222D57CFB0064FF21 /* Moments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77122D57CFB0064FF21 /* Moments.swift */; };
 		380FF77422D5B7680064FF21 /* MomentsImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77322D5B7680064FF21 /* MomentsImageCollectionViewCell.swift */; };
+		380FF77A22D6EA6C0064FF21 /* AtrributeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77922D6EA6C0064FF21 /* AtrributeLabel.swift */; };
+		380FF77C22D707840064FF21 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF77B22D707840064FF21 /* WebViewController.swift */; };
 		38278C802285542F00884EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278C7F2285542F00884EB0 /* AppDelegate.swift */; };
 		38278C822285542F00884EB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38278C812285542F00884EB0 /* ViewController.swift */; };
 		38278C852285542F00884EB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38278C832285542F00884EB0 /* Main.storyboard */; };
@@ -265,6 +267,8 @@
 		380FF76F22D4679F0064FF21 /* momnets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = momnets.json; sourceTree = "<group>"; };
 		380FF77122D57CFB0064FF21 /* Moments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moments.swift; sourceTree = "<group>"; };
 		380FF77322D5B7680064FF21 /* MomentsImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		380FF77922D6EA6C0064FF21 /* AtrributeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrributeLabel.swift; sourceTree = "<group>"; };
+		380FF77B22D707840064FF21 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		38278C7C2285542F00884EB0 /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38278C7F2285542F00884EB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38278C812285542F00884EB0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -654,6 +658,8 @@
 				38AA0268229FE8E600755C8D /* Checksum.swift */,
 				38AA028022A0E0FD00755C8D /* NextPushId.swift */,
 				3838D47922A89B28008FFC5A /* AttrStringGenerator.swift */,
+				380FF77922D6EA6C0064FF21 /* AtrributeLabel.swift */,
+				380FF77B22D707840064FF21 /* WebViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1513,6 +1519,7 @@
 				380FF76C22D443D40064FF21 /* MomentsViewModel.swift in Sources */,
 				38AD0B0822B767E800110A64 /* JXNumberPageControlDelegate.swift in Sources */,
 				38AA027B229FFA3600755C8D /* Immessage.proto.swift in Sources */,
+				380FF77A22D6EA6C0064FF21 /* AtrributeLabel.swift in Sources */,
 				38D5A15B22955E19002BBBA7 /* ContactModel.swift in Sources */,
 				38EDD7D2228E74A300E9935A /* TCPClient.swift in Sources */,
 				3836BE9122A792160015B733 /* EmoticonPackage.swift in Sources */,
@@ -1578,6 +1585,7 @@
 				38AD0AFD22B767E800110A64 /* JXPhotoBrowserZoomAnimator.swift in Sources */,
 				38278D6E228A496200884EB0 /* Extension.swift in Sources */,
 				38EDD789228D3D4800E9935A /* ContactsViewModel.swift in Sources */,
+				380FF77C22D707840064FF21 /* WebViewController.swift in Sources */,
 				3836BD9A22A666A90015B733 /* ChatActionBarView.swift in Sources */,
 				38EDD7D5228E74A300E9935A /* Socket.swift in Sources */,
 				38AA0269229FE8E700755C8D /* Checksum.swift in Sources */,

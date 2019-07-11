@@ -10,6 +10,17 @@ import UIKit
 
 class MomentsCellViewModel: NSObject,MeProtocol {
     
+
+    // 点击链接地址block
+    var actionClickLinkBlock : ((String) -> Void)?
+    
+    // 点击名字地址block
+    var actionClickTextBlock : ((String) -> Void)?
+    
+    
+    // 点击手机号block
+    var actionClickPhoneBlock : ((String) -> Void)?
+    
     var model : momnets?
     
     var cell : MomentsTableViewCell?
@@ -33,7 +44,7 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         cell?.contentLabel.sizeToFit()
         cell?.contentLabel.top = (cell?.nameLabel.bottom)!+10
         cell?.contentLabel.width = Screen_W-(cell?.imageHead.right)! - 15*2
-        
+        cell?.contentLabel.delegate = self
         
         // 判断图片个数
         let imageCount = model?.imagesList.count;
@@ -47,16 +58,16 @@ class MomentsCellViewModel: NSObject,MeProtocol {
             imageW = 150
         case 2,3:
             imageH =  90
-            imageW = CGFloat(imageCount!*90 + 10*(imageCount!-1))
+            imageW = CGFloat(imageCount!*90 + 5*(imageCount!-1))
         case 4:
-            imageH = 190
-            imageW = 190
+            imageH = 185
+            imageW = 185
         case 5,6:
-            imageH = 190
-            imageW = 290
+            imageH = 185
+            imageW = 280
         case 7,8,9:
-            imageH = 290
-            imageW = 290
+            imageH = 280
+            imageW = 280
             
         default:
              print("")
@@ -99,9 +110,8 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         // 时间
         cell?.timeLabel.text = model?.time
         cell?.timeLabel.top = (cell?.addressLabel.bottom)! + 5
-
         //
-        cell?.moreBtn.top = (cell?.addressLabel.bottom)! 
+        cell?.moreBtn.top = (cell?.addressLabel.bottom)! + 5
         
         // 评论
         cell?.commentView.top = (cell?.timeLabel.bottom)!+10
@@ -190,4 +200,37 @@ extension MomentsCellViewModel: UICollectionViewDelegate,UICollectionViewDataSou
         JXPhotoBrowser(dataSource: dataSource, delegate: delegate, transDelegate: trans)
             .show(pageIndex: indexPath.item)
     }
+}
+
+extension MomentsCellViewModel : AtrributeLabelDelegate {
+    
+    // 点击链接
+    func labelDidSelectedLink(text: String) {
+        guard let linkBlock = actionClickLinkBlock else {
+            return
+        }
+        linkBlock(text)
+    }
+    
+    func labelDidSelectedTopic(text: String) {
+        
+    }
+    
+    // 点击名字
+    func labelDidSelectedAt(text: String) {
+        guard let textBlock = actionClickTextBlock else {
+            return
+        }
+        textBlock(text)
+    }
+    
+    // 点击手机号
+    func labelDidSelectedPhone(text: String) {
+        guard let phoneBlock = actionClickPhoneBlock else {
+            return
+        }
+        phoneBlock(text)
+    }
+    
+    
 }

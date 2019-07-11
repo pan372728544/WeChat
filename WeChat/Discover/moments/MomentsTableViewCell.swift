@@ -14,7 +14,7 @@ class MomentsTableViewCell: UITableViewCell {
     
     var nameLabel = UILabel()
     
-    var contentLabel = UILabel()
+    var contentLabel = AtrributeLabel()
     
     
     var imageBackView = UIView()
@@ -82,7 +82,7 @@ class MomentsTableViewCell: UITableViewCell {
         flowLayout = UICollectionViewFlowLayout()
         flowLayout?.scrollDirection = .vertical
         
-        let spacing: CGFloat = 10.0
+        let spacing: CGFloat = 5
         let viewW = 90
         flowLayout!.minimumLineSpacing = spacing
         flowLayout!.minimumInteritemSpacing = spacing
@@ -103,13 +103,13 @@ class MomentsTableViewCell: UITableViewCell {
         
         
         // 时间
-        timeLabel.frame = CGRect(x: imageHead.right + 15, y: addressLabel.bottom+5, width: Screen_W-imageHead.right - 15*2, height: 14)
+        timeLabel.frame = CGRect(x: imageHead.right + 15, y: addressLabel.bottom+5, width: Screen_W-imageHead.right - 15*2, height: 18)
         timeLabel.textColor = UIColor.init(r: 178, g: 178, b: 178)
         timeLabel.font = UIFont.systemFont(ofSize: 14)
         contentView.addSubview(timeLabel)
         
         moreBtn.frame = CGRect(x: Screen_W-15-32, y: addressLabel.bottom, width: 32, height: 20)
-        moreBtn.setImage(UIImage.init(named: "AlbumOperateMoreHL"), for: UIControl.State.normal)
+        moreBtn.setImage(UIImage.init(named: "AlbumOperateMore"), for: UIControl.State.normal)
         contentView.addSubview(moreBtn)
         
         // 评论

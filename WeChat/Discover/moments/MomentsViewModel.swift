@@ -100,6 +100,34 @@ extension MomentsViewModel : UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MomentsTableViewCell") as! MomentsTableViewCell
         cell.selectionStyle = .none
         let cellVM = aryCellVM[indexPath.section]
+        cellVM.actionClickLinkBlock = { [weak vc] linkStr in
+            
+            let webVC = WebViewController(url: linkStr)
+            
+            vc!.navigationController?.pushViewController(webVC, animated: true)
+        }
+        
+        // 手机号
+        cellVM.actionClickPhoneBlock = { [weak vc] phone in
+            
+            // 实例化
+            let alertSheet = UIAlertController(title: "", message: "\(phone)可能是一个电话号码,你可以", preferredStyle: UIAlertController.Style.actionSheet)
+            // （样式：退出Cancel，警告Destructive-按钮标题为红色，默认Default）
+            let cancelAction = UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil)
+            let callAction = UIAlertAction(title: "呼叫", style: UIAlertAction.Style.default, handler: nil)
+            let copyAction = UIAlertAction(title: "复制号码", style: UIAlertAction.Style.default, handler: nil)
+            let addAction = UIAlertAction(title: "添加到手机通讯录", style: UIAlertAction.Style.default, handler: {
+                action in
+                print("OK")
+            })
+            alertSheet.addAction(cancelAction)
+            alertSheet.addAction(callAction)
+            alertSheet.addAction(copyAction)
+            alertSheet.addAction(addAction)
+            //  跳转
+            vc!.present(alertSheet, animated: true, completion: nil)
+            
+        }
         cellVM.bindView(view: cell)
         
         return cell
