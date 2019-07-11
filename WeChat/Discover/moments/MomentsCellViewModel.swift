@@ -49,6 +49,10 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         // 判断图片个数
         let imageCount = model?.imagesList.count;
 
+        let cellH = 80
+        let cellMargin = 5
+        
+        
         switch imageCount {
         case 0:
             imageH = 0
@@ -57,17 +61,17 @@ class MomentsCellViewModel: NSObject,MeProtocol {
             imageH = 240
             imageW = 150
         case 2,3:
-            imageH =  90
-            imageW = CGFloat(imageCount!*90 + 5*(imageCount!-1))
+            imageH =  CGFloat(cellH)
+            imageW = CGFloat(imageCount!*cellH + cellMargin*(imageCount!-1))
         case 4:
-            imageH = 185
-            imageW = 185
+            imageH = CGFloat(imageCount!/2*cellH + cellMargin)
+            imageW = imageH
         case 5,6:
-            imageH = 185
-            imageW = 280
+            imageH = CGFloat(2*cellH + cellMargin)
+            imageW = CGFloat(3*cellH + cellMargin*2)
         case 7,8,9:
-            imageH = 280
-            imageW = 280
+            imageH = CGFloat(3*cellH + cellMargin*2)
+            imageW = imageH
             
         default:
              print("")
@@ -135,7 +139,7 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         if imageCount == 1 {
             cell?.flowLayout!.itemSize = CGSize(width: imageW, height: imageH)
         } else {
-            cell?.flowLayout!.itemSize = CGSize(width: 90, height: 90)
+            cell?.flowLayout!.itemSize = CGSize(width: cellH, height: cellH)
         }
         cell?.collectionView?.frame = (cell?.imageBackView.bounds)!
         cell?.collectionView?.delegate = self

@@ -53,28 +53,29 @@ class MomentsTableViewCell: UITableViewCell {
     
     func setupView()  {
         
+        let cellMargin : CGFloat = 10
         // 头像
-        imageHead.frame = CGRect(x: 15, y:15 , width: 45, height: 45)
+        imageHead.frame = CGRect(x: cellMargin, y:cellMargin , width: 45, height: 45)
         imageHead.backgroundColor = UIColor.lightGray
         imageHead.layer.cornerRadius = 5
         imageHead.layer.masksToBounds = true
         contentView.addSubview(imageHead)
         
         // 昵称
-        nameLabel.frame = CGRect(x: imageHead.right + 15, y: 15, width: Screen_W-imageHead.right - 15*2, height: 18)
+        nameLabel.frame = CGRect(x: imageHead.right + cellMargin, y: cellMargin, width: Screen_W-imageHead.right - cellMargin*2, height: 18)
         nameLabel.textColor = UIColor.init(r: 87, g: 107, b: 149)
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         contentView.addSubview(nameLabel)
         
         // 内容
-        contentLabel.frame = CGRect(x: nameLabel.left, y: nameLabel.bottom+10 , width: Screen_W-imageHead.right - 15*2, height: 18)
+        contentLabel.frame = CGRect(x: nameLabel.left, y: nameLabel.bottom+10 , width: Screen_W-imageHead.right - cellMargin*2, height: 18)
         contentLabel.textColor = UIColor.black
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 18)
         contentView.addSubview(contentLabel)
         
         // 图片视图
-        imageBackView.frame = CGRect(x: contentLabel.left, y: contentLabel.bottom+10, width:  Screen_W-imageHead.right - 15*2, height: 100)
+        imageBackView.frame = CGRect(x: contentLabel.left, y: contentLabel.bottom+10, width:  Screen_W-imageHead.right - cellMargin*2, height: 100)
         imageBackView.backgroundColor = UIColor.orange
         contentView.addSubview(imageBackView)
         
@@ -83,7 +84,7 @@ class MomentsTableViewCell: UITableViewCell {
         flowLayout?.scrollDirection = .vertical
         
         let spacing: CGFloat = 5
-        let viewW = 90
+        let viewW = 60
         flowLayout!.minimumLineSpacing = spacing
         flowLayout!.minimumInteritemSpacing = spacing
         flowLayout!.itemSize = CGSize(width: viewW, height: viewW)
@@ -96,14 +97,14 @@ class MomentsTableViewCell: UITableViewCell {
         imageBackView.addSubview(collectionView!)
     
         // 地址
-        addressLabel.frame = CGRect(x: imageHead.right + 15, y: imageBackView.bottom+10, width: Screen_W-imageHead.right - 15*2, height: 14)
+        addressLabel.frame = CGRect(x: imageHead.right + cellMargin, y: imageBackView.bottom+10, width: Screen_W-imageHead.right - cellMargin*2, height: 14)
         addressLabel.textColor = UIColor.init(r: 87, g: 107, b: 149)
         addressLabel.font = UIFont.boldSystemFont(ofSize: 14)
         contentView.addSubview(addressLabel)
         
         
         // 时间
-        timeLabel.frame = CGRect(x: imageHead.right + 15, y: addressLabel.bottom+5, width: Screen_W-imageHead.right - 15*2, height: 18)
+        timeLabel.frame = CGRect(x: imageHead.right + cellMargin, y: addressLabel.bottom+5, width: Screen_W-imageHead.right - cellMargin*2, height: 18)
         timeLabel.textColor = UIColor.init(r: 178, g: 178, b: 178)
         timeLabel.font = UIFont.systemFont(ofSize: 14)
         contentView.addSubview(timeLabel)
@@ -113,7 +114,7 @@ class MomentsTableViewCell: UITableViewCell {
         contentView.addSubview(moreBtn)
         
         // 评论
-        commentView.frame = CGRect(x: imageHead.right + 15, y:addressLabel.bottom+5 , width: Screen_W-imageHead.right - 15*2, height: 45)
+        commentView.frame = CGRect(x: imageHead.right + cellMargin, y:addressLabel.bottom+5 , width: Screen_W-imageHead.right - cellMargin*2, height: 45)
         commentView.backgroundColor = UIColor.init(r: 243, g: 243, b: 243)
         contentView.addSubview(commentView)
         
@@ -124,7 +125,7 @@ class MomentsTableViewCell: UITableViewCell {
         commentView.addSubview(triangleView)
         
         
-        commLabel.frame = CGRect(x: 10, y: 5, width: Screen_W-imageHead.right - 15*2-20, height: 14)
+        commLabel.frame = CGRect(x: 10, y: 5, width: Screen_W-imageHead.right - cellMargin*2-20, height: 14)
         commLabel.textColor = UIColor.black
         commLabel.font = UIFont.systemFont(ofSize: 14)
         commLabel.numberOfLines = 0

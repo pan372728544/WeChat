@@ -92,14 +92,65 @@ class AtrributeLabel: UILabel {
         
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if selectedRange != nil {
+//
+//            self.modifySelectedAttribute(false)
+//        }
+//    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if selectedRange != nil {
+            
+            self.modifySelectedAttribute(false)
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if selectedRange != nil {
 
             self.modifySelectedAttribute(false)
+            guard let location = touches.first?.location(in: self) else {
+                return
+            }
+            // 获取点击了第几个字符
+            let index = layoutManager.glyphIndex(for: location, in: textContainer)
+            
+            // 判断index是否在 range里
+            for range in urlRanges ?? [] {
+                if NSLocationInRange(index, range) {
+                    
+                    let str = (textStorage.string as NSString).substring(with: range)
+                    delegate?.labelDidSelectedLink(text: str)
+                    return
+                }
+            }
+            
+            for range in topicRanges ?? [] {
+                if NSLocationInRange(index, range) {
+                    let str = (textStorage.string as NSString).substring(with: range)
+                    delegate?.labelDidSelectedTopic(text: str)
+                    return
+                }
+            }
+            
+            for range in atRanges ?? [] {
+                if NSLocationInRange(index, range) {
+
+                    let str = (textStorage.string as NSString).substring(with: range)
+                    delegate?.labelDidSelectedAt(text: str)
+                    return
+                }
+            }
+            
+            for range in phoneRanges ?? [] {
+                if NSLocationInRange(index, range) {
+
+                    let str = (textStorage.string as NSString).substring(with: range)
+                    delegate?.labelDidSelectedPhone(text: str)
+                    return
+                }
+            }
         }
     }
     
@@ -119,8 +170,6 @@ class AtrributeLabel: UILabel {
                 
                 selectedRange = range
                 self.modifySelectedAttribute(true)
-                let str = (textStorage.string as NSString).substring(with: range)
-                delegate?.labelDidSelectedLink(text: str)
                 return
             }
         }
@@ -129,8 +178,6 @@ class AtrributeLabel: UILabel {
             if NSLocationInRange(index, range) {
                 selectedRange = range
                 self.modifySelectedAttribute(true)
-                let str = (textStorage.string as NSString).substring(with: range)
-                delegate?.labelDidSelectedTopic(text: str)
                 return
             }
         }
@@ -139,8 +186,7 @@ class AtrributeLabel: UILabel {
             if NSLocationInRange(index, range) {
                 selectedRange = range
                 self.modifySelectedAttribute(true)
-                let str = (textStorage.string as NSString).substring(with: range)
-                delegate?.labelDidSelectedAt(text: str)
+
                 return
             }
         }
@@ -149,8 +195,6 @@ class AtrributeLabel: UILabel {
             if NSLocationInRange(index, range) {
                 selectedRange = range
                 self.modifySelectedAttribute(true)
-                let str = (textStorage.string as NSString).substring(with: range)
-                delegate?.labelDidSelectedPhone(text: str)
                 return
             }
         }
