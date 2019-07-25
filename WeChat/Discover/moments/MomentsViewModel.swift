@@ -43,8 +43,10 @@ class MomentsViewModel: NSObject,MeProtocol {
                 UIView.animate(withDuration: 0.2) {
                     self.circleView.centerY =  self.circleY
                     self.circleView.alpha = 1.0
-                    self.generator = UIImpactFeedbackGenerator(style: .light);
-                    self.generator?.impactOccurred()
+                    if self.generator == nil {
+                        self.generator = UIImpactFeedbackGenerator(style: .light);
+                        self.generator?.impactOccurred()
+                    }
                 }
                 self.generator = nil
             case .refresh:  // 松开手的时候执行旋转动画1.5秒后刷新完成
