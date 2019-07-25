@@ -38,18 +38,23 @@ class MomentsViewModel: NSObject,MeProtocol {
             
             switch circleStatus {
             case .normal: // 开始状态透明度为0
-                    self.circleView.alpha = 0
+                self.circleView.alpha = 0
             case .will: // 下拉的时候改变Y值，修改透明度
-                UIView.animate(withDuration: 0.2) {
+                
+                
+                self.generator?.prepare()
+                self.generator?.impactOccurred()
+                UIView.animate(withDuration: 0.2, animations: {
                     self.circleView.centerY =  self.circleY
                     self.circleView.alpha = 1.0
-                    if self.generator == nil {
-                        self.generator = UIImpactFeedbackGenerator(style: .light);
-                        self.generator?.impactOccurred()
-                    }
+                }) { (finsh) in
+                    self.generator = nil
                 }
-                self.generator = nil
+     
+                
             case .refresh:  // 松开手的时候执行旋转动画1.5秒后刷新完成
+                self.generator = nil
+                self.circleView.layer.removeAllAnimations()
                 // 1. 创建动画
                 let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
                 
@@ -62,15 +67,21 @@ class MomentsViewModel: NSObject,MeProtocol {
                 rotationAnim.isRemovedOnCompletion = false
                 self.circleView.layer.add(rotationAnim, forKey: nil)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
                     self.circleView.layer.removeAllAnimations()
                     self.circleStatus = .done
                 }
-            default: // 刷新完成后改变Y值
-                UIView.animate(withDuration: 0.2) {
+            case .done: // 刷新完成后改变Y值
+                
+                self.circleStatus = .normal
+                UIView.animate(withDuration: 0.2, animations: {
                     self.circleView.centerY =  StatusBar_H
                     self.circleView.alpha = 0
+                }) { (finsh) in
+                    self.generator = UIImpactFeedbackGenerator(style: .light);
                 }
+            default :
+                print("")
             }
         }
     }
@@ -199,7 +210,8 @@ extension MomentsViewModel {
         self.view.addSubview(circleView)
         
         circleStatus = .normal
-        
+        self.generator = UIImpactFeedbackGenerator(style: .light);
+        print("")
     }
     
 }
@@ -282,6 +294,7 @@ extension MomentsViewModel : UITableViewDelegate,UITableViewDataSource {
         self.vc?.updateStatusColor(status: scrollView.contentOffset.y < 0 ? UIStatusBarStyle.lightContent : UIStatusBarStyle.default)
         
     }
+
 }
 
 
@@ -330,18 +343,13 @@ extension MomentsViewModel {
         var y = offsetY
         if y <= -StatusBar_H {
             y = -StatusBar_H
-            if self.tableView.isDragging && circleStatus != .will {
+            if self.tableView.isDragging && circleStatus == .normal {
                 circleStatus = .will
             } else if self.tableView.isDecelerating && circleStatus != .refresh {
                 circleStatus = .refresh
             }
 
-        } else {
-            if self.tableView.isDragging && circleStatus != .done {
-                circleStatus = .done
-            }
         }
-
         // 设置滑动时为5°
         let rotationAngle = CGFloat((offsetY+60)*CGFloat.pi/180*5)
         // 进行旋转
