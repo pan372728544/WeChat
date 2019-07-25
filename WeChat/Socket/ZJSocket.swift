@@ -107,15 +107,11 @@ extension ZJSocket {
             type == 0 ? delegate?.socket(self, joinRoom: user) : delegate?.socket(self, leaveRoom: user)
         case 2:
             // 收到消息
-            let chatMsg = try! ProtoMessage.parseFrom(data: data)
-            
-//              Toast.showCenterWithText(text: "收到消息：\(chatMsg.text)")
-//            Toast.showCenterWithText(text: "收到消息； \(chatMsg.text)")
-            delegate?.socket(self, chatMsg: chatMsg)
+            let chatMsg = try? ProtoMessage.parseFrom(data: data)
+            delegate?.socket(self, chatMsg: chatMsg!)
         case 10:
-               print("T##items: Any...##Any")
-//            let group = try! GroupMessage.parseFrom(data: data)
-//            delegate?.socket(self, groupMsg: group)
+               print("")
+
         case 200 :
             let protoUser = try! ProtoUser.parseFrom(data: data)
             delegate?.socket(self, login: protoUser)

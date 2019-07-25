@@ -13,9 +13,9 @@ let Screen_W : CGFloat = UIScreen.main.bounds.width
 
 let Screen_H : CGFloat = UIScreen.main.bounds.height
 
-let Tabbar_H : CGFloat = CGFloat(49+(UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)! )
+let Tabbar_H : CGFloat = CGFloat(49 + Bottom_H)
 
-let Bottom_H : CGFloat = (UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)!
+let Bottom_H : CGFloat = (UIApplication.shared.keyWindow?.safeAreaInsets.bottom)!
 
 
 let StatusBar_H : CGFloat = UIApplication.shared.statusBarFrame.size.height

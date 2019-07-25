@@ -225,7 +225,8 @@ extension ChatRoomViewModel {
         self.tableView.contentInsetAdjustmentBehavior = .never
         self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: viewBottom_H, right: 0)
         // tablview背景图片
-        let tableViewBackview = UIImageView(image: UIImage(named: "IMG_1813.JPG"))
+        let tableViewBackview = UIImageView(image: UIImage(named: "IMG_2206.JPG"))
+        tableViewBackview.contentMode = .scaleAspectFill
         self.tableView.backgroundView = tableViewBackview
         
         //加载
