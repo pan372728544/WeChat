@@ -18,6 +18,7 @@ enum RefreshStatus {
 
 class MomentsViewModel: NSObject,MeProtocol {
 
+    fileprivate var generator : UIImpactFeedbackGenerator?
     // tableView
     fileprivate lazy var tableView : UITableView = {
         let tableView =  UITableView(frame: CGRect(x: 0,
@@ -42,8 +43,10 @@ class MomentsViewModel: NSObject,MeProtocol {
                 UIView.animate(withDuration: 0.2) {
                     self.circleView.centerY =  self.circleY
                     self.circleView.alpha = 1.0
+                    self.generator = UIImpactFeedbackGenerator(style: .light);
+                    self.generator?.impactOccurred()
                 }
-
+                self.generator = nil
             case .refresh:  // 松开手的时候执行旋转动画1.5秒后刷新完成
                 // 1. 创建动画
                 let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -321,7 +324,6 @@ extension MomentsViewModel {
         var y = offsetY
         if y <= -StatusBar_H {
             y = -StatusBar_H
-            print(circleStatus,y,"aaaa")
             if self.tableView.isDragging && circleStatus != .will {
                 circleStatus = .will
             } else if self.tableView.isDecelerating && circleStatus != .refresh {
@@ -329,7 +331,6 @@ extension MomentsViewModel {
             }
 
         } else {
-            print(circleStatus,y)
             if self.tableView.isDragging && circleStatus != .done {
                 circleStatus = .done
             }

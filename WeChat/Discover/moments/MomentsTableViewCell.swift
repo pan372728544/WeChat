@@ -77,7 +77,7 @@ class MomentsTableViewCell: UITableViewCell {
         contentView.addSubview(contentLabel)
         // 图片视图
         imageBackView.frame = CGRect(x: contentLabel.left, y: contentLabel.bottom+10, width:  Screen_W-imageHead.right - cellMargin*2, height: 100)
-        imageBackView.backgroundColor = UIColor.orange
+        imageBackView.backgroundColor = UIColor.lightGray
         contentView.addSubview(imageBackView)
         
         
