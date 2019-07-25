@@ -120,7 +120,7 @@ class MomentsViewModel: NSObject,MeProtocol {
     // 绑定的控制器view
     fileprivate var view: UIView = UIView()
     // 绑定的控制器
-    fileprivate var vc :UIViewController = UIViewController()
+    fileprivate var vc : MomentsViewController?
     // cell
     fileprivate var cellVM: MomentsCellViewModel = MomentsCellViewModel()
     
@@ -130,7 +130,7 @@ class MomentsViewModel: NSObject,MeProtocol {
         self.setupMainView()
     }
     
-    func bindViewController(vc: UIViewController) {
+    func bindViewController(vc: MomentsViewController) {
         
         self.vc = vc
     }
@@ -274,6 +274,10 @@ extension MomentsViewModel : UITableViewDelegate,UITableViewDataSource {
         
         // 朋友圈下拉刷新动画
         updateCirCleView(offsetY: scrollView.contentOffset.y)
+        
+        
+        // 更新状态栏颜色
+        self.vc?.updateStatusColor(status: scrollView.contentOffset.y < 0 ? UIStatusBarStyle.lightContent : UIStatusBarStyle.default)
         
     }
 }

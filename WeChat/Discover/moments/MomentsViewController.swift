@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MomentsViewController: ViewController {
+class MomentsViewController: UIViewController {
 
     fileprivate let momentVM = MomentsViewModel()
     
@@ -40,10 +40,16 @@ class MomentsViewController: ViewController {
         setup()
     }
     
+    // 状态栏颜色
+    var statusBarColor : UIStatusBarStyle = .default
+    
     @objc func back() {
         self.navigationController?.popViewController(animated: true)
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarColor
+    }
+ 
 
 }
 
@@ -53,6 +59,15 @@ extension MomentsViewController {
         momentVM.loadData()
         momentVM.bindView(view: self.view)
         momentVM.bindViewController(vc: self)
+
+
+    }
+    
+    
+    // 更新状态栏颜色
+   open func updateStatusColor(status: UIStatusBarStyle)  {
+        statusBarColor = status
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
 }

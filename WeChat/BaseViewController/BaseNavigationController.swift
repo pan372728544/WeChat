@@ -31,5 +31,10 @@ class BaseNavigationController: UINavigationController {
         }
         super.pushViewController(viewController, animated: animated)
     }
+    
+    // 如果重写了naigation需要重写一下方法 才可用修改状态栏颜色
+    override var childForStatusBarStyle: UIViewController? {
+        return self.topViewController
+    }
 
 }

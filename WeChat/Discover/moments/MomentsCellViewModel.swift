@@ -177,7 +177,6 @@ extension MomentsCellViewModel: UICollectionViewDelegate,UICollectionViewDataSou
         let imageModel = model?.imagesList[indexPath.item]
         
         let url = URL(string: (imageModel?.imageUrl)!)
-        cell.backgroundColor = UIColor.orange
         cell.imageView.kf.setImage(with: url)
         
         return cell
