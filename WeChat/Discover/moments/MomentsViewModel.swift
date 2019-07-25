@@ -13,7 +13,7 @@ import Kingfisher
 
 // 刷新的状态
 enum RefreshStatus {
-    case normal,will,refresh,done
+    case normal,will,refresh,done,hidden
 }
 
 class MomentsViewModel: NSObject,MeProtocol {
@@ -72,16 +72,21 @@ class MomentsViewModel: NSObject,MeProtocol {
                     self.circleStatus = .done
                 }
             case .done: // 刷新完成后改变Y值
-                
-                self.circleStatus = .normal
+
                 UIView.animate(withDuration: 0.2, animations: {
                     self.circleView.centerY =  StatusBar_H
+                    self.circleView.alpha = 0
+                    self.circleStatus = .normal
+                }) { (finsh) in
+                    
+                    self.generator = UIImpactFeedbackGenerator(style: .light);
+                }
+            default :
+                UIView.animate(withDuration: 0.2, animations: {
                     self.circleView.alpha = 0
                 }) { (finsh) in
                     self.generator = UIImpactFeedbackGenerator(style: .light);
                 }
-            default :
-                print("")
             }
         }
     }
@@ -343,12 +348,16 @@ extension MomentsViewModel {
         var y = offsetY
         if y <= -StatusBar_H {
             y = -StatusBar_H
-            if self.tableView.isDragging && circleStatus == .normal {
+            if self.tableView.isDragging && (circleStatus == .normal || circleStatus == .hidden){
                 circleStatus = .will
             } else if self.tableView.isDecelerating && circleStatus != .refresh {
                 circleStatus = .refresh
+            } 
+        } else {
+            
+            if self.tableView.isDragging && circleStatus == .will {
+                circleStatus = .hidden
             }
-
         }
         // 设置滑动时为5°
         let rotationAngle = CGFloat((offsetY+60)*CGFloat.pi/180*5)
