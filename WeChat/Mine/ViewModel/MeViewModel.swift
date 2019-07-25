@@ -276,7 +276,7 @@ extension MeViewModel : UITableViewDelegate,UITableViewDataSource {
                 self.photoButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
                 self.photoButton?.layer.masksToBounds = true
                 self.photoButton?.layer.cornerRadius = 5
-                self.photoButton?.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+                self.photoButton?.imageEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: 30)
                 self.photoButton?.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
                 self.photoButton?.addTarget(self, action: #selector(self.btnClick22(btn:)), for: UIControl.Event.touchUpInside)
                 self.photoButton?.addTarget(self, action: #selector(self.btnClick11(btn:)), for: UIControl.Event.touchDown)
