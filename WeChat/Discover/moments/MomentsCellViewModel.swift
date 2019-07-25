@@ -43,7 +43,6 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         cell?.contentLabel.text = model?.contentDesc
         cell?.contentLabel.sizeToFit()
         cell?.contentLabel.top = (cell?.nameLabel.bottom)!+10
-        cell?.contentLabel.width = Screen_W-(cell?.imageHead.right)! - 15*2
         cell?.contentLabel.delegate = self
         
         // 判断图片个数
@@ -114,8 +113,14 @@ class MomentsCellViewModel: NSObject,MeProtocol {
         // 时间
         cell?.timeLabel.text = model?.time
         cell?.timeLabel.top = (cell?.addressLabel.bottom)! + 5
-        //
+        // 更多按钮
         cell?.moreBtn.top = (cell?.addressLabel.bottom)! + 5
+        
+        // 遮罩
+        cell?.coverView.centerY = (cell?.moreBtn.centerY)!
+        
+        // 更多赞 评论
+        cell?.moreImageView.centerY = (cell?.moreBtn.centerY)!
         
         // 评论
         cell?.commentView.top = (cell?.timeLabel.bottom)!+10
