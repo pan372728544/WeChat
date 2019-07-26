@@ -77,9 +77,9 @@ class MomentsViewModel: NSObject,MeProtocol {
                     self.circleView.centerY =  StatusBar_H
                     self.circleView.alpha = 0
                     self.circleStatus = .normal
+                    self.generator = UIImpactFeedbackGenerator(style: .light);
                 }) { (finsh) in
                     
-                    self.generator = UIImpactFeedbackGenerator(style: .light);
                 }
             default :
                 UIView.animate(withDuration: 0.2, animations: {
@@ -345,6 +345,10 @@ extension MomentsViewModel {
     
     func updateCirCleView(offsetY : CGFloat)  {
         
+        if circleStatus == .refresh  || circleStatus == .done  {
+            return
+        }
+        
         var y = offsetY
         if y <= -StatusBar_H {
             y = -StatusBar_H
@@ -352,7 +356,7 @@ extension MomentsViewModel {
                 circleStatus = .will
             } else if self.tableView.isDecelerating && circleStatus != .refresh {
                 circleStatus = .refresh
-            } 
+            }
         } else {
             
             if self.tableView.isDragging && circleStatus == .will {
