@@ -13,11 +13,7 @@ class SearchViewController: UISearchController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.view.backgroundColor = UIColor.clear
+        self.view.backgroundColor = UIColor.Gray237Color()
     }
     
     fileprivate var searResult : ContactSearchViewController?
@@ -38,21 +34,21 @@ class SearchViewController: UISearchController {
     
     func setup() {
 
-  //        let image = UIImage(named: "fav_searchbar_textfield2")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 6, bottom: 12, right: 6), resizingMode: UIImage.ResizingMode.stretch)
-        // 样式
-//        searchBar.barTintColor = UIColor.Gray237Color()
         
         searchBar.tintColor = UIColor.ThemeGreenColor()
         searchBar.placeholder = "搜索"
         searchBar.setValue("取消", forKey:"_cancelButtonText")
         searchBar.setPositionAdjustment(UIOffset(horizontal: (Screen_W-20-90)*0.5, vertical: 0), for: UISearchBar.Icon.search)
         self.searchResultsUpdater = searResult
+        searchBar.delegate = self
 
-        let viewSearch = UIView(frame: CGRect(x: 0, y: NavaBar_H, width: Screen_W, height: Screen_H-NavaBar_H))
-        viewSearch.backgroundColor = UIColor.Gray237Color()
-        self.view.addSubview(viewSearch)
-        
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        searchBar.autocapitalizationType = .allCharacters
+
+        for view in  (searchBar.subviews.last!.subviews) {
+            if view.isKind(of: NSClassFromString("UISearchBarBackground")!) {
+                view.removeFromSuperview()
+            }
+        }
         
     }
     
@@ -60,14 +56,21 @@ class SearchViewController: UISearchController {
 
 }
 
-extension SearchViewController: UISearchControllerDelegate {
+extension SearchViewController: UISearchControllerDelegate,UISearchBarDelegate{
  
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        print("searchBarShouldBeginEditing")
+         searchBar.setPositionAdjustment(UIOffset(horizontal: 0, vertical: 0), for: UISearchBar.Icon.search)
+        return true
+    }
+    
+    func presentSearchController(_ searchController: UISearchController) {
+        
+    }
+    
     func willPresentSearchController(_ searchController: UISearchController) {
-        searchBar.setPositionAdjustment(UIOffset(horizontal: 0, vertical: 0), for: UISearchBar.Icon.search)
-        
-        let image = imageFromColor(color: UIColor.Gray237Color(), viewSize: CGSize(width: Screen_W, height: NavaBar_H))
-        
-        searchBar.setBackgroundImage(image, for: .any, barMetrics: .defaultPrompt)
+
         
     }
     
@@ -77,6 +80,7 @@ extension SearchViewController: UISearchControllerDelegate {
     func willDismissSearchController(_ searchController: UISearchController) {
         
         searchBar.setPositionAdjustment(UIOffset(horizontal: (Screen_W-20-90)*0.5, vertical: 0), for: UISearchBar.Icon.search)
+                searchBar.sizeToFit()
         
     }
     func didDismissSearchController(_ searchController: UISearchController) {
@@ -84,21 +88,4 @@ extension SearchViewController: UISearchControllerDelegate {
         
     }
     
-}
-
-extension SearchViewController {
-    
-    func imageFromColor(color: UIColor, viewSize: CGSize) -> UIImage{
-        
-        let rect: CGRect = CGRect(x: 0, y: 0, width: viewSize.width, height: viewSize.height)
-        UIGraphicsBeginImageContext(rect.size)
-        let context: CGContext = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsGetCurrentContext()
-        return image!
-        
-    }
 }

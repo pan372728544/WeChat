@@ -23,6 +23,8 @@ class ContactsViewController: UIViewController {
         let itemRight = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(more))
         self.navigationItem.rightBarButtonItems = [itemRight]
         
+        self.definesPresentationContext = true
+        
         contactVM.loadData()
         contactVM.bindView(view: self.view)
         contactVM.bingViewController(vc: self)

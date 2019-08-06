@@ -25,7 +25,7 @@ class ChatViewController: UIViewController {
     fileprivate var msgArray : [DBChat] = [DBChat]()
     fileprivate var searchController : SearchViewController = {
         
-        let searchController = SearchViewController.init(searchResultsController: ContactSearchViewController())
+        let searchController = SearchViewController.init(searchResultsController: UIViewController())
         return searchController
     }()
     override func viewDidLoad() {
@@ -37,6 +37,7 @@ class ChatViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
+   
         
         let rightButton = UIButton(type: .custom)
         rightButton.setImage(UIImage(named: "Fav_List_Add_Icon_Normal"), for: .normal)
@@ -48,6 +49,10 @@ class ChatViewController: UIViewController {
         let right = UIBarButtonItem(customView: rightButton)
         
         navigationItem.rightBarButtonItem = right
+        
+        self.definesPresentationContext = true
+        self.automaticallyAdjustsScrollViewInsets = true
+        self.extendedLayoutIncludesOpaqueBars = true
         
         // 初始化View
         setupMainView()
@@ -77,6 +82,7 @@ class ChatViewController: UIViewController {
         view.addSubview(self.tableView)
         self.tableView.tableHeaderView = searchController.searchBar
         
+
         
         let viewNew = UIView(frame: self.tableView.bounds)
         viewNew.backgroundColor = UIColor.Gray237Color()
