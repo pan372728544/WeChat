@@ -29,7 +29,8 @@ class ChatViewController: UIViewController {
         return searchController
     }()
     
-    
+    let searchH : CGFloat = 34
+    let searchAllH : CGFloat = 52
     var searchView = SearchView()
     var tableViewSearch : UITableView!
     var imagV = UIImageView()
@@ -37,6 +38,8 @@ class ChatViewController: UIViewController {
     var back = UIView()
     var topView = UIView()
     var btnSearch = UIButton()
+    var oldOffset : CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
@@ -46,10 +49,6 @@ class ChatViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
-   
-        
-     
-
         
         // 初始化View
         setupMainView()
@@ -77,9 +76,6 @@ class ChatViewController: UIViewController {
         self.tableView.contentInsetAdjustmentBehavior = .never
         self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
         view.addSubview(self.tableView)
-//        self.tableView.tableHeaderView = searchController.searchBar
-        
-
         
         let viewNew = UIView(frame: self.tableView.bounds)
         viewNew.backgroundColor = UIColor.Gray237Color()
@@ -98,20 +94,15 @@ class ChatViewController: UIViewController {
 
             item.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
         }
-        
 
         let viewH = 1/UIScreen.main.scale
-
         viewLine1 = UIView(frame: CGRect(x: 0, y: NavaBar_H-viewH, width: Screen_W, height: viewH))
         viewLine1.backgroundColor = UIColor.Gray213Color()
         viewLine1.isHidden = true
         self.view.addSubview(viewLine1)
-        
-        
-        
+
         
         // 导航添加
-        
         topView = UIView(frame: effectView!.bounds)
         topView.backgroundColor = UIColor.clear
         let rightButton = UIButton(type: .custom)
@@ -130,50 +121,47 @@ class ChatViewController: UIViewController {
         self.view.addSubview(topView)
         
         
-        
-        let backSearch = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: 56))
-        
+        // 搜索背景视图
+        let backSearch = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: searchAllH))
         backSearch.backgroundColor = UIColor.Gray237Color()
         
-        searchView.frame  = CGRect(x: 10, y: 9, width: Screen_W-20, height: 38)
+        // 搜索框
+        searchView.frame  = CGRect(x: 10, y: 9, width: Screen_W-20, height: searchH)
         searchView.searchDelegate = self
-        btnCancle.frame = CGRect(x: searchView.frame.origin.x+searchView.frame.size.width, y: 0, width: 60, height: 56)
+        btnCancle.frame = CGRect(x: searchView.right, y: 0, width: 60, height: searchAllH)
         btnCancle.setTitle("取消", for: .normal)
         btnCancle.setTitleColor(UIColor(r: 87, g: 107, b: 148), for: .normal)
         btnCancle.addTarget(self, action: #selector(btnCancleClick), for: .touchUpInside)
         backSearch.addSubview(btnCancle)
         searchView.backgroundColor = UIColor.white
         
-        
+        /// 搜索左侧视图
         imagV = UIImageView(frame: CGRect(x: 10, y: 1, width: 16, height: 16))
         imagV.image = UIImage(named: "local_search_icon_Normal")
         let v = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
         v.addSubview(imagV)
-        
         searchView.leftView = v
         searchView.leftViewMode = .always
         searchView.placeholder = "搜索"
         
-        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: 38)
+        // 动画的搜索占位
+        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: searchH)
         btnSearch.setTitle("搜索", for: .normal)
         btnSearch.setTitleColor(UIColor(r: 199, g: 199, b: 204), for: .normal)
         btnSearch.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         btnSearch.setImage(UIImage(named: "local_search_icon_Normal"), for: .normal)
-        btnSearch.imageEdgeInsets = UIEdgeInsets(top: -2, left: -12, bottom: 0, right: 6)
+        btnSearch.imageEdgeInsets = UIEdgeInsets(top: 2, left: -12, bottom: 0, right: 6)
         btnSearch.titleEdgeInsets = UIEdgeInsets(top: -2, left: -12, bottom: 0, right: 0)
         btnSearch.isHidden = true
         searchView.addSubview(btnSearch)
-        
-        
-        
-        searchView.layer.cornerRadius = 6;
+        searchView.layer.cornerRadius = 4;
         searchView.contentVerticalAlignment = .center
         backSearch.addSubview(searchView)
         tableView.tableHeaderView = backSearch
 
         
-    
-        tableViewSearch = UITableView(frame: CGRect(x: 0, y: NavaBar_H + 56, width: self.view.frame.size.width, height: self.view.frame.size.height-NavaBar_H), style: .plain)
+        // 搜索页面展示
+        tableViewSearch = UITableView(frame: CGRect(x: 0, y: NavaBar_H + searchAllH, width: Screen_W, height: self.view.frame.size.height-NavaBar_H), style: .plain)
         
         tableViewSearch.register(SearchTableViewCell.self, forCellReuseIdentifier: "cell")
         tableViewSearch.dataSource = self
@@ -182,11 +170,10 @@ class ChatViewController: UIViewController {
         tableViewSearch.backgroundColor = UIColor.white
         tableViewSearch.contentInsetAdjustmentBehavior = .never
         tableViewSearch.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        let viewNew2 = UIView(frame: self.tableView.bounds)
+        let viewNew2 = UIView(frame: self.view.bounds)
         viewNew2.backgroundColor = UIColor.Gray237Color()
         tableViewSearch.backgroundView = viewNew2
-        
-        
+  
     }
 
 }
@@ -209,7 +196,6 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchTableViewCell
-
             return cell
         }
        
@@ -254,11 +240,10 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         if scrollView.contentOffset.y > -NavaBar_H {
             self.topView.frame.origin.y = 0
         } else {
-            
             topView.top = -scrollView.contentOffset.y - NavaBar_H
         }
 
-        
+    
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
@@ -266,6 +251,31 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         
     }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > oldOffset {
+            
+            if offset > -NavaBar_H && offset <  -NavaBar_H + self.searchAllH &&  offset > -NavaBar_H + 15{
+                
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H + self.searchAllH ), animated: true)
+            } else if offset >= -36 {
+                
+            }else {
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
+            }
+        }
+        else{
+            if offset > -NavaBar_H && offset <  -NavaBar_H + self.searchAllH {
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
+            }
+        }
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        oldOffset = scrollView.contentOffset.y
+    }
 }
 
 
@@ -307,11 +317,10 @@ extension ChatViewController {
     
     func changeNavigation(_ offset : CGFloat)  {
         
-        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        effectView?.alpha = offset <= -56 ? 0 : 1
+        effectView?.alpha = offset <= -searchAllH ? 0 : 1
         
-        viewLine1.isHidden = offset <= -tableHeadH
-        if offset == -12 {
+        viewLine1.isHidden = offset <= -searchAllH
+        if offset == -8 {
             viewLine1.isHidden = true
         }
 
@@ -328,7 +337,7 @@ extension ChatViewController : SearchViewDelegate  {
         self.view.addSubview(self.tableViewSearch)
         self.searchView.leftView?.isHidden = false
         self.searchView.placeholder = "搜索"
-        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: 38)
+        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: searchH)
         self.btnSearch.isHidden = true
         UIView.animate(withDuration: 0.3) {
             self.tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
@@ -337,10 +346,10 @@ extension ChatViewController : SearchViewDelegate  {
             self.navigationController?.navigationBar.isHidden = true
             self.tableView.isScrollEnabled = false
             
-            self.tableViewSearch.frame.origin.y = NavaBar_H+12
-            self.searchView.frame  = CGRect(x: 10, y: 9, width: Screen_W-20-50, height: 38)
+            self.tableViewSearch.frame.origin.y = NavaBar_H + 5
+            self.searchView.width = Screen_W-20-50
             
-            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: 56)
+            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: self.searchAllH)
             
             
         }
@@ -349,7 +358,7 @@ extension ChatViewController : SearchViewDelegate  {
     func searchViewShouldEndEditing(_ searchView: UITextField) {
         self.navigationController?.navigationBar.isHidden = false
         self.tableView.isScrollEnabled = true
-        self.tableViewSearch.frame.origin.y = 88+56
+        self.tableViewSearch.frame.origin.y = NavaBar_H+searchAllH
         self.tableViewSearch.removeFromSuperview()
         self.searchView.leftView?.isHidden = true
         self.searchView.placeholder = ""
@@ -359,9 +368,9 @@ extension ChatViewController : SearchViewDelegate  {
             self.effectView!.frame.origin.y = 0
             self.tableView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H), animated: false)
             
-            self.searchView.frame  = CGRect(x: 10, y: 9, width: Screen_W-20, height: 38)
+            self.searchView.width = Screen_W-20
             
-            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: 56)
+            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: self.searchAllH)
             self.btnSearch.frame.origin.x = Screen_W/2 - 50-5
             
             

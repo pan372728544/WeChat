@@ -75,6 +75,9 @@ class DiscoverViewController: UIViewController {
         effectView?.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 0.0
         self.view.addSubview(effectView!)
+        for item in effectView!.subviews {
+            item.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
+        }
         
         let viewH = 1/UIScreen.main.scale
         
@@ -180,10 +183,8 @@ extension DiscoverViewController {
     
     
     func changeNavigation(_ offset : CGFloat)  {
-        effectView?.alpha = 0.9*(offset/5)
-        
-        viewLine1.isHidden = offset <= 0
-        
+        effectView?.alpha = 1
+        viewLine1.isHidden = (offset <= 0)
     }
     
     

@@ -205,6 +205,11 @@ extension MomentsViewModel {
         effectView?.alpha = 0
         self.view.addSubview(effectView!)
         
+        for item in effectView!.subviews {
+            
+            item.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
+        }
+
         let viewH = 1/UIScreen.main.scale
         
         viewLine1 = UIView(frame: CGRect(x: 0, y: NavaBar_H-viewH, width: Screen_W, height: viewH))

@@ -60,7 +60,20 @@ class ContactsViewModel: NSObject,MeProtocol {
     fileprivate var contactArray : [Any] = [Any]()
     fileprivate var arraySectionH : [CGFloat] = [CGFloat]()
     fileprivate var arraySectionNewH : [CGFloat] = [CGFloat]()
-     fileprivate var viewLine1: UIView = UIView()
+    fileprivate var viewLine1: UIView = UIView()
+    
+    // 搜索
+    let searchH : CGFloat = 34
+    let searchAllH : CGFloat = 52
+    var searchView = SearchView()
+    var tableViewSearch : UITableView!
+    var imagV = UIImageView()
+    var btnCancle = UIButton()
+    var back = UIView()
+    var topView = UIView()
+    var btnSearch = UIButton()
+    var oldOffset : CGFloat = 0
+    
     func bindView(view: UIView) {
         
         self.view = view
@@ -203,7 +216,6 @@ extension ContactsViewModel {
         self.indexView.setSelectionIndex(index: 1)
         self.indexView.vibrationOn = true
 
-        self.tableView.tableHeaderView = searchController.searchBar
 
         // 解决下拉有其他view 背景颜色问题
         let viewNew = UIView(frame: self.tableView.bounds)
@@ -219,6 +231,10 @@ extension ContactsViewModel {
         effectView?.backgroundColor = UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.6)
         effectView?.alpha = 0
         self.view.addSubview(effectView!)
+        for item in effectView!.subviews {
+            item.backgroundColor =  UIColor(red: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 0.5)
+        }
+        
         
         let viewH = 1/UIScreen.main.scale
         
@@ -226,6 +242,77 @@ extension ContactsViewModel {
         viewLine1.backgroundColor = UIColor.Gray213Color()
         viewLine1.isHidden = true
         self.view.addSubview(viewLine1)
+        
+        // 导航添加
+        topView = UIView(frame: effectView!.bounds)
+        topView.backgroundColor = UIColor.clear
+        let rightButton = UIButton(type: .custom)
+        rightButton.setImage(UIImage(named: "AlbumGroupIcon"), for: .normal)
+        rightButton.imageView?.contentMode = .scaleAspectFill
+        rightButton.frame = CGRect(x: Screen_W-30 - 15, y: StatusBar_H + (44 - 30)/2, width: 30, height: 30)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        rightButton.backgroundColor = UIColor.clear
+        rightButton.addTarget(self, action: #selector(more), for: .touchUpInside)
+        let title = UILabel(frame: CGRect(x: 0, y: StatusBar_H + (44 - 30)/2, width: Screen_W, height: 30))
+        title.text = "通讯录"
+        title.textAlignment = .center
+        title.font = UIFont.boldSystemFont(ofSize: 17)
+        topView.addSubview(title)
+        topView.addSubview(rightButton)
+        self.view.addSubview(topView)
+        
+        // 搜索背景视图
+        let backSearch = UIView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: searchAllH))
+        backSearch.backgroundColor = UIColor.Gray237Color()
+        
+        // 搜索框
+        searchView.frame  = CGRect(x: 10, y: 9, width: Screen_W-20, height: searchH)
+        searchView.searchDelegate = self
+        btnCancle.frame = CGRect(x: searchView.right, y: 0, width: 60, height: searchAllH)
+        btnCancle.setTitle("取消", for: .normal)
+        btnCancle.setTitleColor(UIColor(r: 87, g: 107, b: 148), for: .normal)
+        btnCancle.addTarget(self, action: #selector(btnCancleClick), for: .touchUpInside)
+        backSearch.addSubview(btnCancle)
+        searchView.backgroundColor = UIColor.white
+        
+        /// 搜索左侧视图
+        imagV = UIImageView(frame: CGRect(x: 10, y: 1, width: 16, height: 16))
+        imagV.image = UIImage(named: "local_search_icon_Normal")
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
+        v.addSubview(imagV)
+        searchView.leftView = v
+        searchView.leftViewMode = .always
+        searchView.placeholder = "搜索"
+        
+        // 动画的搜索占位
+        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: searchH)
+        btnSearch.setTitle("搜索", for: .normal)
+        btnSearch.setTitleColor(UIColor(r: 199, g: 199, b: 204), for: .normal)
+        btnSearch.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        btnSearch.setImage(UIImage(named: "local_search_icon_Normal"), for: .normal)
+        btnSearch.imageEdgeInsets = UIEdgeInsets(top: 2, left: -12, bottom: 0, right: 6)
+        btnSearch.titleEdgeInsets = UIEdgeInsets(top: -2, left: -12, bottom: 0, right: 0)
+        btnSearch.isHidden = true
+        searchView.addSubview(btnSearch)
+        searchView.layer.cornerRadius = 4;
+        searchView.contentVerticalAlignment = .center
+        backSearch.addSubview(searchView)
+        tableView.tableHeaderView = backSearch
+        
+        
+        // 搜索页面展示
+        tableViewSearch = UITableView(frame: CGRect(x: 0, y: NavaBar_H + searchAllH, width: Screen_W, height: self.view.frame.size.height-NavaBar_H), style: .plain)
+        
+        tableViewSearch.register(SearchTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableViewSearch.dataSource = self
+        tableViewSearch.delegate = self
+        tableViewSearch.separatorStyle = .none
+        tableViewSearch.backgroundColor = UIColor.white
+        tableViewSearch.contentInsetAdjustmentBehavior = .never
+        tableViewSearch.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let viewNew2 = UIView(frame: self.view.bounds)
+        viewNew2.backgroundColor = UIColor.Gray237Color()
+        tableViewSearch.backgroundView = viewNew2
     }
     
 }
@@ -233,11 +320,16 @@ extension ContactsViewModel {
 extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView == tableViewSearch {
+            return 1
+        }
         return keysAry.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if tableView == tableViewSearch {
+            return 1
+        }
         let key = keysAry[section]
         
         let array = dicAll[key]
@@ -248,27 +340,34 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsTableViewCell") as! ContactsTableViewCell
-        cell.selectionStyle = .none
-        cell.indexPath = indexPath
-        let array = contactArray[indexPath.section] as! [ContactCellViewModel]
-        let vm = array[indexPath.row]
-        vm.bindView(view: cell)
-        vm.bingData(data: array)
-    
-        
-        return cell
-        
+        if tableView == self.tableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsTableViewCell") as! ContactsTableViewCell
+            cell.selectionStyle = .none
+            cell.indexPath = indexPath
+            let array = contactArray[indexPath.section] as! [ContactCellViewModel]
+            let vm = array[indexPath.row]
+            vm.bindView(view: cell)
+            vm.bingData(data: array)
+            
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchTableViewCell
+            return cell
+        }
+
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        if tableView == tableViewSearch {
+            return Screen_H - NavaBar_H
+        }
         return ContactCellH
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     
+
         if section == 0 {
             return 0
         }
@@ -296,7 +395,9 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if tableView == tableViewSearch {
+            return
+        }
         if indexPath.section == 0 {
             
             Toast.showCenterWithText(text: "没有可跳转的页面")
@@ -320,8 +421,10 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     }
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == tableViewSearch {
+            return
+        }
 
-        
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
         
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
@@ -350,6 +453,31 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
         self.indexView.scrollViewDidScroll(scrollow: scrollView)
     }
 
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > oldOffset {
+            
+            if offset > -NavaBar_H && offset <  -NavaBar_H + self.searchAllH &&  offset > -NavaBar_H + 15{
+                
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H + self.searchAllH ), animated: true)
+            } else if offset >= -36 {
+                
+            }else {
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
+            }
+        }
+        else{
+            if offset > -NavaBar_H && offset <  -NavaBar_H + self.searchAllH {
+                scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
+            }
+        }
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        oldOffset = scrollView.contentOffset.y
+    }
 
 }
 
@@ -407,11 +535,72 @@ extension ContactsViewModel {
     
     func changeNavigation(_ offset : CGFloat)  {
 
-        let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        let new : CGFloat = offset + tableHeadH 
+        effectView?.alpha = offset <= -searchAllH ? 0 : 1
+        
+        viewLine1.isHidden = offset <= -searchAllH
+        if offset == -8 {
+            viewLine1.isHidden = true
+        }
 
-        effectView?.alpha = 0.9*CGFloat(new/tableHeadH)
-
-        viewLine1.isHidden = offset <= -tableHeadH
     }
+}
+
+extension ContactsViewModel : SearchViewDelegate  {
+    
+    
+    func searchViewShouldBeginEditing(_ searchView: UITextField) {
+        self.view.addSubview(self.tableViewSearch)
+        self.searchView.leftView?.isHidden = false
+        self.searchView.placeholder = "搜索"
+        btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: searchH)
+        self.btnSearch.isHidden = true
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+            self.topView.frame.origin.y = -NavaBar_H
+            self.effectView!.frame.origin.y = -NavaBar_H
+            self.vc.navigationController?.navigationBar.isHidden = true
+            self.tableView.isScrollEnabled = false
+            
+            self.tableViewSearch.frame.origin.y = NavaBar_H + 5
+            self.searchView.width = Screen_W-20-50
+            
+            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: self.searchAllH)
+            
+            
+        }
+    }
+    
+    func searchViewShouldEndEditing(_ searchView: UITextField) {
+        self.vc.navigationController?.navigationBar.isHidden = false
+        self.tableView.isScrollEnabled = true
+        self.tableViewSearch.frame.origin.y = NavaBar_H+searchAllH
+        self.tableViewSearch.removeFromSuperview()
+        self.searchView.leftView?.isHidden = true
+        self.searchView.placeholder = ""
+        self.btnSearch.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.topView.frame.origin.y = 0
+            self.effectView!.frame.origin.y = 0
+            self.tableView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H), animated: false)
+            
+            self.searchView.width = Screen_W-20
+            
+            self.btnCancle.frame = CGRect(x: self.searchView.frame.origin.x+self.searchView.frame.size.width, y: 0, width: 60, height: self.searchAllH)
+            self.btnSearch.frame.origin.x = Screen_W/2 - 50-5
+            
+            
+        }) { (finish) in
+            self.btnSearch.isHidden = true
+            self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+            self.searchView.leftView?.isHidden = false
+            self.searchView.placeholder = "搜索"
+        }
+    }
+    @objc func btnCancleClick()  {
+        self.searchView.endEditing(true)
+    }
+    @objc func more() {
+        
+    }
+    
 }
