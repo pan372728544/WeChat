@@ -183,6 +183,8 @@
 		3838D49F22A910F7008FFC5A /* MoreActionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3838D49E22A910F7008FFC5A /* MoreActionPackage.swift */; };
 		3838D4A122A912A9008FFC5A /* MoreAction.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3838D4A022A912A9008FFC5A /* MoreAction.plist */; };
 		389195B822B8F2170027D7F5 /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389195B722B8F2170027D7F5 /* MomentsViewController.swift */; };
+		3893B84F22FA5F5200DB3C9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B84E22FA5F5200DB3C9A /* SearchView.swift */; };
+		3893B85122FA68DB00DB3C9A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B85022FA68DB00DB3C9A /* SearchTableViewCell.swift */; };
 		38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA025E229FB58900755C8D /* BaseViewController.swift */; };
 		38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */; };
 		38AA0265229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */; };
@@ -440,6 +442,8 @@
 		3838D49E22A910F7008FFC5A /* MoreActionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActionPackage.swift; sourceTree = "<group>"; };
 		3838D4A022A912A9008FFC5A /* MoreAction.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MoreAction.plist; sourceTree = "<group>"; };
 		389195B722B8F2170027D7F5 /* MomentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
+		3893B84E22FA5F5200DB3C9A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		3893B85022FA68DB00DB3C9A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		38AA025E229FB58900755C8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1199,6 +1203,8 @@
 				38EDD79C228E462600E9935A /* IndexView.swift */,
 				38EDD79E228E469300E9935A /* IndicatorView.swift */,
 				38D5A11E2293F7D7002BBBA7 /* SearchViewController.swift */,
+				3893B84E22FA5F5200DB3C9A /* SearchView.swift */,
+				3893B85022FA68DB00DB3C9A /* SearchTableViewCell.swift */,
 			);
 			path = commonView;
 			sourceTree = "<group>";
@@ -1497,6 +1503,7 @@
 				38EDD7D1228E74A300E9935A /* ytcpsocket.c in Sources */,
 				38278D6522897C0600884EB0 /* BaseNavigationController.swift in Sources */,
 				38EDD774228C2C7500E9935A /* MeViewModel.swift in Sources */,
+				3893B85122FA68DB00DB3C9A /* SearchTableViewCell.swift in Sources */,
 				38EDD782228D081900E9935A /* MeModel.swift in Sources */,
 				38EDD77F228C330D00E9935A /* MeHeaderCellViewModel.swift in Sources */,
 				3836BE9322A7922A0015B733 /* Emoticon.swift in Sources */,
@@ -1533,6 +1540,7 @@
 				3836BE9122A792160015B733 /* EmoticonPackage.swift in Sources */,
 				3836BD9C22A66A1F0015B733 /* ChatButton.swift in Sources */,
 				38EDD7D4228E74A300E9935A /* UDPClient.swift in Sources */,
+				3893B84F22FA5F5200DB3C9A /* SearchView.swift in Sources */,
 				380FF76A22D4432A0064FF21 /* MomentsTableViewCell.swift in Sources */,
 				38AD0B0D22B876CA00110A64 /* DiscoverTableViewCell.swift in Sources */,
 				38AD0B0922B767E800110A64 /* JXDefaultPageControlDelegate.swift in Sources */,
