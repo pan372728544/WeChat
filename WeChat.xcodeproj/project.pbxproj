@@ -185,6 +185,10 @@
 		389195B822B8F2170027D7F5 /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389195B722B8F2170027D7F5 /* MomentsViewController.swift */; };
 		3893B84F22FA5F5200DB3C9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B84E22FA5F5200DB3C9A /* SearchView.swift */; };
 		3893B85122FA68DB00DB3C9A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B85022FA68DB00DB3C9A /* SearchTableViewCell.swift */; };
+		3893B87722FACC6E00DB3C9A /* bg1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3893B87622FACC6D00DB3C9A /* bg1.jpg */; };
+		3893B87922FAD9F900DB3C9A /* MiniProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B87822FAD9F900DB3C9A /* MiniProgramView.swift */; };
+		3893B87B22FAE4A300DB3C9A /* MiniTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B87A22FAE4A300DB3C9A /* MiniTableViewCell.swift */; };
+		3893B87D22FAEF6600DB3C9A /* MiniCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893B87C22FAEF6600DB3C9A /* MiniCollectionViewCell.swift */; };
 		38AA025F229FB58900755C8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA025E229FB58900755C8D /* BaseViewController.swift */; };
 		38AA0262229FBEEF00755C8D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */; };
 		38AA0265229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */; };
@@ -444,6 +448,10 @@
 		389195B722B8F2170027D7F5 /* MomentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
 		3893B84E22FA5F5200DB3C9A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3893B85022FA68DB00DB3C9A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		3893B87622FACC6D00DB3C9A /* bg1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg1.jpg; sourceTree = "<group>"; };
+		3893B87822FAD9F900DB3C9A /* MiniProgramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniProgramView.swift; sourceTree = "<group>"; };
+		3893B87A22FAE4A300DB3C9A /* MiniTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniTableViewCell.swift; sourceTree = "<group>"; };
+		3893B87C22FAEF6600DB3C9A /* MiniCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniCollectionViewCell.swift; sourceTree = "<group>"; };
 		38AA025E229FB58900755C8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		38AA0261229FBEEF00755C8D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		38AA0264229FCCCD00755C8D /* ChatRoomMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMeTableViewCell.swift; sourceTree = "<group>"; };
@@ -686,6 +694,7 @@
 				38278D75228AA1D200884EB0 /* 0.jpg */,
 				38278D77228AA1D200884EB0 /* 1.jpg */,
 				38278D76228AA1D200884EB0 /* 2.jpg */,
+				3893B87622FACC6D00DB3C9A /* bg1.jpg */,
 				38278D7B228AAAA200884EB0 /* 3.jpg */,
 				382D62C022B2185C0004F314 /* bj_1136.png */,
 				382D62C222B21A640004F314 /* IMG_1258.JPG */,
@@ -730,6 +739,9 @@
 			isa = PBXGroup;
 			children = (
 				38278C9C2285885C00884EB0 /* ChatViewController.swift */,
+				3893B87822FAD9F900DB3C9A /* MiniProgramView.swift */,
+				3893B87A22FAE4A300DB3C9A /* MiniTableViewCell.swift */,
+				3893B87C22FAEF6600DB3C9A /* MiniCollectionViewCell.swift */,
 			);
 			path = list;
 			sourceTree = "<group>";
@@ -1348,6 +1360,7 @@
 				3836C01A22A79A540015B733 /* Expression_71@2x.png in Resources */,
 				380FF77E22D739030064FF21 /* momnets_bj.jpeg in Resources */,
 				38EDD7CF228E74A300E9935A /* README.md in Resources */,
+				3893B87722FACC6E00DB3C9A /* bg1.jpg in Resources */,
 				3836C00122A79A540015B733 /* Expression_57@2x.png in Resources */,
 				3836BFEE22A79A540015B733 /* Expression_13@2x.png in Resources */,
 				3836BFCB22A79A540015B733 /* Expression_7@2x.png in Resources */,
@@ -1515,6 +1528,7 @@
 				38AD0AF322B767E800110A64 /* JXPhotoBrowserTransitioning.swift in Sources */,
 				38EDD77A228C2CBB00E9935A /* MeOtherTableViewCell.swift in Sources */,
 				38278D87228BA9AF00884EB0 /* Toast.swift in Sources */,
+				3893B87D22FAEF6600DB3C9A /* MiniCollectionViewCell.swift in Sources */,
 				38EDD768228C0DBD00E9935A /* SocketManager.swift in Sources */,
 				3836BDAF22A74B5D0015B733 /* PageCollectionViewLayout.swift in Sources */,
 				38278CA62285892000884EB0 /* BaseTabBarController.swift in Sources */,
@@ -1570,6 +1584,7 @@
 				380FF77222D57CFB0064FF21 /* Moments.swift in Sources */,
 				38EDD778228C2CAD00E9935A /* MeHeaderTableViewCell.swift in Sources */,
 				38AD0B0222B767E800110A64 /* JXPhotoBrowserDelegate.swift in Sources */,
+				3893B87B22FAE4A300DB3C9A /* MiniTableViewCell.swift in Sources */,
 				38AD0AF922B767E800110A64 /* JXPhotoBrowserNetworkingCell.swift in Sources */,
 				38AA028122A0E0FE00755C8D /* NextPushId.swift in Sources */,
 				3836BDAD22A74B410015B733 /* PageCollectionView.swift in Sources */,
@@ -1609,6 +1624,7 @@
 				3836BE8D22A7916A0015B733 /* EmoticonViewModel.swift in Sources */,
 				3838D49722A90CED008FFC5A /* MoreActionView.swift in Sources */,
 				38EDD76C228C0E0D00E9935A /* ZJSocket.swift in Sources */,
+				3893B87922FAD9F900DB3C9A /* MiniProgramView.swift in Sources */,
 				38AD0AFA22B767E800110A64 /* UICollectionView+JX.swift in Sources */,
 				380FF76E22D460AA0064FF21 /* MomentsCellViewModel.swift in Sources */,
 				38AA028722A1298800755C8D /* ChatGoupListTableViewCell.swift in Sources */,

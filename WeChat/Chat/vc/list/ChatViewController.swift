@@ -28,7 +28,7 @@ class ChatViewController: UIViewController {
         let searchController = SearchViewController.init(searchResultsController: UIViewController())
         return searchController
     }()
-    
+    fileprivate var imgv : UIImageView?
     let searchH : CGFloat = 34
     let searchAllH : CGFloat = 52
     var searchView = SearchView()
@@ -40,6 +40,12 @@ class ChatViewController: UIViewController {
     var btnSearch = UIButton()
     var oldOffset : CGFloat = 0
     
+    let miniProH : CGFloat = 100
+    
+    //
+    var tableCover = UIView()
+    var titleTop = UILabel()
+    var viewMini = MiniProgramView()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
@@ -60,6 +66,7 @@ class ChatViewController: UIViewController {
     
 
     func setupMainView()   {
+        
         
         self.tableView.register(ChatGoupListTableViewCell.self, forCellReuseIdentifier: "ChatGoupListTableViewCell")
         self.tableView.delegate = self
@@ -112,11 +119,11 @@ class ChatViewController: UIViewController {
         rightButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.backgroundColor = UIColor.clear
         rightButton.addTarget(self, action: #selector(more), for: .touchUpInside)
-        let title = UILabel(frame: CGRect(x: 0, y: StatusBar_H + (44 - 30)/2, width: Screen_W, height: 30))
-        title.text = "微信"
-        title.textAlignment = .center
-        title.font = UIFont.boldSystemFont(ofSize: 17)
-        topView.addSubview(title)
+        titleTop.frame = CGRect(x: 0, y: StatusBar_H , width: Screen_W, height: 44)
+        titleTop.text = "微信"
+        titleTop.textAlignment = .center
+        titleTop.font = UIFont.boldSystemFont(ofSize: 17)
+        topView.addSubview(titleTop)
         topView.addSubview(rightButton)
         self.view.addSubview(topView)
         
@@ -173,7 +180,21 @@ class ChatViewController: UIViewController {
         let viewNew2 = UIView(frame: self.view.bounds)
         viewNew2.backgroundColor = UIColor.Gray237Color()
         tableViewSearch.backgroundView = viewNew2
-  
+        
+        
+        viewMini.frame = CGRect(x: 0, y: -(Screen_H-searchAllH), width: Screen_W, height: Screen_H-searchAllH)
+        viewMini.backgroundColor = UIColor.Gray237Color();
+        viewMini.alpha = 0
+
+        self.tableView.addSubview(viewMini)
+        
+        
+        // 进入小程序后遮罩视图
+        tableCover.frame = CGRect(x: 0, y: 0, width: Screen_W, height: Screen_H)
+        tableCover.backgroundColor = UIColor(r: 92, g: 86, b: 114)
+        tableCover.alpha = 0
+        self.tableView.addSubview(tableCover)
+        
     }
 
 }
@@ -232,23 +253,25 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        // 搜索的tableView 直接返回
         if scrollView == tableViewSearch {
             return
         }
         
-        
+        // 设置顶部视图跟随滑动更新位置
         if scrollView.contentOffset.y > -NavaBar_H {
             self.topView.frame.origin.y = 0
         } else {
             topView.top = -scrollView.contentOffset.y - NavaBar_H
         }
 
-    
+        // 更改导航栏的颜色等
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
-        
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
         
+//        print("=== \(scrollView.contentOffset.y+NavaBar_H)")
+
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -264,13 +287,28 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
             }else {
                 scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
             }
+            
+            
+            // 上滑内间距
         }
         else{
             if offset > -NavaBar_H && offset <  -NavaBar_H + self.searchAllH {
                 scrollView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H ), animated: true)
             }
+            
+            // 下滑设置tableView 内边距
+            if offset + NavaBar_H < -miniProH  && offset >= -self.tableView.height+self.searchAllH {
+                self.tableView.contentInset = UIEdgeInsets(top: self.tableView.height-self.searchAllH, left: 0, bottom: 0, right: 0)
+                
+            }
         }
-        
+
+       
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // 处理下拉进入小程序页面的逻辑
+        enterToMiniProgram(scrollView.contentOffset.y + NavaBar_H)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -389,4 +427,59 @@ extension ChatViewController : SearchViewDelegate  {
     
     
     
+}
+
+// MARK: -- 进入小程序逻辑
+extension ChatViewController {
+    
+    func enterToMiniProgram(_ offset : CGFloat)  {
+        
+        if offset-NavaBar_H > oldOffset && self.tableView.contentInset.top != NavaBar_H {
+            // 向上滑动
+            print("向上滑动")
+
+            UIView.animate(withDuration: 0.3) {
+                self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+            }
+            
+            self.tabBarController?.tabBar.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.tableCover.alpha = 0
+                self.viewMini.alpha = 0
+                self.titleTop.backgroundColor =  UIColor.clear
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H), animated: true)
+            }
+        } else {
+            print("向下滑动")
+            if offset <= -miniProH  && offset >= -self.tableView.height+self.searchAllH{
+                print("进入小程序 \(offset)")
+                
+                // 遮罩tableview
+                self.titleTop.alpha = 0
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.tableCover.alpha = 1
+                    self.viewMini.alpha = 1
+                    self.titleTop.backgroundColor =  UIColor.clear
+                    self.titleTop.alpha = 1
+                    self.titleTop.backgroundColor =  UIColor(r: 92, g: 86, b: 114)
+                }) { (isfin) in
+              
+                }
+                
+                self.tabBarController?.tabBar.isHidden = true
+                
+                DispatchQueue.main.async {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.height+self.searchAllH), animated: true)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                   
+                }
+            }
+        }
+   
+    }
 }
