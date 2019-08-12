@@ -275,6 +275,11 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        // 搜索的tableView 直接返回
+        if scrollView == tableViewSearch {
+            return
+        }
+        
         let offset = scrollView.contentOffset.y
         
         if offset > oldOffset {
@@ -307,6 +312,11 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // 搜索的tableView 直接返回
+        if scrollView == tableViewSearch {
+            return
+        }
+        
         // 处理下拉进入小程序页面的逻辑
         enterToMiniProgram(scrollView.contentOffset.y + NavaBar_H)
     }

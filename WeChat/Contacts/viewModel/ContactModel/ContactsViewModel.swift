@@ -454,6 +454,11 @@ extension ContactsViewModel : UITableViewDelegate,UITableViewDataSource {
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        // 搜索的tableView 直接返回
+        if scrollView == tableViewSearch {
+            return
+        }
+        
         let offset = scrollView.contentOffset.y
         
         if offset > oldOffset {
