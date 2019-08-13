@@ -283,19 +283,19 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         } else {
             topView.top = -scrollView.contentOffset.y - NavaBar_H
         }
-
+        
         // 设置tableView展开小程序后不可滑动
-          if scrollView.contentOffset.y <= -(Screen_H-searchAllH) {
-              tableView.bounces = false
-          } else {
-              tableView.bounces = true
-          }
+        if scrollView.contentOffset.y <= -(Screen_H-searchAllH) {
+            tableView.bounces = false
+        } else {
+            tableView.bounces = true
+        }
         // 更改导航栏的颜色等
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
         
-
+        
         /// 下拉小球动画
         smallBallAnimation(scrollView.contentOffset.y + NavaBar_H)
         
@@ -482,9 +482,9 @@ extension ChatViewController {
         if offset-NavaBar_H > oldOffset && self.tableView.contentInset.top != NavaBar_H {
             // 向上滑动
             print("向上滑动")
-            
+            tableView.bounces = true
             UIView.animate(withDuration: 0.3) {
-                self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+                self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
             }
             
             self.tabBarController?.tabBar.isHidden = false
