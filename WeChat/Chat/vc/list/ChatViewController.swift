@@ -271,7 +271,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+    
         // 搜索的tableView 直接返回
         if scrollView == tableViewSearch {
             return
@@ -284,6 +284,12 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
             topView.top = -scrollView.contentOffset.y - NavaBar_H
         }
 
+        // 设置tableView展开小程序后不可滑动
+          if scrollView.contentOffset.y <= -(Screen_H-searchAllH) {
+              tableView.bounces = false
+          } else {
+              tableView.bounces = true
+          }
         // 更改导航栏的颜色等
         let tableHeadH : CGFloat = tableView.tableHeaderView?.height ?? 0.0
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
@@ -553,7 +559,7 @@ extension ChatViewController {
                 ballView.alpha = aaa
             }
             
-            if offset <= -offsetPoint {
+            if offset <= -offsetPoint && offset >= -150{
                 generator?.impactOccurred()
                 generator = nil
             }
