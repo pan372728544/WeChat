@@ -45,7 +45,15 @@ class ChatViewController: UIViewController {
     //
     var tableCover = UIView()
     var titleTop = UILabel()
+    var titleTopView = UIView()
     var viewMini = MiniProgramView()
+    
+    // 震动反馈
+    fileprivate var generator : UIImpactFeedbackGenerator?
+    
+    var ballView : ChatBallView = ChatBallView(frame: CGRect(x: 0, y: 0, width: Screen_H, height: 50))
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
@@ -123,6 +131,10 @@ class ChatViewController: UIViewController {
         titleTop.text = "微信"
         titleTop.textAlignment = .center
         titleTop.font = UIFont.boldSystemFont(ofSize: 17)
+        titleTopView.frame =  CGRect(x: 0, y: StatusBar_H , width: Screen_W, height: 44)
+        titleTopView.backgroundColor = UIColor(r: 92, g: 86, b: 114)
+        titleTopView.alpha = 0
+        topView.addSubview(titleTopView)
         topView.addSubview(titleTop)
         topView.addSubview(rightButton)
         self.view.addSubview(topView)
@@ -185,8 +197,8 @@ class ChatViewController: UIViewController {
         viewMini.frame = CGRect(x: 0, y: -(Screen_H-searchAllH), width: Screen_W, height: Screen_H-searchAllH)
         viewMini.backgroundColor = UIColor.Gray237Color();
         viewMini.alpha = 0
-
         self.tableView.addSubview(viewMini)
+        
         
         
         // 进入小程序后遮罩视图
@@ -194,6 +206,13 @@ class ChatViewController: UIViewController {
         tableCover.backgroundColor = UIColor(r: 92, g: 86, b: 114)
         tableCover.alpha = 0
         self.tableView.addSubview(tableCover)
+        
+        // 小球动画视图
+        ballView.frame = CGRect(x: 0, y: 30, width: Screen_W, height: BallViewH)
+        ballView.alpha = 0
+        view.addSubview(self.ballView)
+        
+        generator = UIImpactFeedbackGenerator(style: .light)
         
     }
 
@@ -270,7 +289,13 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
         let scrollsetOffY = scrollView.contentOffset.y + NavaBar_H - tableHeadH
         changeNavigation(scrollsetOffY)
         
-//        print("=== \(scrollView.contentOffset.y+NavaBar_H)")
+
+        /// 下拉小球动画
+        smallBallAnimation(scrollView.contentOffset.y + NavaBar_H)
+        
+        
+        /// 更新小程序的背景透明度
+        updataMiniALpha(scrollView.contentOffset.y + NavaBar_H)
 
     }
     
@@ -324,6 +349,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         oldOffset = scrollView.contentOffset.y
     }
+    
 }
 
 
@@ -442,54 +468,96 @@ extension ChatViewController : SearchViewDelegate  {
 // MARK: -- 进入小程序逻辑
 extension ChatViewController {
     
+    
+    /// 进入小程序
+    /// - Parameter offset: 偏移量
     func enterToMiniProgram(_ offset : CGFloat)  {
         
         if offset-NavaBar_H > oldOffset && self.tableView.contentInset.top != NavaBar_H {
             // 向上滑动
             print("向上滑动")
-
+            
             UIView.animate(withDuration: 0.3) {
                 self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
             }
             
             self.tabBarController?.tabBar.isHidden = false
-            UIView.animate(withDuration: 0.3) {
-                self.tableCover.alpha = 0
-                self.viewMini.alpha = 0
-                self.titleTop.backgroundColor =  UIColor.clear
-            }
-            
             DispatchQueue.main.async {
                 self.tableView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H), animated: true)
             }
         } else {
             print("向下滑动")
             if offset <= -miniProH  && offset >= -self.tableView.height+self.searchAllH{
-                print("进入小程序 \(offset)")
-                
-                // 遮罩tableview
-                self.titleTop.alpha = 0
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.tableCover.alpha = 1
-                    self.viewMini.alpha = 1
-                    self.titleTop.backgroundColor =  UIColor.clear
-                    self.titleTop.alpha = 1
-                    self.titleTop.backgroundColor =  UIColor(r: 92, g: 86, b: 114)
-                }) { (isfin) in
-              
-                }
                 
                 self.tabBarController?.tabBar.isHidden = true
                 
                 DispatchQueue.main.async {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.height+self.searchAllH), animated: true)
                 }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                   
-                }
             }
         }
-   
+        
+    }
+    
+    
+    
+    /// 小球动画
+    /// - Parameter offset: 偏移量
+    func smallBallAnimation(_ offset : CGFloat) {
+        
+        ballView.updataAnimation(offset)
+    }
+    
+    
+    /// 更新小程序背景颜色
+    /// - Parameter offset: 偏移量
+    func updataMiniALpha(_ offset : CGFloat) {
+        
+        let scrollH = (Screen_H-searchAllH-NavaBar_H-offsetPoint)
+        
+        if offset-NavaBar_H > oldOffset {
+
+            /// 向上滑动偏移量
+            let scale = (scrollH + offset)/scrollH >= 1 ? 1 : (scrollH + offset)/scrollH
+            viewMini.alpha = 1-scale
+            tableCover.alpha = 1-scale
+            titleTopView.alpha = 1-scale
+            if scale == 1 {
+                ballView.alpha = 0
+                ballView.endBallAnimation()
+            }
+            if generator == nil {
+                  generator = UIImpactFeedbackGenerator(style: .light)
+              }
+            
+        } else {
+            ballView.alpha = 1
+            let scaleC = (-offset-offsetPoint)/scrollH >= 1 ? 1 : (-offset-offsetPoint)/scrollH
+            // 更改小程序背景透明度 大于100才开始
+            let newAlpha = -offset>=offsetPoint ? scaleC : 0
+            viewMini.alpha = newAlpha
+            tableCover.alpha = newAlpha
+            if newAlpha >= 0.5 {
+                self.titleTopView.alpha = newAlpha
+            }
+            
+            /// 更新小球位置
+            let scaleB = (-offset)/(offsetPoint*2) >= 1 ? 1 : (-offset)/(offsetPoint*2)
+            if scaleB <= 0.7 {
+                ballView.top = 30 + 100 * scaleB
+            }
+            
+            /// 更新小球透明度
+            if scaleB >= 0.9 {
+                let aaa = (1-scaleB)*10
+                ballView.alpha = aaa
+            }
+            
+            if offset <= -offsetPoint {
+                generator?.impactOccurred()
+                generator = nil
+            }
+        }
+      
     }
 }

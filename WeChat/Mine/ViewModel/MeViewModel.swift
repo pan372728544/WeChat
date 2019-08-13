@@ -21,7 +21,7 @@ class MeViewModel: NSObject, MeProtocol{
         tableView.backgroundColor = UIColor.orange
         return tableView
     }()
-        fileprivate var generator : UIImpactFeedbackGenerator?
+    fileprivate var generator : UIImpactFeedbackGenerator?
     fileprivate var view : UIView = UIView()
     fileprivate var vc : UIViewController = UIViewController()
     fileprivate var sectionAry : [Any] = [Any]()
@@ -39,7 +39,7 @@ class MeViewModel: NSObject, MeProtocol{
     
     fileprivate var photoButton : UIButton?
     fileprivate var headArray : [MeHeaderCellViewModel] = [MeHeaderCellViewModel]()
-        fileprivate var viewHead : UIView?
+    fileprivate var viewHead : UIView?
     fileprivate var otherArray : [Any] = [Any]()
     
     func bindView(view: UIView) {

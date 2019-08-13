@@ -116,7 +116,10 @@ extension ZJSocket {
             let protoUser = try! ProtoUser.parseFrom(data: data)
             delegate?.socket(self, login: protoUser)
         case 201 :
-            let array : [Data] = NSKeyedUnarchiver.unarchiveObject(with: data) as! [Data]
+
+            guard let array: [Data] = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Data] else {
+                return
+            }
             
             var friendAry : [ProtoFriend] = [ProtoFriend]()
             

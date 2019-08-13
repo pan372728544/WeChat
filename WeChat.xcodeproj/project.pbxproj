@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1106FB67327138F07037CE1E /* Pods_WeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEC367348D0EE0E4A23D293 /* Pods_WeChat.framework */; };
+		3801873E23025ED7001E8EBE /* ChatBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3801873D23025ED7001E8EBE /* ChatBallView.swift */; };
 		380FF76A22D4432A0064FF21 /* MomentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76922D4432A0064FF21 /* MomentsTableViewCell.swift */; };
 		380FF76C22D443D40064FF21 /* MomentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76B22D443D40064FF21 /* MomentsViewModel.swift */; };
 		380FF76E22D460AA0064FF21 /* MomentsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FF76D22D460AA0064FF21 /* MomentsCellViewModel.swift */; };
@@ -269,6 +270,7 @@
 
 /* Begin PBXFileReference section */
 		1A25D5BE1CAA4A1353DB313D /* Pods-WeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeChat/Pods-WeChat.release.xcconfig"; sourceTree = "<group>"; };
+		3801873D23025ED7001E8EBE /* ChatBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBallView.swift; sourceTree = "<group>"; };
 		380FF76922D4432A0064FF21 /* MomentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsTableViewCell.swift; sourceTree = "<group>"; };
 		380FF76B22D443D40064FF21 /* MomentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewModel.swift; sourceTree = "<group>"; };
 		380FF76D22D460AA0064FF21 /* MomentsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsCellViewModel.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 				3893B87822FAD9F900DB3C9A /* MiniProgramView.swift */,
 				3893B87A22FAE4A300DB3C9A /* MiniTableViewCell.swift */,
 				3893B87C22FAEF6600DB3C9A /* MiniCollectionViewCell.swift */,
+				3801873D23025ED7001E8EBE /* ChatBallView.swift */,
 			);
 			path = list;
 			sourceTree = "<group>";
@@ -1589,6 +1592,7 @@
 				38AD0B0622B767E800110A64 /* JXPhotoBrowserBaseDelegate.swift in Sources */,
 				3836BDA722A74B060015B733 /* TitleStyle.swift in Sources */,
 				3836C02622A7ACBE0015B733 /* MessageSend.swift in Sources */,
+				3801873E23025ED7001E8EBE /* ChatBallView.swift in Sources */,
 				38278D6722897C6000884EB0 /* ChatRoomViewController.swift in Sources */,
 				38EDD77D228C2D4E00E9935A /* MeProtocol.swift in Sources */,
 				38D5A15222955ACE002BBBA7 /* ContactDetailOtherTableViewCell.swift in Sources */,

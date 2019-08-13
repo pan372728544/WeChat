@@ -37,7 +37,7 @@ class SearchViewController: UISearchController {
         
         searchBar.tintColor = UIColor.ThemeGreenColor()
         searchBar.placeholder = "搜索"
-        searchBar.setValue("取消", forKey:"_cancelButtonText")
+//        searchBar.setValue("取消", forKey:"_cancelButtonText")
         searchBar.setPositionAdjustment(UIOffset(horizontal: (Screen_W-20-90)*0.5, vertical: 0), for: UISearchBar.Icon.search)
         self.searchResultsUpdater = searResult
         searchBar.delegate = self

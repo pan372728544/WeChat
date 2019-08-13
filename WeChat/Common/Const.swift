@@ -41,3 +41,9 @@ let DiscoverCellH : CGFloat = 56
 let MaxPhotoWH : CGFloat = 138
 
 let SAVE_SUCCESS = "保存成功"
+
+// 小球动画视图高度
+let BallViewH : CGFloat = 50
+
+// 下拉的距离
+let offsetPoint : CGFloat = 100
