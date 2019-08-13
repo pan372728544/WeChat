@@ -450,6 +450,13 @@ extension ZJSocket {
         
         let dbUsers =  RealmTool.getDBUser()
         
+        if dbUsers.first == nil {
+            
+            let protoUser = ProtoUser.Builder()
+            return protoUser
+        }
+        
+        
         let dbUser = (dbUsers.first)!
         
         let protoUser = ProtoUser.Builder()
