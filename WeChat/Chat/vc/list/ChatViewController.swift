@@ -48,6 +48,9 @@ class ChatViewController: UIViewController {
     var titleTopView = UIView()
     var viewMini = MiniProgramView()
     
+    var statusBarHid : Bool = false
+    
+    
     // 震动反馈
     fileprivate var generator : UIImpactFeedbackGenerator?
     
@@ -72,6 +75,9 @@ class ChatViewController: UIViewController {
         registerNotification()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return statusBarHid
+    }
 
     func setupMainView()   {
         
@@ -531,10 +537,13 @@ extension ChatViewController {
             if scale == 1 {
                 ballView.alpha = 0
                 ballView.endBallAnimation()
+                // 显示状态栏
+                statusBarHid = false
+                self.setNeedsStatusBarAppearanceUpdate()
             }
             if generator == nil {
-                  generator = UIImpactFeedbackGenerator(style: .light)
-              }
+                generator = UIImpactFeedbackGenerator(style: .light)
+            }
             
         } else {
             ballView.alpha = 1
@@ -563,6 +572,13 @@ extension ChatViewController {
                 generator?.impactOccurred()
                 generator = nil
             }
+            
+            // 隐藏状态栏
+            if newAlpha == 1 {
+                statusBarHid = true
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
+
         }
       
     }

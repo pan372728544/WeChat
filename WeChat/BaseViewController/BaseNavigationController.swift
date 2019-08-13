@@ -37,4 +37,7 @@ class BaseNavigationController: UINavigationController {
         return self.topViewController
     }
 
+    override var childForStatusBarHidden: UIViewController? {
+        return self.topViewController
+    }
 }
