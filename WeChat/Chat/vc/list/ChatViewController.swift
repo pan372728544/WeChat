@@ -340,7 +340,7 @@ extension ChatViewController : UITableViewDataSource,UITableViewDelegate {
             
             // 下滑设置tableView 内边距
             if offset + NavaBar_H < -miniProH  && offset >= -self.tableView.height+self.searchAllH {
-                self.tableView.contentInset = UIEdgeInsets(top: self.tableView.height-self.searchAllH, left: 0, bottom: 0, right: 0)
+                self.tableView.contentInset = UIEdgeInsets(top: self.tableView.height-self.searchAllH, left: 0, bottom: Tabbar_H, right: 0)
                 
             }
         }
@@ -426,7 +426,7 @@ extension ChatViewController : SearchViewDelegate  {
         btnSearch.frame = CGRect(x: 0, y: 0, width: 100, height: searchH)
         self.btnSearch.isHidden = true
         UIView.animate(withDuration: 0.3) {
-            self.tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: Tabbar_H, right: 0)
             self.topView.frame.origin.y = -NavaBar_H
             self.effectView!.frame.origin.y = -NavaBar_H
             self.navigationController?.navigationBar.isHidden = true
@@ -462,7 +462,7 @@ extension ChatViewController : SearchViewDelegate  {
             
         }) { (finish) in
             self.btnSearch.isHidden = true
-            self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
             self.searchView.leftView?.isHidden = false
             self.searchView.placeholder = "搜索"
         }

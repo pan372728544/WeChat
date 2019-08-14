@@ -596,7 +596,7 @@ extension ContactsViewModel : SearchViewDelegate  {
             
         }) { (finish) in
             self.btnSearch.isHidden = true
-            self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
             self.searchView.leftView?.isHidden = false
             self.searchView.placeholder = "搜索"
         }
