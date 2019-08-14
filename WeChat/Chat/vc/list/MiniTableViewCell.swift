@@ -56,21 +56,23 @@ class MiniTableViewCell: UITableViewCell,UICollectionViewDataSource, UICollectio
         
         let me1 = MeModel()
         me1.img = "MoreMyFavorites_Normal"
-        me1.name = "城市"
+        me1.name = "小程序1"
         
         let me2 = MeModel()
         me2.img = "add_friend_icon_offical_Normal"
-        me2.name = "中心点"
+        me2.name = "小程序2"
         
         let me3 = MeModel()
         me3.img = "AlbumReflashIcon"
-        me3.name = "万达店"
+        me3.name = "小程序3"
         
         
         array.append(me1)
         array.append(me2)
         array.append(me3)
-        
+        array.append(me1)
+        array.append(me2)
+        array.append(me3)
     }
     
     override func layoutSubviews() {
