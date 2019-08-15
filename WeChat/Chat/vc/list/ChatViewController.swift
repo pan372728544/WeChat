@@ -49,7 +49,7 @@ class ChatViewController: UIViewController {
     var viewMini = MiniProgramView()
     
     var statusBarHid : Bool = false
-    
+    let miniH = Screen_H - 52 
     
     // 震动反馈
     fileprivate var generator : UIImpactFeedbackGenerator?
@@ -81,11 +81,11 @@ class ChatViewController: UIViewController {
 
     func setupMainView()   {
         
-        
+        self.view.backgroundColor = UIColor.orange
         self.tableView.register(ChatGoupListTableViewCell.self, forCellReuseIdentifier: "ChatGoupListTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.clear
+        self.tableView.backgroundColor = UIColor.Gray237Color()
         self.tableView.separatorStyle = .none
         self.tableView.sectionHeaderHeight = 0.1
         self.tableView.sectionFooterHeight = 0.1
@@ -136,11 +136,20 @@ class ChatViewController: UIViewController {
         titleTop.frame = CGRect(x: 0, y: StatusBar_H , width: Screen_W, height: 44)
         titleTop.text = "微信"
         titleTop.textAlignment = .center
+        titleTop.backgroundColor = UIColor.clear
         titleTop.font = UIFont.boldSystemFont(ofSize: 17)
+      
         titleTopView.frame =  CGRect(x: 0, y: StatusBar_H , width: Screen_W, height: 44)
         titleTopView.backgroundColor = UIColor(r: 92, g: 86, b: 114)
         titleTopView.alpha = 0
         topView.addSubview(titleTopView)
+        
+        let bezi = UIBezierPath.init(roundedRect: titleTopView.bounds, byRoundingCorners: [.topRight,.topLeft], cornerRadii: CGSize(width: 8, height: 8))
+        let shape = CAShapeLayer.init()
+        shape.frame = titleTopView.bounds
+        shape.path = bezi.cgPath
+        titleTopView.layer.mask = shape
+        
         topView.addSubview(titleTop)
         topView.addSubview(rightButton)
         self.view.addSubview(topView)
@@ -200,8 +209,7 @@ class ChatViewController: UIViewController {
         tableViewSearch.backgroundView = viewNew2
         
         
-        viewMini.frame = CGRect(x: 0, y: -(Screen_H-searchAllH), width: Screen_W, height: Screen_H-searchAllH)
-        viewMini.backgroundColor = UIColor.Gray237Color();
+        viewMini.frame = CGRect(x: 0, y: -miniH , width: Screen_W, height: miniH)
         viewMini.alpha = 0
         self.tableView.addSubview(viewMini)
         
@@ -487,24 +495,22 @@ extension ChatViewController {
         
         if offset-NavaBar_H > oldOffset && self.tableView.contentInset.top != NavaBar_H {
             // 向上滑动
-            print("向上滑动")
             tableView.bounces = true
-            UIView.animate(withDuration: 0.3) {
-                self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
-            }
             
-            self.tabBarController?.tabBar.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.tableView.contentInset = UIEdgeInsets(top: NavaBar_H, left: 0, bottom: Tabbar_H, right: 0)
+                self.tabBarController?.tabBar.isHidden = false
+            }) { (_) in
+
+            }
             DispatchQueue.main.async {
                 self.tableView.setContentOffset(CGPoint(x: 0, y: -NavaBar_H), animated: true)
             }
         } else {
-            print("向下滑动")
             if offset <= -miniProH  && offset >= -self.tableView.height+self.searchAllH{
-                
-                self.tabBarController?.tabBar.isHidden = true
-                
                 DispatchQueue.main.async {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.height+self.searchAllH), animated: true)
+                    self.tabBarController?.tabBar.isHidden = true
                 }
             }
         }
@@ -533,7 +539,7 @@ extension ChatViewController {
             let scale = (scrollH + offset)/scrollH >= 1 ? 1 : (scrollH + offset)/scrollH
             viewMini.alpha = 1-scale
             tableCover.alpha = 1-scale
-            titleTopView.alpha = 1-scale
+            titleTopView.alpha = 1-scale*10
             if scale == 1 {
                 ballView.alpha = 0
                 ballView.endBallAnimation()

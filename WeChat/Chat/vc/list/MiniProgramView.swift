@@ -16,13 +16,13 @@ class MiniProgramView: UIView {
         let tableView =  UITableView(frame: CGRect(x: 0,
                                                    y: 0,
                                                    width: Screen_W,
-                                                   height: Screen_H),
+                                                   height: Screen_H - 52),
                                      style: UITableView.Style.plain)
         return tableView
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.backgroundColor = UIColor(r: 92, g: 86, b: 114)
         setupMainView()
     }
     
@@ -36,7 +36,7 @@ class MiniProgramView: UIView {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.orange
+        self.tableView.backgroundColor = UIColor.Gray237Color()
         self.tableView.sectionHeaderHeight = 0.1
         self.tableView.sectionFooterHeight = 0.1
         self.tableView.separatorStyle = .none
