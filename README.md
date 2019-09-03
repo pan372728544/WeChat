@@ -28,8 +28,7 @@
  
 3. 服务器数据库查找登录的手机号
   我们在common.realm文件中打开数据库文件：
-  <div align="center">
-<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/5.png" height="424" width="190" >
+![](./ReadMe/5.png)
  </div>
   在其中的DBUser文件中随便输入一个数据库中存在的手机号，输入手机号就可以登录成功了。
 4. 登录
