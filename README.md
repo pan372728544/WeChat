@@ -45,25 +45,38 @@
 ## 实现的功能主要截图
    
    1. 下拉进入小程序    
-   ![](./ReadMe/10.png)  
-   
+
+<div align="center">
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/10.png" height="330" width="190" >
+ </div>
+
    2. 通讯录的功能展示
-   ![](./ReadMe/11.png)  
+   <div align="center">
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/11.png" height="330" width="190" >
+ </div>
       
    3. 朋友圈的功能   
-   ![](./ReadMe/12.png)  
-   ![](./ReadMe/13.png)         
-   ![](./ReadMe/20.png)  
-   ![](./ReadMe/14.png)  
-   ![](./ReadMe/15.png) 
+     <div align="center">
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/12.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/13.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/14.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/15.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/20.png" height="330" width="190" >
+ </div>
    
    4. 我的页面下来拍视频动态 
-   ![](./ReadMe/16.png)  
-   ![](./ReadMe/17.png)  
+        <div align="center">
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/16.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/17.png" height="330" width="190" >
+
+ </div>
 
   5. 我的聊天页面键盘展示
-   ![](./ReadMe/18.png)  
-   ![](./ReadMe/19.png)  
+         <div align="center">
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/18.png" height="330" width="190" >
+<img src="https://github.com/pan372728544/WeChat/blob/master/ReadMe/19.png" height="330" width="190" >
+
+ </div>
 
 
 
