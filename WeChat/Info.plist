@@ -50,5 +50,7 @@
 	<string>系统相册</string>
 	<key>NSCameraUsageDescription</key>
 	<string>系统相机</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
